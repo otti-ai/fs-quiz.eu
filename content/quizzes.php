@@ -1,0 +1,101 @@
+<?php 
+	require('./header.php');
+?>
+<div class="col-lg-8 mx-auto p-3 py-md-5">
+  <main>
+    <h1>Registration quizzes</h1>
+    <p class="fs-5">This list is constantly updated.
+	More quizzes coming soon.</p>
+
+    <hr class="col-3 col-md-2">
+	<h3>EV Class:</h3>
+	<div class="container-fluid">
+	<div class="row row-cols-auto">
+		<div class="col">
+			<p class="fs-5">FS Germany:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fsg/e/212">2021 V2</a></li>
+				<li><a href="/quiz/fsg/e/21">2021</a></li>
+				<li><a href="/quiz/fsg/e/20">2020</a></li>
+				<li><a href="/quiz/fsg/e/16">2016</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			<p class="fs-5">FS Austria:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fsa/e/21">2021</a></li>
+				<li><a href="/quiz/fsa/e/19">2019</a></li>
+				<li><a href="/quiz/fsa/e/17">2017</a></li>
+				<li><a href="/quiz/fsa/e/16">2016</a></li>
+				<li><a href="/quiz/fsa/e/14">2014</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			<p class="fs-5">FS Switzerland:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fsch/e/21">2021</a></li>
+				<li><a href="/quiz/fsch/e/20t">2020 Test</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			<p class="fs-5">FS Netherlands:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fsn/e/19">2019</a></li>
+				<li><a href="/quiz/fsn/e/18t">2018 Test</a>*</li>
+			</ul>
+		</div>
+		<div class="col">
+			<p class="fs-5">FS Czech Republic:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fscz/e/17">2017</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			<p class="fs-5">FS Spain:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fss/e/20">2020</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			<p class="fs-5">FS East:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fseast/e/19">2019</a>*</li>
+			</ul>
+		</div>
+	</div>
+	<p>* not all solutions available</p>
+	</div>
+	<hr class="col-3 col-md-2">
+	<h3>CV Class:</h3>
+	<div class="container-fluid ">
+	<div class="row row-cols-auto">
+		<div class="col">
+			<p class="fs-5">FS Austria:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fsa/c/21">2021</a></li>
+				<li><a href="/quiz/fsa/c/19">2019</a></li>
+				<li><a href="/quiz/fsa/c/17">2017</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			<p class="fs-5">FS Netherlands:</p>
+			<ul class="icon-list">
+				<li><a href="/quiz/fsn/c/19">2019</a></li>
+			</ul>
+		</div>
+		<div class="col">
+			
+		</div>
+		<div class="col">
+			
+		</div>
+	</div>
+	</div>
+	
+	
+  </main>
+
+  </div> 
+<?php 
+	require('./footer.php');
+?>
