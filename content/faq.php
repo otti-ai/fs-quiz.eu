@@ -90,8 +90,7 @@
     <div id="panelsStayOpen-collapseThree3" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree3">
       <div class="accordion-body">
 	  Please first check whether this is not just a change in the rules. The questions are the original questions from the respective year.
-		The rules from this year are linked at the beginning of each quiz under Documents.<br>If there is still an error, please
-		please report it via e-mail to info@fs-quiz.eu.
+		The rules from this year are linked at the beginning of each quiz under Documents.<br>If there is still an error, please report it via e-mail to info@fs-quiz.eu.
 	  </div>
     </div>
   </div>

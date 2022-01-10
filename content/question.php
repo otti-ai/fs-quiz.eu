@@ -71,6 +71,8 @@ var answerNumber2;
 var yAnswer;
 var currect;
 var question;
+var eventID;
+var solution;
 function setQuestion(){
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() { 
@@ -81,6 +83,7 @@ function setQuestion(){
 			type = array[1];
 			document.getElementById("questionText").innerHTML = array[0];
 			question = array[0];
+			eventID = array[4];
 			if(array[2] > 0){
 				document.getElementById("imgBox").style.display = "block";
 				document.getElementById("imgBox").innerHTML="<div class='container'><div class='row'><div class='col'><img class='mx-auto d-block img-fluid' src='/img/"+eventID+"/"+array[2]+".jpg'></div></div></div>";
@@ -91,6 +94,27 @@ function setQuestion(){
 			setAnswers();
 		}
 	xmlHttp.open( "GET", "/php/getQuestion.php?id="+questionID, true );
+	xmlHttp.send( null );
+}
+
+function setSolution(){
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { 
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			var r = "";
+			solution = "";
+			var r = xmlHttp.responseText;
+			var array = r.split(';');
+			array.forEach(function(item){
+				s = item.split('@');
+				if(s[0].includes("text")){
+					solution += "<p>"+s[1]+"</p><br>";
+				}else if(s[0].includes("bild")){
+					solution +=  "<img class='img-fluid' src='/img/solution/"+s[1]+"'>";
+				}
+			});
+		}
+	xmlHttp.open( "GET", "/php/getSolution.php?id="+questionID, true );
 	xmlHttp.send( null );
 }
 
@@ -146,7 +170,7 @@ function setAnswers(){
 				});
 			}
 			document.getElementById("answerBody").innerHTML = bigHtml;
-			
+			setSolution();
 		}
 	xmlHttp.open( "GET", "/php/answers.php?questionID="+questionID, true );
 	xmlHttp.send( null );
@@ -243,10 +267,12 @@ function getResult(){
 		}else{
 			html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="text-danger">You: '+yAnswer+'</p>';
 			html += '<p style="margin-left: 2rem;">Currect: '+answer+'</p>';
+			html += "<p>Solution:</p><br>"+solution;
 		}
 		html +='</div></div></div>';
 	html += '</div>';
 	document.getElementById("divResult").innerHTML += html;
+	
 }
 </script>
 </html>

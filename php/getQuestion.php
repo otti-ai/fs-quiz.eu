@@ -5,7 +5,7 @@ header('Content-Type: text/html; charset=utf-8');
 //PDO Einbindung
 include('datenbank.php');
 
-$sql = "SELECT `question`,`typ`,`img`,`time` FROM `fsQuizQuestion` WHERE `ID` = ?";
+$sql = "SELECT `question`,`typ`,`img`,`time`,`eventID` FROM `fsQuizQuestion` WHERE `ID` = ?";
 $statement = $pdo->prepare($sql);
 $statement->execute(array($_GET['id'])); 
 $row = $statement->fetch();
@@ -16,4 +16,6 @@ echo ";";
 echo $row[2];
 echo ";";
 echo $row[3];
+echo ";";
+echo $row[4];
 ?>
