@@ -75,7 +75,7 @@
       <div class="accordion-body">
 	  Yes, the complete source code of the page is published on my Github account.
 	  <ul class="icon-list">
-          <li><a target="_blank" href="https://github.com/otti-ai">Github</a></li>
+          <li><a target="_blank" href="https://github.com/otti-ai/fs-quiz.eu">Github</a></li>
         </ul>
 	  </div>
     </div>
