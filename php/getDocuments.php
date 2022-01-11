@@ -14,7 +14,7 @@ foreach($directories as $d){
 			if ($pos !== false) {
 				foreach(scandir("../doc/".$d) as $item){
 					if (!($item == '.') && !($item == '..')) {
-						$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>;";
+						$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>@".$d.";";
 					}
 				}
 			}
@@ -24,7 +24,7 @@ foreach($directories as $d){
 			if ($pos !== false) {
 				foreach(scandir("../doc/".$d) as $item){
 					if (!($item == '.') && !($item == '..')) {
-						$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>;";
+						$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>@".$d.";";
 					}
 				}
 			}
@@ -34,14 +34,14 @@ foreach($directories as $d){
 			if ($pos !== false) {
 				foreach(scandir("../doc/".$d) as $item){
 					if (!($item == '.') && !($item == '..')) {
-						$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>;";
+						$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>@".$d.";";
 					}
 				}
 			}
 			if ($d == $year) {
 				foreach(scandir("../doc/".$year) as $item){
 					if (!($item == '.') && !($item == '..')) {
-						$string .= "<a target='_blank' href='../doc/".$year."/".$item."'>".$item."</a>;";
+						$string .= "<a target='_blank' href='../doc/".$year."/".$item."'>".$item."</a>@".$d.";";
 					}
 				}
 			}
@@ -49,11 +49,11 @@ foreach($directories as $d){
 		if($year=="q" && $event=="q"){
 			foreach(scandir("../doc/".$d) as $item){
 				if (!($item == '.') && !($item == '..')) {
-					$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>;";
+					$string .= "<a target='_blank' href='../doc/".$d."/".$item."'>".$item."</a>@".$d.";";
 				}
 			}
 		}
 	}
 }
-echo substr($string, 0, -2);
+echo substr($string, 0, -1);
 ?>

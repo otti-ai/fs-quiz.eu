@@ -13,7 +13,7 @@
 					<select onchange="search()" class="form-select" id="eventSelect" aria-label="eventSelect">
 						<option <?php if ($event == "") {echo 'selected';} ?> value="q">Any</option>
 						<option <?php if ($event == "fsa") {echo 'selected';} ?> value="fsa">Austria</option>
-						<option <?php if ($event == "fscz") {echo 'selected';} ?> value="fscz">Czech</option>
+						<!-- <option <?php //if ($event == "fscz") {echo 'selected';} ?> value="fscz">Czech</option> -->
 						<option <?php if ($event == "fseast") {echo 'selected';} ?> value="fseast">East</option>
 						<option <?php if ($event == "fsg") {echo 'selected';} ?> value="fsg">Germany</option>
 						<option <?php if ($event == "fsn") {echo 'selected';} ?> value="fsn">Netherland</option>
@@ -46,8 +46,18 @@
 		</div>
 		<hr class="col-3 col-md-2">
 		<div class="row">
-			<ul id="doc" class="icon-list">
-			</ul>
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Year</th>
+						<th scope="col">Event</th>
+						<th scope="col">Document</th>
+					</tr>
+				</thead>
+				<tbody id="doc">
+			
+				</tbody>
+			</table>
 		</div>
 	</div>
   </main>
@@ -74,7 +84,17 @@ function load(){
 			var links = r.split(';');
 			var html = "";
 			links.forEach(function(item){
-				html += "<li>"+item+"</li>";
+				var info = item.split("@");
+				var row = "<tr>";
+				row += "<td>"+info[1].slice(-2)+"</td>";
+				if(info[1].includes("fs")){
+					row += "<td>"+info[1].slice(0,-2).toUpperCase()+"</td>";
+				}else{
+					row += "<td>All</td>";
+				}
+				row += "<td>"+info[0]+"</td>";
+				row += "</tr>";
+				html += row;
 			});
 			document.getElementById("doc").innerHTML = html;
 		}
