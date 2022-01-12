@@ -99,7 +99,7 @@ function searchDocuments(){
 	xmlHttp.open( "GET", "/php/getDocuments.php?y="+year+"&e="+event, true );
 	xmlHttp.send( null );
 }
-
+//sort table
 var currentSortColumn = -1;
 var currentSearchDirection = false;
 function SortTable(column, isNumber){
@@ -114,13 +114,10 @@ function SortTable(column, isNumber){
 	
 	items.forEach((x) => {table.appendChild(x);});
 }
-
-
 function compareString(x,y){
 	var result = x.childNodes[currentSortColumn].innerText < y.childNodes[currentSortColumn].innerText;
 	return (currentSearchDirection ? result : !result) ? 1:-1;
 }
-
 function compareNum(x,y){
 	var result = parseInt(x.childNodes[currentSortColumn].innerText) - parseInt(y.childNodes[currentSortColumn].innerText);
 	return currentSearchDirection ? -result : result;

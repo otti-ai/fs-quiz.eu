@@ -47,6 +47,7 @@
 		<div class="col">
 			<p class="fs-5">FS East:</p>
 			<ul class="icon-list">
+				<li><a href="/quiz/fseast/e/20">2020</a></li>
 				<li><a href="/quiz/fseast/e/19">2019</a>*</li>
 				<li><a href="/quiz/fseast/e/18">2018</a>*</li>
 			</ul>
@@ -61,6 +62,7 @@
 		<div class="col">
 			<p class="fs-5">FS Czech Republic:</p>
 			<ul class="icon-list">
+				<li><a href="/quiz/fscz/e/20">2020</a>*</li>
 				<li><a href="/quiz/fscz/e/17">2017</a></li>
 			</ul>
 		</div>
