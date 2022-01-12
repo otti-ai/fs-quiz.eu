@@ -28,7 +28,7 @@ if(strlen($year)>2){
 	if (strpos($year, 't') !== FALSE){
 		$version = $version." Test";
 	}else{
-		$version = $version.' V'.substr($year,2);
+		$version = $version.' V2';
 	}
 }
 ?>
@@ -430,7 +430,7 @@ function getResult(){
 			html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="text-success">You: '+item.yAnswer+'</p>';
 		}else{
 			html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="text-danger">You: '+item.yAnswer+'</p>';
-			html += '<p style="margin-left: 2rem;">Currect: '+item.answer+'</p>';
+			html += '<p style="margin-left: 2rem;">Correct: '+item.answer+'</p>';
 		}
 		html +='</div></div></div>';
 		itemCount++;

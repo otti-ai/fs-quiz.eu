@@ -266,7 +266,7 @@ function getResult(){
 			html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="text-success">You: '+yAnswer+'</p>';
 		}else{
 			html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="text-danger">You: '+yAnswer+'</p>';
-			html += '<p style="margin-left: 2rem;">Currect: '+answer+'</p>';
+			html += '<p style="margin-left: 2rem;">Correct: '+answer+'</p>';
 			html += "<p>Solution:</p><br>"+solution;
 		}
 		html +='</div></div></div>';

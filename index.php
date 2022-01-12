@@ -46,7 +46,7 @@ Route::add('/faq',function(){
 	require('content/faq.php');
 });
 
-Route::add('/quiz/([a-z]*)/([ce]*)/([0-9]*[t]*)', function($event,$engine,$year) {
+Route::add('/quiz/([a-z]*)/([ce]*)/([0-9]*[tv]*)', function($event,$engine,$year) {
 	$titel = 'FS-Quiz - Quiz';
 	$pagename = 'quizzes';
 	require('content/quiz.php');

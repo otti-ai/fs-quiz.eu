@@ -31,7 +31,7 @@ if(strlen($year)>2){
 	if (strpos($year, 't') !== FALSE){
 		$version = $version." Test";
 	}else{
-		$version = $version.' V'.substr($year,2);
+		$version = $version.' V2';
 	}
 }
 ?>

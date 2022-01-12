@@ -3,7 +3,8 @@
 	$name = "";
 
 ?>
-<div onload="load()" class="col-lg-8 mx-auto p-3 py-md-5">
+<script src="/js/search.js" type="text/javascript"></script>
+<div class="col-lg-8 mx-auto p-3 py-md-5">
   <main>
     <h1>Search for Question</h1>
     <div class="container container-fluid">
@@ -41,54 +42,56 @@
 				<div class="form-floating">
 					<select onchange="questions()" class="form-select" id="classSelect" aria-label="classSelect">
 						<option value="q" selected>Any</option>
-						<option value="14q">EV</option>
-						<option value="16q">CV</option>
+						<option value="e">EV</option>
+						<option value="c">CV</option>
 					</select>
 					<label for="classSelect">Class</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="categorySelect" aria-label="categorySelect">
+					<select onchange="questions()" class="form-select" id="typSelect" aria-label="typSelect">
 						<option selected>Any</option>
-						<option value="math">math</option>
-						<option value="rule">rule</option>
-						<option value="scoring">scoring</option>
+						<option value="math">Math</option>
+						<option value="rule">Rule</option>
+						<option value="scoring">Scoring</option>
 					</select>
-					<label for="categorySelect">Type</label>
+					<label for="typSelect">Type</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
 					<select onchange="questions()" class="form-select" id="categorySelect" aria-label="categorySelect">
 						<option selected>Any</option>
-						<option value="electronic">electronic</option>
-						<option value="mechanical">mechanical</option>
+						<option value="electronic">Electronic</option>
+						<option value="mechanical">Mechanical</option>
 					</select>
 					<label for="categorySelect">Category</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="categorySelect" aria-label="categorySelect">
+					<select onchange="questions()" class="form-select" id="disSelect" aria-label="disSelect">
 						<option selected>Any</option>
-						<option value="dynamic">dynamic</option>
-						<option value="static">static</option>
+						<option value="dynamic">Dynamic</option>
+						<option value="static">Static</option>
 					</select>
-					<label for="categorySelect">Event part</label>
+					<label for="disSelect">Disciplines</label>
 				</div>
 			</div>
 		</div>
 		<hr class="col-3 col-md-2">
-		<p id="count" style="margin-bottom: 0;"></p>
 		<div class="row">
-			<table class="table table-striped table-bordered">
+			<table class="table table-striped table-bordered caption-top align-middle">
+			<caption id="count"></caption>
 				<thead>
 					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Year</th>
-						<th scope="col">Event</th>
-						<th scope="col">Question</th>
+						<th style="cursor: pointer;" onclick="SortTable(0, true)" scope="col">ID</th>
+						<th style="cursor: pointer;" onclick="SortTable(1, true)" scope="col">Year</th>
+						<th style="cursor: pointer;" onclick="SortTable(2, false)" scope="col">Event</th>
+						<th style="cursor: pointer;" onclick="SortTable(3, false)" scope="col">Class</th>
+						<th style="cursor: pointer;" onclick="SortTable(4, false)" scope="col">Question</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody id="doc">
@@ -100,7 +103,11 @@
   </main>
 
   </div> 
-<script src="/js/search.js" type="text/javascript"/></script>
+<script>
+	window.onload = function() {
+		questions();
+	}
+</script>
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/footer.php');
 ?>
