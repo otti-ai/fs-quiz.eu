@@ -18,6 +18,9 @@
 				<li><a href="/quiz/fsg/e/21">2021</a></li>
 				<li><a href="/quiz/fsg/e/20">2020</a></li>
 				<li><a href="/quiz/fsg/e/16">2016</a></li>
+				<li><a href="/quiz/fsg/e/13">2013</a>*</li>
+				<li><a href="/quiz/fsg/e/12">2012</a>*</li>
+				<li><a href="/quiz/fsg/e/11">2011</a>*</li>
 			</ul>
 		</div>
 		<div class="col">
@@ -31,10 +34,14 @@
 			</ul>
 		</div>
 		<div class="col">
-			<p class="fs-5">FS Switzerland:</p>
+			<p class="fs-5">FS Czech Republic:</p>
 			<ul class="icon-list">
-				<li><a href="/quiz/fsch/e/21">2021</a></li>
-				<li><a href="/quiz/fsch/e/20t">2020 Test</a></li>
+				<li><a href="/quiz/fscz/e/21">2021</a></li>
+				<li><a href="/quiz/fscz/e/20">2020</a></li>
+				<li><a href="/quiz/fscz/e/19">2019</a>*</li>
+				<li><a href="/quiz/fscz/e/17">2017</a></li>
+				<li><a href="/quiz/fscz/e/16v">2016 V2</a></li>
+				<li><a href="/quiz/fscz/e/16">2016</a></li>
 			</ul>
 		</div>
 		<div class="col">
@@ -42,11 +49,13 @@
 			<ul class="icon-list">
 				<li><a href="/quiz/fss/e/20">2020</a></li>
 				<li><a href="/quiz/fss/e/19">2019</a></li>
+				<li><a href="/quiz/fss/e/16">2016</a></li>
 			</ul>
 		</div>
 		<div class="col">
 			<p class="fs-5">FS East:</p>
 			<ul class="icon-list">
+				<li><a href="/quiz/fseast/e/20">2021</a></li>
 				<li><a href="/quiz/fseast/e/20">2020</a></li>
 				<li><a href="/quiz/fseast/e/19">2019</a>*</li>
 				<li><a href="/quiz/fseast/e/18">2018</a>*</li>
@@ -60,10 +69,10 @@
 			</ul>
 		</div>
 		<div class="col">
-			<p class="fs-5">FS Czech Republic:</p>
+			<p class="fs-5">FS Switzerland:</p>
 			<ul class="icon-list">
-				<li><a href="/quiz/fscz/e/20">2020</a>*</li>
-				<li><a href="/quiz/fscz/e/17">2017</a></li>
+				<li><a href="/quiz/fsch/e/21">2021</a></li>
+				<li><a href="/quiz/fsch/e/20t">2020 Test</a></li>
 			</ul>
 		</div>
 	</div>
