@@ -13,7 +13,12 @@ function questions(){
 	var classValue = classSelect.options[classSelect.selectedIndex].value;
 	var typSelect = document.getElementById('typSelect');
 	var categorySelect = document.getElementById('categorySelect');
+	var imgSelect = document.getElementById('imgSelect');
+	var imgValue = 0;
 	var disSelect = document.getElementById('disSelect');
+	if(imgSelect.checked){
+		imgValue = 1;
+	}
 	var categoryValue = typSelect.options[typSelect.selectedIndex].value+'II'+categorySelect.options[categorySelect.selectedIndex].value+'II'+disSelect.options[disSelect.selectedIndex].value;
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() { 
@@ -39,6 +44,9 @@ function questions(){
 						if(part[1].length>100){//question shorter
 							part[1] = part[1].slice(0,100)+"...";
 						}
+						if(imgValue>0){
+							part[1] += part[3];
+						}
 						row += "<td>"+part[1].split('<ul')[0].replaceAll("<br>"," ")+"</td>";
 						row += '<td><button onclick="openQuestion('+part[0]+')" type="button" class="btn btn-primary btn-sm">Show</button></td>';
 						row += "</tr>";
@@ -52,7 +60,7 @@ function questions(){
 			}
 			document.getElementById("doc").innerHTML = html;
 		}
-	xmlHttp.open( "GET", "/php/search/searchQuestion.php?event="+eventValue+yearValue+"&category="+categoryValue+"&class="+classValue+"&sort="+sort, true );
+	xmlHttp.open( "GET", "/php/search/searchQuestion.php?event="+eventValue+yearValue+"&category="+categoryValue+"&class="+classValue+"&sort="+sort+"&img="+imgValue, true );
 	xmlHttp.send( null );
 }
 
@@ -63,7 +71,7 @@ function openQuestion(id){
 function documents(){
 	year = document.getElementById("yearSelect").value;
 	event = document.getElementById("eventSelect").value;
-	window.history.pushState({ additionalInformation: 'Search Documents' }, "FS-Quiz - Documents'", "https://fs-quiz.eu/search/documents/"+event+"/"+year);
+	window.history.pushState({ additionalInformation: 'Search Documents' }, "FS-Quiz - Documents'", "https://fs-quiz.eu//documents/"+event+"/"+year);
 	searchDocuments();
 }
 
@@ -75,7 +83,7 @@ function searchDocuments(){
 			var r = xmlHttp.responseText;
 			var html = "";
 			var links = r.split(';');
-			if(r.includes(";")){
+			if(r.includes("@")){
 				links.forEach(function(item){
 					var info = item.split("@");
 					var row = "<tr>";
@@ -102,7 +110,8 @@ function searchDocuments(){
 //sort table
 var currentSortColumn = -1;
 var currentSearchDirection = false;
-function SortTable(column, isNumber){
+function SortTable(element, column, isNumber){
+	//sort
 	var items = [];
 	const table = document.getElementById("doc");
 	table.childNodes.forEach((x) => {items.push(x)});
@@ -113,6 +122,14 @@ function SortTable(column, isNumber){
 	items.sort(isNumber ? compareNum : compareString);
 	
 	items.forEach((x) => {table.appendChild(x);});
+	//icon
+	document.getElementsByName('sort').forEach((x) => {x.setAttribute('class','fas fa-sort');});
+
+	if(currentSearchDirection){
+		element.childNodes[1].childNodes[0].setAttribute('class','fas fa-sort-up');
+	}else{
+		element.childNodes[1].childNodes[0].setAttribute('class','fas fa-sort-down');
+	}
 }
 function compareString(x,y){
 	var result = x.childNodes[currentSortColumn].innerText < y.childNodes[currentSortColumn].innerText;

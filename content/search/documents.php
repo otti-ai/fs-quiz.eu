@@ -4,7 +4,8 @@
 
 ?>
 <script src="/js/search.js" type="text/javascript"></script>
-<div class="col-lg-8 mx-auto p-3 py-md-5">
+<link href="/css/all.css" rel="stylesheet">
+<div class="container-fluid col-lg-8 mx-auto p-3 py-md-5">
   <main>
     <h1>Search for Documents</h1>
     <div class="container container-fluid">
@@ -46,14 +47,20 @@
 			</div>
 		</div>
 		<hr class="col-3 col-md-2">
-		<div class="row">
+		<div class="row table-responsive">
 			<table class="table table-striped table-bordered caption-top align-middle">
 			<caption id="count"></caption>
 				<thead>
 					<tr>
-						<th style="cursor: pointer;" onclick="SortTable(0, true)"  scope="col">Year</th>
-						<th style="cursor: pointer;" onclick="SortTable(1, false)"  scope="col">Event</th>
-						<th style="cursor: pointer;" onclick="SortTable(2, false)"  scope="col">Document</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,0, true)"  scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Year</span>
+						</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,1, false)"  scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Event</span>
+						</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,2, false)"  scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Document</span>
+						</th>
 					</tr>
 				</thead>
 				<tbody id="doc">

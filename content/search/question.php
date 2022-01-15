@@ -4,7 +4,8 @@
 
 ?>
 <script src="/js/search.js" type="text/javascript"></script>
-<div class="col-lg-8 mx-auto p-3 py-md-5">
+<link href="/css/all.css" rel="stylesheet">
+<div class="container-fluid col-lg-8 mx-auto p-3 py-md-5">
   <main>
     <h1>Search for Question</h1>
     <div class="container container-fluid">
@@ -44,7 +45,7 @@
 						<option value="q" selected>Any</option>
 						<option value="e">EV</option>
 						<option value="c">CV</option>
-					</select>
+					</select> 
 					<label for="classSelect">Class</label>
 				</div>
 			</div>
@@ -79,18 +80,34 @@
 					<label for="disSelect">Disciplines</label>
 				</div>
 			</div>
+			<div class="col">
+				<div class="form-check">
+  					<input onchange="questions()" class="form-check-input" type="checkbox" value="" id="imgSelect">
+  					<label class="form-check-label" for="imgSelect">only with image</label>
+				</div>
+			</div>
 		</div>
 		<hr class="col-3 col-md-2">
-		<div class="row">
+		<div class="row table-responsive">
 			<table class="table table-striped table-bordered caption-top align-middle">
 			<caption id="count"></caption>
 				<thead>
-					<tr>
-						<th style="cursor: pointer;" onclick="SortTable(0, true)" scope="col">ID</th>
-						<th style="cursor: pointer;" onclick="SortTable(1, true)" scope="col">Year</th>
-						<th style="cursor: pointer;" onclick="SortTable(2, false)" scope="col">Event</th>
-						<th style="cursor: pointer;" onclick="SortTable(3, false)" scope="col">Class</th>
-						<th style="cursor: pointer;" onclick="SortTable(4, false)" scope="col">Question</th>
+					<tr>  
+						<th style="cursor: pointer;" onclick="SortTable(this,0, true)" scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>ID</span>
+						</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,1, true)" scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Year</span>
+						</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,2, false)" scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Event</span>
+						</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,3, false)" scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Class</span>
+						</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,4, false)" scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Question</span>
+						</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
