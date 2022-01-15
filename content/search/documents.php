@@ -14,7 +14,7 @@
 					<select onchange="documents()" class="form-select" id="eventSelect" aria-label="eventSelect">
 						<option <?php if ($event == "") {echo 'selected';} ?> value="q">Any</option>
 						<option <?php if ($event == "fsa") {echo 'selected';} ?> value="fsa">Austria</option>
-						<!-- <option <?php //if ($event == "fscz") {echo 'selected';} ?> value="fscz">Czech</option> -->
+						<option <?php if ($event == "fscz") {echo 'selected';} ?> value="fscz">Czech</option>
 						<option <?php if ($event == "fseast") {echo 'selected';} ?> value="fseast">East</option>
 						<option <?php if ($event == "fsg") {echo 'selected';} ?> value="fsg">Germany</option>
 						<option <?php if ($event == "fsn") {echo 'selected';} ?> value="fsn">Netherland</option>

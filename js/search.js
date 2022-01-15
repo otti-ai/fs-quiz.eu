@@ -63,7 +63,7 @@ function openQuestion(id){
 function documents(){
 	year = document.getElementById("yearSelect").value;
 	event = document.getElementById("eventSelect").value;
-	window.history.pushState({ additionalInformation: 'Search Documents' }, "FS-Quiz - Documents'", "https://fs-quiz.eu/documents/"+event+"/"+year);
+	window.history.pushState({ additionalInformation: 'Search Documents' }, "FS-Quiz - Documents'", "https://fs-quiz.eu/search/documents/"+event+"/"+year);
 	searchDocuments();
 }
 

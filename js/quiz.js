@@ -132,7 +132,7 @@ function showNextQuestion(){
 function getQuestionTime(){
 	var time = parseInt(document.getElementById('quest'+currentQuestions).getAttribute('data-time'));
 	if(time<1){
-		time = dparseInt(durationSetting.value)*60;
+		time = parseInt(durationSetting.value)*60;
 	}
 	return time;
 }
