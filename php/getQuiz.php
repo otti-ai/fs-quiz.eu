@@ -20,12 +20,12 @@ $i = 0;
 foreach($statement as $row){
 	//question
 	$html = "";
-	$html .= '<div class="question" data-typ="'.$row['typ'].'" id="quest'.$i.'" style="display: none;">';
+	$html .= '<div class="question" data-time="'.$row['time'].'" data-typ="'.$row['typ'].'" id="quest'.$i.'" style="display: none;"><h4 style="display: none;" id="questTitel'.$i.'">Question: '.($i+1).'</h4><div id="questText'.$i.'">';
 	$html .= '<p>'.$row['question'].'</p>';
 	if($row['img']>0){
 		$html .= "<div class='container'><div class='row'><div class='col'><img class='mx-auto d-block img-fluid' src='/img/".$event."/".$row['img'].".jpg'></div></div></div>";
 	}
-	$html .= '<hr class="col-3 col-md-2">';
+	$html .= '</div><hr class="col-3 col-md-2">';
 	//answer
 	$sql2 = "SELECT `rigth`,`answer` FROM `fsQuizAnswers` WHERE `questionID` = ?";
 	$statement2 = $pdo->prepare($sql2);
@@ -34,26 +34,25 @@ foreach($statement as $row){
 		case "multi":
 			$c = 0;
 			foreach ($statement2 as $ans) {
-				$html .= '<div class="form-check"><input class="form-check-input" type="checkbox" name="answer'.$c.'" id="answer'.$c.'" value="'.$ans[0];
-				$html .= '" ans="'.$ans[1].'"><label id="ansText" class="form-check-label" for="answer'.$c.'">'.$ans[1].'</label></div>';
+				$html .= '<div class="form-check"><input class="form-check-input" type="checkbox" name="answer'.$i.'" id="answer'.$i.'" value="'.$ans[0];
+				$html .= '" data-ans="'.$ans[1].'"><label id="ansText" class="form-check-label">'.$ans[1].'</label></div>';
 				$c++;
 			}
 			break;
 		case "normal":
 			$c = 0;
 			foreach ($statement2 as $ans) {
-				$html .= '<div class="form-check"><input class="form-check-input" type="radio" name="answer'.$c.'" id="answer'.$c.'" value="'.$ans[0];
-				$html .= '" ans="'.$ans[1].'"><label id="ansText" class="form-check-label" for="answer'.$c.'">'.$ans[1].'</label></div>';
+				$html .= '<div class="form-check"><input class="form-check-input" type="radio" name="answer'.$i.'" id="answer'.$i.'" value="'.$ans[0];
+				$html .= '" data-ans="'.$ans[1].'"><label id="ansText" class="form-check-label">'.$ans[1].'</label></div>';
 				$c++;
 			}
 			break;
 		default:
 			$ans = $statement2->fetch();
-			$html .= '<input answer="'.$ans[1].'" type="text" anwser="'.$ans[0].'" class="form-control" id="numberInput'.$c.'" placeholder="Enter answer">';
+			$html .= '<input data-answer="'.$ans[1].'" type="text" class="form-control" id="numberInput'.$i.'" placeholder="Enter answer">';
 			break;
 	}
-	$html .= '<hr class="col-3 col-md-2">';
-	$html .= '<p id="timeText'.$i.'" style="display: none;">'.$row['time'].'</p></div>';
+	$html .= '<hr class="col-3 col-md-2"></div>';
 	$i++;
 	
 	

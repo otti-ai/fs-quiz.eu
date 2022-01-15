@@ -45,11 +45,12 @@ if(strlen($year)>2){
 	<script src="/js/bootstrap.js"></script>
 	
 	<!-- Quiz -->
+	<script src="/js/quiz.js"></script>
 	<script src="/js/time.js"></script>
 	
     <title>FS-Quiz - Play</title>
   </head>
-  <body onload="load()" class="d-flex flex-column min-vh-100"> 
+  <body onload="loadFullQuiz()" class="d-flex flex-column min-vh-100"> 
 	<header class="p-3 bg-dark text-white">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid col-lg-8">
@@ -72,15 +73,31 @@ if(strlen($year)>2){
 		</div>
 		<div class="col-md-6">
 			<h3>Settings</h3>
+			<div class="form-floating">
+					<select onchange="modusSwitch()" class="form-select" id="modusSelect" aria-label="modusSelect">
+						<option value="0" selected>Single question</option>
+						<option value="1">All questions</option>
+					</select>
+					<label for="categorySelect">Modus</label>
+			</div>
 			<div class="form-check form-switch">
 				<input onclick="settings();" class="form-check-input" type="checkbox" id="settingTiming" checked>
-				<label class="form-check-label" for="settingTiming">Time to next question</label>
+				<label class="form-check-label" for="settingTiming">Timekeeping</label>
 			</div>
-			<div style="margin-left: 2rem;" class="form-check form-switch">
+			<div id="durationSelectDiv" style="margin-left: 0.5rem;" class="form-check">
+				<label for="durationSelect">Duration: </label>
+				<select data-bs-toggle="tooltip" data-bs-placement="top" title="Duration for Questions without duration in minutes" onchange="settings()" class=" form-select-sm" id="durationSelect" aria-label="durationSelect">
+					<option value="5" selected>5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+				</select>
+			</div>
+			<div style="margin-left: 2rem;" class="form-check form-switch" id="settingSkipDiv">
 				<input class="form-check-input" type="checkbox" id="settingSkip" checked>
 				<label class="form-check-label" for="settingSkip">Allow skip time to next question</label>
 			</div>
-			<div style="margin-left: 2rem;" class="form-check form-switch">
+			<div style="margin-left: 2rem;" class="form-check form-switch" id="settingTimeEndDiv">
 				<input class="form-check-input" type="checkbox" id="settingTimeEnd">
 				<label class="form-check-label" for="settingTimeEnd">End question with expired time</label>
 			</div>
@@ -88,9 +105,13 @@ if(strlen($year)>2){
 				<input class="form-check-input" type="checkbox" id="settingTiming" checked>
 				<label class="form-check-label" for="settingTiming">Show participation prediction</label>
 			</div>-->
-			<div class="form-check form-switch">
+			<div class="form-check form-switch" id="settingAutoNextDiv">
 				<input class="form-check-input" type="checkbox" id="settingAutoNext" checked>
 				<label class="form-check-label" for="settingAutoNext">Next question prompt</label>
+			</div>
+			<div class="form-check form-switch" id="settingSubmitDiv">
+				<input class="form-check-input" type="checkbox" id="settingSubmit" checked>
+				<label class="form-check-label" for="settingSubmit">Multiple submission</label>
 			</div>
 		</div>
 		</div>
@@ -109,32 +130,23 @@ if(strlen($year)>2){
 		</div>
 	</div>
 	<div id="divResult" style="display: none;">
+		<p id="resultCount"></p>
 	</div>
-	<div class="question" id="quest" style="display: none;">
-		<p class="fs-5" id="questionText">Need a Question</p>
-		<div class="" id="imgBox">
-		</div>
-		<hr class="col-3 col-md-2">
-		<div id="answerBody">
-			
-		</div>
-		<hr class="col-3 col-md-2">
-		<p id="timeText" style="display: none;">600</p>
+	<div id="questionBody">
+		
 	</div>
-	<div id="time" style="display: none;">
+	<div id="guestionFooter" style="display: none;" class="container">
 		<div class="row">
 			<div class="col"></div>
-			<div class="col text-center">
-				<p class="fs-5" id="zeit"></p>
-				<input id="next" style="display: none;" class="btn btn-primary" onclick="openQuestion()" type="submit" value="next">
+			<div id="time" class="col text-center">
+				<p class="fs-5" id="timeText"> </p>
 			</div>
-			<div id="submitbutton" class="col text-end">
-				<input class="btn btn-primary" onclick="checkAnswerRadio()" type="submit" value="Submit">
-			</div>
-			<div id="nextbutton" class="col text-end" style="display: none;">
-				<input class="btn btn-primary" onclick="openQuestion()" type="submit" value="Skip">
+			<div id="button" class="col text-end">
+				<input id="submitButton" class="btn btn-primary" onclick="submit()" type="submit" value="Submit">
 			</div>
 		</div>
+	</div>
+</div>
 </div>
  
 </div> 
@@ -148,312 +160,9 @@ if(strlen($year)>2){
  </body>
  
 <script>
-var count = 1;
-var questionTime = 0;
 var eventID = "<?php echo $event.$year; ?>";
-var eventName = "<?php echo $event.substr($year,0,2); ?>";
+var event = "<?php echo $event; ?>";
 var year = "<?php echo substr($year,0,2); ?>";
 var engine = "<?php echo $engine; ?>";
-var maxCount = 0;
-var rigthAnswers = 0;
-var arrayAnswers = [];
-var questionID = 0;
-var type = null;
-var answerNumber = null;
-var answerNumber2 = null;
-var waiting;
-var results = [];
-var result= {
-	"question": "",
-	"yAnswer": "",
-	"answer": "",
-	"currect": ""
-};
-
-function load(){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			var r = "";
-			var r = xmlHttp.responseText;
-			var array = r.split(';');
-			maxCount = array[0];
-			document.getElementById("maxInfo").innerHTML = "Questions: "+maxCount;
-			var minutes = Math.floor((array[1]/60) % 60);
-			var hours = Math.floor(((array[1]/60)/60) % 60);
-			document.getElementById("timeInfo").innerHTML = 'Time: '+hours+'h '+minutes+'m';
-			loaddocuments();
-		}
-	xmlHttp.open( "GET", "/php/quizInfo.php?event="+eventID+"&engine="+engine, true );
-	xmlHttp.send( null );
-}
-
-function loaddocuments(){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			var r = "";
-			var r = xmlHttp.responseText;
-			var links = r.split(';');
-			var html = "";
-			links.forEach(function(item){
-				html += "<li>"+item+"</li>";
-			});
-			document.getElementById("doc").innerHTML = html;
-		}
-	xmlHttp.open( "GET", "/php/documents.php?event="+eventName+"&year="+year, true );
-	xmlHttp.send( null );
-	setQuestion();
-}
-
-function start(){
-    document.getElementById("divStart").style.display = "none";
-	document.getElementById("time").style.display = "block";
-	openQuestion();
-}
-
-function settings(){
-	document.getElementById("settingTimeEnd").checked = false;
-	document.getElementById("settingTimeEnd").disabled = !document.getElementById("settingTiming").checked;
-	document.getElementById("settingSkip").checked = document.getElementById("settingTiming").checked;
-	document.getElementById("settingSkip").disabled = !document.getElementById("settingTiming").checked;
-}
-
-function setQuestion(){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			var r = "";
-			var r = xmlHttp.responseText;
-			var array = r.split(';');
-			type = array[1];
-			document.getElementById("questionText").innerHTML = array[0];
-			result.question = array[0];
-			if(array[2] > 0){
-				document.getElementById("imgBox").style.display = "block";
-				document.getElementById("imgBox").innerHTML="<div class='container'><div class='row'><div class='col'><img class='mx-auto d-block img-fluid' src='/img/"+eventID+"/"+array[2]+".jpg'></div></div></div>";
-			}else{
-				document.getElementById("imgBox").style.display = "none";
-				document.getElementById("imgBox").innerHTML ="";
-			}
-			questionID = array[3];
-			if(array[4] != "0"){
-				document.getElementById("timeText").innerHTML = array[4];
-			}else{
-				document.getElementById("timeText").innerHTML = 600;
-			}
-			setAnswers();
-		}
-	xmlHttp.open( "GET", "/php/frage.php?event="+eventID+"&"+"number="+count+"&engine="+engine, true );
-	xmlHttp.send( null );
-}
-
-function setAnswers(){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			var r = "";
-			var r = xmlHttp.responseText;
-			var lines = r.split("||");
-			var bigHtml = "";
-			var i = 0;
-			result.answer = "";
-			if(type =="range"){
-				bigHtml += '<input type="text" class="form-control" id="numberInput" placeholder="Enter answer">';
-				ans = r.split('@');
-				a = ans[0].replace(/\u200B/g, '');
-				antwort = a.split('-');
-				answerNumber = antwort[0];
-				answerNumber2 = antwort[1];
-				result.answer= antwort[0] + " - " + antwort[1];
-			} else if(type =="number"){
-				bigHtml += '<input type="text" class="form-control" id="numberInput" placeholder="Enter answer">';
-				ans = r.split('@');
-				answerNumber = ans[0].replace(/\u200B/g, '');
-				result.answer=ans[0].replace(/\u200B/g, '');
-			}else{
-				lines.forEach(function(item){
-					ans = item.split('@');
-					var html = "";
-					if(type == "normal"){
-						html += '<div class="form-check"><input class="form-check-input" type="radio" name="answer';
-					}else{
-						html += '<div class="form-check"><input class="form-check-input" type="checkbox" name="answer';
-					}
-					
-					html += count;
-					html += '" id="answer';
-					html += i;
-					html += '" value="'
-					html += ans[1];
-					if(ans[1]==1){
-						result.answer+='<br>'+ans[0];
-					}
-					html += '" ans="'+ans[0];
-					html += '"><label id="ansText" class="form-check-label" for="answer';
-					html += i;
-					html += '">';
-					html += ans[0];
-					html += '</label></div>';
-					bigHtml += html;
-					i++;
-				});
-			}
-			document.getElementById("answerBody").innerHTML = bigHtml;
-			
-		}
-	xmlHttp.open( "GET", "/php/answers.php?questionID="+questionID, true );
-	xmlHttp.send( null );
-}
-
-
-function checkAnswerRadio(){
-	stopTimming();
-	result.yAnswer = '';
-	options = document.getElementsByName("answer"+count);
-	var ok = true;
-	var check = false;
-	if(type == "normal"){
-		ok = false;
-		options.forEach(function(item){
-			if(item.checked == true){
-				check = true;
-				result.yAnswer += '<br>'+item.getAttribute('ans')+ ' ';
-				if(item.value == "1"){
-					ok = true;
-				}
-			}
-		});
-	}else if(type == "multi"){ //multi
-		options.forEach(function(item){
-			if(item.checked == true){
-				check = true;
-				result.yAnswer += '<br>'+item.getAttribute('ans');
-				if(item.value == "0"){
-					ok = false;
-				}
-			}else{
-				if(item.value == "1"){
-					ok = false;
-				}
-			}
-		});
-	}else if(type=="number"){
-		result.yAnswer = document.getElementById('numberInput').value ;
-		if(document.getElementById('numberInput').value == answerNumber){
-			check = true;
-			ok = true;
-		}else{
-			ok = false;
-		}
-	}else if (type == "range"){
-		result.yAnswer = document.getElementById('numberInput').value;
-		if(document.getElementById('numberInput').value >= answerNumber && document.getElementById('numberInput').value <= answerNumber2 ){
-			check = true;
-			ok = true;
-		}else{
-			ok = false;
-		}
-	}
-	if(check == false){
-		ok = false;
-	}
-	result.currect = ok;
-	arrayAnswers[count] = ok;
-	if(ok == true){
-		rigthAnswers++;
-		result.currect = "1";
-	}
-	results.push(Object.assign({}, result));
-	closeQuestion();
-}
-
-function closeQuestion(){
-    document.getElementById("quest").style.display = "none";
-	document.getElementById("submitbutton").style.display = "none";
-	if(document.getElementById("settingSkip").checked){
-		document.getElementById("nextbutton").style.display = "block";
-	}
-    count++;
-	if(count<=maxCount){
-		setQuestion();
-		if(document.getElementById("settingTiming").checked){
-			waiting = true;
-		}else{
-			if(document.getElementById("settingAutoNext").checked){
-				document.getElementById("next").style.display = "block";
-			}else{
-				openQuestion();
-			}
-		}
-	}else{
-		getResult();
-	}
-}
-function getResult(){
-	document.getElementById("count").innerHTML = "Result";
-	document.getElementById("divResult").style.display = "block";
-	document.getElementById("quest").style.display = "none";
-	document.getElementById("submitbutton").style.display = "none";
-	document.getElementById("nextbutton").style.display = "none";
-	document.getElementById("time").style.display = "none";
-	clearInterval(myVar);
-	myVar = null;
-	waiting = false;
-	//time
-	var seconds = timeQuiz % 60;
-	var minutes = Math.floor((timeQuiz/60) % 60);
-	var hours = Math.floor(((timeQuiz/60)/60) % 60);
-	
-	
-	var html = "";
-	var itemCount = 1;
-	html += '<h1>Quiz result​:</h1>';
-	if(document.getElementById("settingTiming").checked){
-		html += '<p class="fs-5">Time: '+hours+'h '+minutes+'m '+seconds+'s '+'</p>';
-	}
-	html += '<div class="accordion" id="resultPanel">';
-	results.forEach(function(item){
-		html += '<div class="accordion-item">';
-		html += '<h2 class="accordion-header" id="panelTitel'+itemCount+'">';
-		html += '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panel'+itemCount+'" aria-expanded="false" aria-controls="panel'+itemCount+'">';
-		if(item.currect == true){
-			html += itemCount+'/'+maxCount+': passed';
-		}else{
-			html += itemCount+'/'+maxCount+': failed';
-		}
-		html += '</button></h2>';
-		html += '<div id="panel'+itemCount+'" class="accordion-collapse collapse" aria-labelledby="panelTitel'+itemCount+'">';
-		html += '<div class="accordion-body">';
-		html += item.question;
-		if(item.currect == true){
-			html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="text-success">You: '+item.yAnswer+'</p>';
-		}else{
-			html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="text-danger">You: '+item.yAnswer+'</p>';
-			html += '<p style="margin-left: 2rem;">Correct: '+item.answer+'</p>';
-		}
-		html +='</div></div></div>';
-		itemCount++;
-	});
-	html += '</div>';
-	document.getElementById("divResult").innerHTML += html;
-}
-
-function openQuestion(){
-	clearInterval(myVar);
-	myVar = null;
-	waiting = false;
-	if(document.getElementById("settingTiming").checked){
-		setTimming();
-		setTime(document.getElementById("timeText").innerHTML);
-		document.getElementById("zeit").style.display = "block";
-	}
-	document.getElementById("zeit").innerHTML = "";
-	document.getElementById("submitbutton").style.display = "block";
-	document.getElementById("nextbutton").style.display = "none";
-	document.getElementById("next").style.display = "none";
-    document.getElementById("quest").style.display = "block";
-	document.getElementById("count").innerHTML = (count)+"/"+(maxCount);
-}
 </script>
 </html>

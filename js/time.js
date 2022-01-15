@@ -1,57 +1,78 @@
-var myVar = null;
-var timeQuiz = 0;
-var timeQuizObj = null;
+//timing Quiz
+var quizTime = 0;
+var quizTimeObj = null;
 
-function setTimming(){
-	timeQuizObj = setInterval(quizTimer, 1000);
-}
-function stopTimming(){
-	clearInterval(timeQuizObj);
-	timeQuizObj = null;
-}
+//timing Question
+var nextQuestion = 0;
+var nextQuestionObj = null;
 
-function quizTimer(){
-	timeQuiz++;
-}
+//timing submit
+var submitTime = 0;
+var submitTimeObj = null;
 
-function setTime(time){
-	myVar = null;
-	timestamp =time;
-	myVar = setInterval(myTimer, 1000)
+function startSubmitTime(){
+	document.getElementById('submitButton').disabled = true;
+	submitTime = 30;
+	submitTimeObj = setInterval(submitTimming, 1000);
 }
-
-function component(x, v) {
-	return Math.floor(x / v);
-}
-
-function myTimer() {
-	if(timestamp>0){
-		timestamp--;
-		var minutes = component(timestamp,60) % 60,
-			seconds = component(timestamp,1) % 60;
-		if(seconds<10){
-			document.getElementById("zeit").innerHTML = "Next question in: " + minutes + ":0" + seconds;
-		}else{
-			document.getElementById("zeit").innerHTML = "Next question in: " + minutes + ":" + seconds;
-		}
-		if(timestamp<30){
-			document.getElementById("zeit").style.color = "red";
-		}else{
-			document.getElementById("zeit").style.color = "black";
-		}
-	}else if (timestamp<=0){
-		timestamp--;
-		document.getElementById("zeit").innerHTML = "Time is over";
-		if(waiting == true){
-			setQuestion();
-			document.getElementById("next").style.display = "block";
-			document.getElementById("nextbutton").style.display = "none";
-			document.getElementById("zeit").style.display = "none";
-		}
-		clearInterval(myVar);
-		myVar = null;
-		if(document.getElementById("settingTimeEnd").checked){
-			checkAnswerRadio();
-		}
+function submitTimming(){
+	submitTime--;
+	if(submitTime<1){
+		document.getElementById('submitButton').disabled = false;
+		document.getElementById("submitButton").value = "Submit";
+		clearInterval(submitTimeObj);
+		submitTimeObj = null;
+	}else{
+		document.getElementById("submitButton").value = "Retry " +submitTime+"s";
 	}
+}
+function startQuizTime(){
+	quizTimeObj = setInterval(quizTimming, 1000);
+}
+function stopQuizTime(){
+	clearInterval(quizTimeObj);
+	quizTimeObj = null;
+}
+function stopNextQuestionTime(){
+	clearInterval(nextQuestionObj);
+	nextQuestionObj = null;
+}
+function startQuestionTime(){
+	nextQuestionObj = null;
+	nextQuestionObj = setInterval(nextQuestionTimming, 1000);
+}
+function addTimeToNextQuestionTime(addTime){
+	nextQuestion += addTime;
+	updateTimeUI();
+}
+function nextQuestionTimming(){
+	nextQuestion--;
+	updateTimeUI();
+	if(nextQuestion<0){
+		guestionTimeOver();
+	}
+}
+function updateTimeUI(){
+	if(nextQuestion<60){ //color
+		document.getElementById("timeText").style.color = "red";
+	}else{
+		document.getElementById("timeText").style.color = "black";
+	}
+	if(nextQuestion>0){ //text
+		document.getElementById("timeText").innerHTML = "Next question in: " + timeToSting(nextQuestion).substring(3);
+	}else{
+		document.getElementById("timeText").innerHTML = "Next question available";
+	}
+}
+function quizTimming(){
+	quizTime++;
+}
+function timeToSting(timeInSec) {
+    var hours = Math.floor(timeInSec / 3600);
+    var minutes = Math.floor((timeInSec - (hours * 3600)) / 60);
+    var seconds = timeInSec - (hours * 3600) - (minutes * 60);
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return hours+'h '+minutes+'m '+seconds+'s'; //  HH : MM : SS
 }
