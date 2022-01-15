@@ -48,7 +48,6 @@ if(strlen($year)>2){
 	<script src="/js/bootstrap.js"></script>
 	
 	<!-- Quiz -->
-	<script src="/js/time.js"></script>
 	<script src="/js/quiz.js"></script>
 	
     <title>FS-Quiz - Play</title>
@@ -135,32 +134,20 @@ if(strlen($year)>2){
 	<div id="divResult" style="display: none;">
 	</div>
 	<div id="questionBody">
-		<div class="question" id="quest" style="display: none;">
-			<p class="fs-5" id="questionText">Need a Question</p>
-			<div class="" id="imgBox">
-			</div>
-			<hr class="col-3 col-md-2">
-			<div id="answerBody">
-				
-			</div>
-			<hr class="col-3 col-md-2">
-			<p id="timeText" style="display: none;">600</p>
-		</div>
+		
 	</div>
-	<div id="time" style="display: none;">
+	<div id="guestionFooter" style="display: none;" class="container">
 		<div class="row">
 			<div class="col"></div>
-			<div class="col text-center">
-				<p class="fs-5" id="zeit"></p>
-				<input id="next" style="display: none;" class="btn btn-primary" onclick="openQuestion()" type="submit" value="next">
+			<div id="time" class="col text-center">
+				<p class="fs-5" id="zeit">Test time</p>
 			</div>
-			<div id="submitbutton" class="col text-end">
-				<input class="btn btn-primary" onclick="checkAnswerRadio()" type="submit" value="Submit">
-			</div>
-			<div id="nextbutton" class="col text-end" style="display: none;">
-				<input class="btn btn-primary" onclick="openQuestion()" type="submit" value="Skip">
+			<div id="button" class="col text-end">
+				<input class="btn btn-primary" onclick="submit()" type="submit" value="Submit">
 			</div>
 		</div>
+	</div>
+</div>
 </div>
  
 </div> 

@@ -1,5 +1,6 @@
 //info quiz
 var maxQuestions = 0;
+var currentQuestions = 0;
 var quizDuration = 0;
 var questionsWithoutDuration = 0;
 
@@ -12,7 +13,7 @@ var submitSetting = true;
 
 var currentTyp = "";
 var currentQuestionID = "";
-var modus = 0; //0: one question, 1: all questions
+var modus = "0"; //0: one question, 1: all questions
 var results = [];
 var result= {
 	"question": "",
@@ -20,10 +21,13 @@ var result= {
 	"answer": "",
 	"currect": ""
 };
+var countLoad = 0;
+
 var questionsIDs = [];
 
 function loadFullQuiz(){
 	getQuestionIDs();
+	getQuiz();
 }
 
 function calculateDuration(){
@@ -78,7 +82,82 @@ function settings(){
 	updateUI();
 }
 
-function getQuestionIDs(){
+function start(){
+	document.getElementById('divStart').style.display = "none";
+	document.getElementById("guestionFooter").style.display = "block";
+	switch(modus) {
+		case "0":
+			showNextQuestion();
+		  	break;
+		case "1":
+			for(var i = 0; i< maxQuestions; i++){
+				//wait
+				document.getElementById('quest'+i).style.display = "block";
+				//time
+			}
+		  	break;
+	}
+}
+
+function showNextQuestion(){
+	document.getElementById("count").innerHTML = (currentQuestions+1)+"/"+(maxQuestions);
+	document.getElementById('questionBody').style.display = "block";
+	document.getElementById('quest'+currentQuestions).style.display = "block";
+
+	//time
+}
+
+function submit(){
+	//timestop
+	document.getElementById('questionBody').style.display = "none";
+	switch(modus) {
+		case "0":
+			if(currentQuestions<maxQuestions-1){
+				document.getElementById('quest'+currentQuestions).style.display = "none";
+				currentQuestions++;
+				showNextQuestion();
+			}else{
+				checkAnswers();
+			}
+		  	break;
+		case "1":
+			for(var i = 0; i< maxQuestions; i++){
+				//time
+			}
+		  	break;
+	}
+}
+
+function checkAnswers(){
+	var countTrue = 0;
+	for(var i = 0; i< maxQuestions; i++){
+		var typ = document.getElementById('quest'+i).getAttribute('data-typ');
+		var result = false;
+		var check = false;
+		switch(typ) {
+			case "normal":
+				result = 
+				options.forEach(function(item){
+					if(item.checked == true){
+						check = true;
+						result.yAnswer += '<br>'+item.getAttribute('ans')+ ' ';
+						if(item.value == "1"){
+							ok = true;
+						}
+					}
+				});
+				break;
+			case "multi":
+				break;
+			case "multi":
+				break;
+			case "multi":
+				break;
+		}
+	}
+}
+
+function getQuestionIDs(){//todo
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() { 
 		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
@@ -100,86 +179,15 @@ function getQuestionIDs(){
 	xmlHttp.open( "GET", "/php/getQuestionsIDs.php?engine="+engine+"&event="+eventID, true );
 	xmlHttp.send( null );
 }
-
-function getQuestion(id){
+function getQuiz(){
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() { 
 		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
 			var r = "";
 			var r = xmlHttp.responseText;
-			var a = r.split(';');
-			setQuestion(a[0],a[1],a[2],a[3],getAnswers(id));
+			document.getElementById("questionBody").innerHTML = r;
 		}
 	}
-	xmlHttp.open( "GET", "/php/getQuestion.php?id="+id, true );
+	xmlHttp.open( "GET", "/php/getQuiz.php?engine="+engine+"&event="+eventID, true );
 	xmlHttp.send( null );
-}
-
-function createHTMLQuestion(count, question, img, time, ID){
-	var html = '<div class="question" id="quest'+count+'" style="display: none;">';
-	html += '<p>'+question+'</p>';
-	if(img>0){
-		html += "<div class='container'><div class='row'><div class='col'><img class='mx-auto d-block img-fluid' src='/img/"+eventID+"/"+img+".jpg'></div></div></div>";
-	}
-	html += '<hr class="col-3 col-md-2">';
-	result.question = $html+"";
-	html += createHTMLAnswer(count, ID);
-	html += '<hr class="col-3 col-md-2">';
-	return html + '<p id="timeText'+count+'" style="display: none;">'+time+'</p></div>';
-}
-
-function createHTMLAnswer(count, ID, typ){
-	var html = "";
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-			var r = "";
-			var r = xmlHttp.responseText;
-			var i = 0;
-			result.answer = "";
-			switch(typ) {
-				case "range":
-					var ans = r.split('@').replace(/\u200B/g, '');
-					html += '<input answer="'+ans+'" type="text" class="form-control" id="numberInput'+count+'" placeholder="Enter answer">';
-					break;
-				case "number":
-					var ans = r.split('@').replace(/\u200B/g, '')
-					html += '<input answer="'+ans+'" type="text" class="form-control" id="numberInput'+count+'" placeholder="Enter answer">';
-					break;
-				default:
-					var lines = r.split("||");
-					lines.forEach(function(item){
-						ans = item.split('@');
-						var ansHtml = "";
-						ansHtml += '<div class="form-check"><input class="form-check-input" type="';
-						if(type == "normal"){
-							ansHtml += 'radio';
-						}else{
-							ansHtml += 'checkbox';
-						}
-						ansHtml += '" name="answer'+count+'" id="answer'+i+'" value="'+ans[1];
-						if(ans[1]==1){
-							result.answer+='<br>'+ans[0];
-						}
-						ansHtml += '" ans="'+ans[0]+'"><label id="ansText" class="form-check-label" for="answer'+i+'">'+ans[0]+'</label></div>';
-						html += ansHtml;
-					});
-					break;
-			}
-		}
-	}
-	xmlHttp.open( "GET", "/php/getAnswers.php?questionID="+ID, true );
-	xmlHttp.send( null );
-	return $html;
-}
-
-function buildQuiz(){
-	switch(modus) {
-		case "0"://single
-
-		  	break;
-		case "1": //all
-			
-		  	break;
-	  }
 }
