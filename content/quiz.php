@@ -109,7 +109,7 @@ if(strlen($year)>2){
 				<input class="form-check-input" type="checkbox" id="settingAutoNext" checked>
 				<label class="form-check-label" for="settingAutoNext">Next question prompt</label>
 			</div>
-			<div class="form-check form-switch" id="settingSubmitDiv">
+			<div style="display: none;" class="form-check form-switch" id="settingSubmitDiv">
 				<input class="form-check-input" type="checkbox" id="settingSubmit" checked>
 				<label class="form-check-label" for="settingSubmit">Multiple submission</label>
 			</div>

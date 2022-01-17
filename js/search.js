@@ -41,8 +41,8 @@ function questions(){
 							row += "<td>"+part[2].slice(0,-2).toUpperCase()+"</td>";
 						}
 						row += "<td>"+part[4]+"</td>";
-						if(part[1].length>100){//question shorter
-							part[1] = part[1].slice(0,100)+"...";
+						if(part[1].length>50){//question shorter
+							part[1] = part[1].slice(0,50)+"...";
 						}
 						if(imgValue>0){
 							part[1] += part[3];

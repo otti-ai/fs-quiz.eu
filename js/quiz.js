@@ -3,6 +3,7 @@ var maxQuestions = 0;
 var currentQuestions = 0;
 var quizDuration = 0;
 var questionsWithoutDuration = 0;
+var statisticID = 0;
 
 //settings
 var durationSetting = document.getElementById('durationSelect'); //in minutes
@@ -38,6 +39,7 @@ function loadFullQuiz(){
 	skipSetting = document.getElementById("settingSkip");
 	timeEndSetting = document.getElementById("settingAutoNextDiv");
 	submitSetting = document.getElementById("settingSubmit");
+	modusSwitch();
 	getQuestionIDs();//can remove 
 	getQuiz();
 	loaddocuments();
@@ -75,7 +77,7 @@ function modusSwitch(){
 			document.getElementById('durationSelectDiv').style.display = "block";
 			document.getElementById('settingSkipDiv').style.display = "block";
 			document.getElementById('settingTimeEndDiv').style.display = "block";
-			document.getElementById('settingAutoNextDiv').style.display = "block";
+			document.getElementById('settingAutoNextDiv').style.display = "none";
 			document.getElementById('settingSubmitDiv').style.display = "none";
 		  	break;
 		case "1":
@@ -113,11 +115,14 @@ function start(){
 			if(timekeeping.checked){//start full quiztime
 				startQuizTime();
 			}
+			currentQuestions = -2;
+			setStatistic();
 		  	break;
 	}
 }
 
 function showNextQuestion(){
+	setStatistic();
 	document.getElementById("submitButton").style.display = "";
 	document.getElementById("submitButton").value = "Submit";
 	document.getElementById("count").innerHTML = (currentQuestions+1)+"/"+(maxQuestions);
@@ -220,9 +225,9 @@ function htmlResultPart(i,correct,question,yAnswer,answer){
 	var html = '<div class="accordion-item">';
 	html += '<h2 class="accordion-header" id="panelTitel'+i+'"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panel'+i+'" aria-expanded="false" aria-controls="panel'+i+'">';
 	if(correct){
-		html += i+'/'+maxQuestions+': passed';
+		html += (i+1)+'/'+maxQuestions+': passed';
 	}else{
-		html += i+'/'+maxQuestions+': failed';
+		html += (i+1)+'/'+maxQuestions+': failed';
 	}
 	html += '</button></h2><div id="panel'+i+'" class="accordion-collapse collapse" aria-labelledby="panelTitel'+i+'"><div class="accordion-body">';
 	html += question;
@@ -260,8 +265,8 @@ function checkAnswers(){
 				});
 				break;
 			case "multi":
+				result = true;
 				options.forEach(function(item){
-					result = true;
 					if(item.value == "1"){
 						answer += item.getAttribute('data-ans');
 					}
@@ -333,6 +338,7 @@ function getQuiz(){
 			var r = "";
 			var r = xmlHttp.responseText;
 			document.getElementById("questionBody").innerHTML = r;
+			statisticID = document.getElementById('quest1').getAttribute('data-id');
 		}
 	}
 	xmlHttp.open( "GET", "/php/getQuiz.php?engine="+engine+"&event="+eventID, true );
@@ -373,5 +379,16 @@ function setSolution(){
 			});
 		}
 	xmlHttp.open( "GET", "/php/getSolution.php?id="+questionID, true );
+	xmlHttp.send( null );
+}
+function setStatistic(){
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { 
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			var r = "";
+			solution = "";
+			var r = xmlHttp.responseText;
+		}
+	xmlHttp.open( "GET", "/php/setStatistic.php?id="+statisticID+"&count="+(currentQuestions+1), true );
 	xmlHttp.send( null );
 }

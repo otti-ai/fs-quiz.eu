@@ -15,12 +15,20 @@ if($engine == "c"){
 }
 $statement = $pdo->prepare($sql);
 $statement->execute(array($event));
+
+//statistic
+$sql3 = "INSERT INTO `fsQuizStatistic` (`event`) VALUES (?)";
+$statement3 = $pdo->prepare($sql3);
+$statement3->execute(array($event));
+$id = $pdo->lastInsertId();
+
+//generation
 $string = "";
 $i = 0;
 foreach($statement as $row){
 	//question
 	$html = "";
-	$html .= '<div class="question" data-time="'.$row['time'].'" data-typ="'.$row['typ'].'" id="quest'.$i.'" style="display: none;"><h4 style="display: none;" id="questTitel'.$i.'">Question: '.($i+1).'</h4><div id="questText'.$i.'">';
+	$html .= '<div class="question" data-id="'.$id.'" data-time="'.$row['time'].'" data-typ="'.$row['typ'].'" id="quest'.$i.'" style="display: none;"><h4 style="display: none;" id="questTitel'.$i.'">Question: '.($i+1).'</h4><div id="questText'.$i.'">';
 	$html .= '<p>'.$row['question'].'</p>';
 	if($row['img']>0){
 		$html .= "<div class='container'><div class='row'><div class='col'><img class='mx-auto d-block img-fluid' src='/img/".$event."/".$row['img'].".jpg'></div></div></div>";
