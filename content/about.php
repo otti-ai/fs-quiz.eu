@@ -6,7 +6,7 @@
     <h1>About me</h1>
     <div class="row">
 		<div class="col-sm-4">
-			<img class="img-fluid" src="./img/me.jpg" alt="Me">
+			<img class="img-fluid" src="/img/me.jpg" alt="Me">
 		</div>
 		<div class="col-sm-8">
 			<p class="fs-5">My name is Yannik Ottens and I study computer science at the University of Bremen in Germany. I have been 

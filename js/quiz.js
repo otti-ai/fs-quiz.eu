@@ -101,7 +101,7 @@ function settings(){
 
 function start(){
 	document.getElementById('divStart').style.display = "none";
-	document.getElementById("guestionFooter").style.display = "block";
+	document.getElementById("questionFooter").style.display = "block";
 	switch(modus) {
 		case "0":
 			startQuestionTime();
@@ -208,7 +208,7 @@ function showResult(){
 		stopNextQuestionTime();
 	}
 
-	document.getElementById('guestionFooter').style.display = "none";
+	document.getElementById('questionFooter').style.display = "none";
 
 	var html = "";
 	html += '<h1>Quiz result​:</h1>';
