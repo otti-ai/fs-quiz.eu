@@ -17,25 +17,26 @@
 	
     <div class="row g-5">
       <div class="col-md-6">
-        <h2>Reqistration</h2>
-        <p>Informations about the registration procedure</p>
+        <h2>Registration</h2>
+        <p>Information about the registration procedure</p>
         <ul class="icon-list">
-		  <li><a target="_blank" href="/doc/reg/FSA-Registration-Procedure-2022_1-1.pdf">FS Austria</a></li>
-		  <li><a target="_blank" href="https://www.formula-ata.it/how-to-register/">SAE Italy</a></li>
+		  <li><a target="_blank" href="/doc/reg/FSA-Registration-Procedure-2022_1-1.pdf">FS Austria (v1.1)</a></li>
+		  <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
 		  <li><a target="_blank" href="https://formulastudent.ch/registration2022">FS Switzerland</a></li>
         </ul>
       </div>
 
       <div class="col-md-6">
         <h2>Documents</h2>
-        <p>Important documents for the reqistration quizzes</p>
+        <p>Important documents for the registration quizzes</p>
         <ul class="icon-list">
-          <li><a target="_blank" href="/doc/22/FS-Rules_2022_v1.0.pdf">FSG Rules 2022</a></li>
-		  <li><a target="_blank" href="/doc/21/FS-Rules_2020_V1.0.pdf">FSG Rules 2021</a></li>
-		  <li><a target="_blank" href="/doc/22/FS_2022_CV_Hybrid_Rules.pdf">FS Hybrid Rules 2022</a></li>
-		  <li><a target="_blank" href="/doc/fsn22/FSN-Competition-Handbook-2022-V1.0.pdf">FSN Handbook 2022</a></li>
-		  <li><a target="_blank" href="/doc/fsa22/FSA-Competition-Handbook-2022_1-2-0.pdf">FSA Handbook 2022</a></li>
-		  <li><a target="_blank" href="/dog/datalog/FSG-FSA-Datalogger-Datasheet-v0.1.pdf">FSG & FSA Datalogger 2022</a></li>
+          <li><a target="_blank" href="/doc/22/FS-Rules_2022_v1.0.pdf">FSG Rules 2022 (v1.0)</a></li>
+		  <li><a target="_blank" href="/doc/21/FS-Rules_2020_V1.0.pdf">FSG Rules 2021 (v1.0)</a></li>
+		  <li><a target="_blank" href="/doc/22/FS_2022_CV_Hybrid_Rules.pdf">FS Hybrid Rules 2022 (v0.9)</a></li>
+		  <li><a target="_blank" href="/doc/fsg22/FSG22_Competition_Handbook_v1.0.pdf">FSG Handbook 2022 (v1.0)</a></li>
+		  <li><a target="_blank" href="/doc/fsn22/FSN-Competition-Handbook-2022-V1.0.pdf">FSN Handbook 2022 (v1.0)</a></li>
+		  <li><a target="_blank" href="/doc/fsa22/FSA-Competition-Handbook-2022_1-4-0-1.pdf">FSA Handbook 2022 (v1.4.0)</a></li>
+		  <li><a target="_blank" href="/doc/datalog/FSG-FSA-Datalogger-Datasheet-v0.1.pdf">FSG & FSA Datalogger 2022 (v0.1)</a></li>
         </ul>
       </div>
     </div>

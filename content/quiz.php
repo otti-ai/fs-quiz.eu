@@ -66,7 +66,7 @@ if(strlen($year)>2){
 		<h1>FS <?php echo $name; ?> Registration Quiz 20<?php echo $version ?></h1>
 		<div class="row g-5">
 		<div class="col-md-6">
-			<h3>Infomation</h3>
+			<h3>Information</h3>
 			<p id="maxInfo" style="margin-bottom: 0;">Questions: x</p>
 			<p id="timeInfo" style="margin-bottom: 0;">Time: x</p>
 			<p id="classInfo" style="margin-bottom: 0;">Class: <?php echo strtoupper($engine); ?>V</p>
@@ -135,7 +135,7 @@ if(strlen($year)>2){
 	<div id="questionBody">
 		
 	</div>
-	<div id="guestionFooter" style="display: none;" class="container">
+	<div id="questionFooter" style="display: none;" class="container">
 		<div class="row">
 			<div class="col"></div>
 			<div id="time" class="col text-center">
