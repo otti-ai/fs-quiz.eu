@@ -35,6 +35,11 @@ Route::add('/faq',function(){
 	$pagename = 'faq';
 	require('content/faq.php');
 });
+Route::add('/changelog',function(){
+    $titel = 'FS-Quiz - Changelog';
+	$pagename = 'about';
+	require('content/changelog.php');
+});
 Route::add('/quiz/([a-z]*)/([ce]*)/([0-9]*[tv]*)', function($event,$engine,$year) {
 	$titel = 'FS-Quiz - Quiz';
 	$pagename = 'quizzes';

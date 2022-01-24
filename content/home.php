@@ -40,8 +40,28 @@
         </ul>
       </div>
     </div>
+    <hr class="col-3 col-md-2 mb-5">
+    <h3>Changelog</h3>
+    <p id="changelog"></p>
+	  <p><a href="/changelog">More</a></p>
   </main>
   </div> 
+  <script>
+getChangelog();
+function getChangelog(){
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { 
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+			var r = "";
+			var r = xmlHttp.responseText;
+			document.getElementById("changelog").innerHTML = r;
+		}
+	}
+	xmlHttp.open( "GET", "/php/getChangelog.php?type=0", true );
+	xmlHttp.send( null );
+}
+
+</script>
   <?php 
 	require('./footer.php');
 ?>

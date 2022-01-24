@@ -24,6 +24,26 @@
     	</div>
       </div>
     </div>
+    <hr class="col-3 col-md-2 mb-5">
+	<h4>Changelog:</h4>
+	<p id="changelog"></p>
+	<p><a href="/changelog">More</a></p>
+  <script>
+getChangelog();
+function getChangelog(){
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { 
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+			var r = "";
+			var r = xmlHttp.responseText;
+			document.getElementById("changelog").innerHTML = r;
+		}
+	}
+	xmlHttp.open( "GET", "/php/getChangelog.php?type=2", true );
+	xmlHttp.send( null );
+}
+
+</script>
   </main>
   </div> 
   <?php 
