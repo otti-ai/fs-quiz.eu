@@ -78,35 +78,52 @@
 			</ul>
 		</div>
 	</div>
-	<p>* not all solutions available</p>
 	</div>
 	<hr class="col-3 col-md-2">
-	<h3>CV Class:</h3>
-	<div class="container-fluid ">
 	<div class="row row-cols-auto">
 		<div class="col">
-			<p class="fs-5">FS Austria:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fsa/c/21">2021</a></li>
-				<li><a href="/quiz/fsa/c/20">2020</a></li>
-				<li><a href="/quiz/fsa/c/19">2019</a></li>
-				<li><a href="/quiz/fsa/c/17">2017</a></li>
-			</ul>
+			<h3>CV Class:</h3>
+			<div class="container-fluid ">
+			<div class="row row-cols-auto">
+				<div class="col">
+					<p class="fs-5">FS Austria:</p>
+					<ul class="icon-list">
+						<li><a href="/quiz/fsa/c/21">2021</a></li>
+						<li><a href="/quiz/fsa/c/20">2020</a></li>
+						<li><a href="/quiz/fsa/c/19">2019</a></li>
+						<li><a href="/quiz/fsa/c/17">2017</a></li>
+					</ul>
+				</div>
+				<div class="col">
+					<p class="fs-5">FS Netherlands:</p>
+					<ul class="icon-list">
+						<li><a href="/quiz/fsn/c/19">2019</a></li>
+					</ul>
+				</div>
+				<div class="col">
+					
+				</div>
+				<div class="col">
+					
+				</div>
+			</div>
+			</div>
 		</div>
 		<div class="col">
-			<p class="fs-5">FS Netherlands:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fsn/c/19">2019</a></li>
-			</ul>
-		</div>
-		<div class="col">
-			
-		</div>
-		<div class="col">
-			
+			<h3>DV Class:</h3>
+			<div class="container-fluid ">
+			<div class="row row-cols-auto">
+				<div class="col">
+					<p class="fs-5">FS Germany:</p>
+					<ul class="icon-list">
+						<li><a href="/quiz/fsg/d/17">2017</a>*</li>
+					</ul>
+				</div>
+			</div>
+			</div>
 		</div>
 	</div>
-	</div>
+	<p>* not all solutions available</p>
 	<hr class="col-3 col-md-2 mb-5">
 	<h4>Changelog:</h4>
 	<p id="changelog"></p>

@@ -40,23 +40,30 @@ switch ($class) {
     case "c":
         $string = $string." AND q.combustion = 1";
         break;
+    case "d":
+        $string = $string." AND q.dv = 1";
+        break;
 }
 if($_GET['img']>0){
     $string .= " AND q.img > 0" ;
 }
-$sql = "SELECT q.ID, q.question, q.eventID, q.img, q.electric, q.combustion FROM `fsQuizQuestion` q, `fsQuizCategory` c WHERE q.ID = c.questionID AND q.eventID LIKE ? ". $string;
+$sql = "SELECT q.ID, q.question, q.eventID, q.img, q.electric, q.combustion, q.dv FROM `fsQuizQuestion` q, `fsQuizCategory` c WHERE q.ID = c.questionID AND q.eventID LIKE ? ". $string;
 $statement = $pdo->prepare($sql);
 $statement->execute(array(str_replace("q","%",$_GET['event']))); 
 $string = "";
 foreach ($statement as $ro) {
         $string .= $ro[0]."@".$ro[1]."@".$ro[2]."@"."<img class='mx-auto d-block img-fluid' src='/img/".$ro[2]."/".$ro[3].".jpg'>";
-        if($ro[4] == true && $ro[5] == true){
-                $string .= "@Any;";
-        }else if($ro[4] == true){
-                $string .= "@EV;";
-        }else{
-                $string .= "@CV;";
+        $s = '';
+        if($ro[4] == true){
+            $s .= "EV, ";
         }
+        if($ro[5] == true){
+            $s .= "CV, ";
+        }
+        if($ro[6] == true){
+            $s .= "DV, ";
+        }
+        $string .= "@".substr($s,0,-2).";";
 }
 echo substr($string, 0, -1);
 ?>

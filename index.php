@@ -40,7 +40,7 @@ Route::add('/changelog',function(){
 	$pagename = 'about';
 	require('content/changelog.php');
 });
-Route::add('/quiz/([a-z]*)/([ce]*)/([0-9]*[tv]*)', function($event,$engine,$year) {
+Route::add('/quiz/([a-z]*)/([ced]*)/([0-9]*[tv]*)', function($event,$engine,$year) {
 	$titel = 'FS-Quiz - Quiz';
 	$pagename = 'quizzes';
 	require('content/quiz.php');

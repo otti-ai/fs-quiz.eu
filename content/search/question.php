@@ -45,6 +45,7 @@
 						<option value="q" selected>Any</option>
 						<option value="e">EV</option>
 						<option value="c">CV</option>
+						<option value="d">DV</option>
 					</select> 
 					<label for="classSelect">Class</label>
 				</div>

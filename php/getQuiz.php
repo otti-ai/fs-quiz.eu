@@ -8,11 +8,18 @@ include('datenbank.php');
 $engine = $_GET['engine'];
 $event = $_GET['event'];
 
-if($engine == "c"){
-	$sql = "SELECT * FROM `fsQuizQuestion` WHERE `eventID` = ? AND `combustion` = 1";
-}else{
-	$sql = "SELECT * FROM `fsQuizQuestion` WHERE `eventID` = ? AND `electric` = 1";
+switch ($engine) {
+    case "e":
+        $sql = "SELECT * FROM `fsQuizQuestion` WHERE `eventID` = ? AND `electric` = 1";
+        break;
+    case "c":
+        $sql = "SELECT * FROM `fsQuizQuestion` WHERE `eventID` = ? AND `combustion` = 1";
+        break;
+    case "d":
+        $sql = "SELECT * FROM `fsQuizQuestion` WHERE `eventID` = ? AND `dv` = 1";
+        break;
 }
+
 $statement = $pdo->prepare($sql);
 $statement->execute(array($event));
 
