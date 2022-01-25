@@ -21,8 +21,12 @@
         <p>Information about the registration procedure</p>
         <ul class="icon-list">
 		  <li><a target="_blank" href="/doc/reg/FSA-Registration-Procedure-2022_1-1.pdf">FS Austria (v1.1)</a></li>
+		  <li><a target="_blank" href="/doc/reg/FSEast-Registration-guide.pdf">FS East Registration Guide</a></li>
+		  <li><a target="_blank" href="https://fseast.eu/get-ready-for-fs-east-2022">FS East</a></li>
 		  <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
 		  <li><a target="_blank" href="https://formulastudent.ch/registration2022">FS Switzerland</a></li>
+		  <li><a target="_blank" href="https://fs-alpeadria.com/fs-alpe-adria-event/registration">FS Alpe-Adria</a></li>
+		  <li><a target="_blank" href="/doc/reg/FSAA_Registration_V2.pdf">FS Alpe-Adria Registration Procedure Guide</a></li>
         </ul>
       </div>
 
@@ -33,6 +37,8 @@
           <li><a target="_blank" href="/doc/22/FS-Rules_2022_v1.0.pdf">FSG Rules 2022 (v1.0)</a></li>
 		  <li><a target="_blank" href="/doc/21/FS-Rules_2020_V1.0.pdf">FSG Rules 2021 (v1.0)</a></li>
 		  <li><a target="_blank" href="/doc/22/FS_2022_CV_Hybrid_Rules.pdf">FS Hybrid Rules 2022 (v0.9)</a></li>
+		  <li><a target="_blank" href="/doc/fseast22/FS_East_2022_Rules_v0.9.pdf">FS East Rules 2022 (v0.9)</a></li>
+		  <li><a target="_blank" href="/doc/fseast22/FS_East_Alumni_Rules_v1.0.pdf">FS East Alumni Cup Rules 2022 (v1.0)</a></li>
 		  <li><a target="_blank" href="/doc/fsg22/FSG22_Competition_Handbook_v1.0.pdf">FSG Handbook 2022 (v1.0)</a></li>
 		  <li><a target="_blank" href="/doc/fsn22/FSN-Competition-Handbook-2022-V1.0.pdf">FSN Handbook 2022 (v1.0)</a></li>
 		  <li><a target="_blank" href="/doc/fsa22/FSA-Competition-Handbook-2022_1-4-0-1.pdf">FSA Handbook 2022 (v1.4.0)</a></li>
