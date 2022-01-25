@@ -26,6 +26,7 @@
 		  <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
 		  <li><a target="_blank" href="https://formulastudent.ch/registration2022">FS Switzerland</a></li>
 		  <li><a target="_blank" href="https://fs-alpeadria.com/fs-alpe-adria-event/registration">FS Alpe-Adria</a></li>
+		  <li><a target="_blank" href="https://fs-alpeadria.com/fs-alpe-adria-event/registration">FS Alpe-Adria Registration Procedure Guide</a></li>
         </ul>
       </div>
 
