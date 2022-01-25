@@ -14,6 +14,7 @@
 				<div class="form-floating">
 					<select onchange="documents()" class="form-select" id="eventSelect" aria-label="eventSelect">
 						<option <?php if ($event == "") {echo 'selected';} ?> value="q">Any</option>
+						<option <?php if ($event == "fsaa") {echo 'selected';} ?> value="fsaa">Alpe Adria</option>
 						<option <?php if ($event == "fsa") {echo 'selected';} ?> value="fsa">Austria</option>
 						<option <?php if ($event == "fscz") {echo 'selected';} ?> value="fscz">Czech</option>
 						<option <?php if ($event == "fseast") {echo 'selected';} ?> value="fseast">East</option>
