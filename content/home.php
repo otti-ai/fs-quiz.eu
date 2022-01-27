@@ -39,7 +39,7 @@
 		  <li><a target="_blank" href="/doc/22/FS_2022_CV_Hybrid_Rules.pdf">FS Hybrid Rules 2022 (v0.9)</a></li>
 		  <li><a target="_blank" href="/doc/fseast22/FS_East_2022_Rules_v0.9.pdf">FS East Rules 2022 (v0.9)</a></li>
 		  <li><a target="_blank" href="/doc/fseast22/FS_East_Alumni_Rules_v1.0.pdf">FS East Alumni Cup Rules 2022 (v1.0)</a></li>
-		  <li><a target="_blank" href="/doc/fsg22/FSG22_Competition_Handbook_v1.0.pdf">FSG Handbook 2022 (v1.0)</a></li>
+		  <li><a target="_blank" href="/doc/fsg22/FSG22_Competition_Handbook_v1.1.pdf">FSG Handbook 2022 (v1.1)</a></li>
 		  <li><a target="_blank" href="/doc/fsn22/FSN-Competition-Handbook-2022-V1.0.pdf">FSN Handbook 2022 (v1.0)</a></li>
 		  <li><a target="_blank" href="/doc/fsa22/FSA-Competition-Handbook-2022_1-4-0-1.pdf">FSA Handbook 2022 (v1.4.0)</a></li>
 		  <li><a target="_blank" href="/doc/datalog/FSG-FSA-Datalogger-Datasheet-v0.1.pdf">FSG & FSA Datalogger 2022 (v0.1)</a></li>

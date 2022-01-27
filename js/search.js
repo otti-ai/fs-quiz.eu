@@ -107,6 +107,38 @@ function searchDocuments(){
 	xmlHttp.open( "GET", "/php/getDocuments.php?y="+year+"&e="+event, true );
 	xmlHttp.send( null );
 }
+function searchRules(){
+	var eventSelect = document.getElementById('eventSelect');
+	var eventValue = eventSelect.options[eventSelect.selectedIndex].value;
+	var textSelect = document.getElementById('textSearch').value;
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { 
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			var r = "";
+			var r = xmlHttp.responseText;
+			var html = "";
+			var links = r.split('||');
+			if(r.includes("@@")){
+				links.forEach(function(item){
+					var info = item.split("@@");
+					var row = "<tr>";
+					row += "<td>"+info[2] +"</td>";
+					row += "<td>"+info[1] +"</td>";
+
+					row += "<td>"+info[3]+"</td>";
+					row += "</tr>";
+					html += row;
+				});
+				document.getElementById("count").innerHTML = "Found: "+links.length;
+			}else{
+				html += "<tr><td class='text-center' colspan='3'>No question found</td></tr>";
+				document.getElementById("count").innerHTML = "Found: 0";
+			}
+			document.getElementById("doc").innerHTML = html;
+		}
+	xmlHttp.open( "GET", "/php/search/searchRules.php?year="+"FS2022"+"&event="+eventValue+"&text="+textSelect, true );
+	xmlHttp.send( null );
+}
 //sort table
 var currentSortColumn = -1;
 var currentSearchDirection = false;
