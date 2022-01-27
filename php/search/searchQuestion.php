@@ -7,6 +7,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/php/datenbank.php');
 
 $string = "";
 $class = $_GET['class'];
+$text = "%".$_GET['text']."%";
 $categories = explode("II",$_GET['category']);
 foreach ($categories as $cate) {
    switch ($cate) {
@@ -47,9 +48,9 @@ switch ($class) {
 if($_GET['img']>0){
     $string .= " AND q.img > 0" ;
 }
-$sql = "SELECT q.ID, q.question, q.eventID, q.img, q.electric, q.combustion, q.dv FROM `fsQuizQuestion` q, `fsQuizCategory` c WHERE q.ID = c.questionID AND q.eventID LIKE ? ". $string;
+$sql = "SELECT q.ID, q.question, q.eventID, q.img, q.electric, q.combustion, q.dv FROM `fsQuizQuestion` q, `fsQuizCategory` c WHERE q.ID = c.questionID AND q.eventID LIKE ? AND q.question LIKE ?". $string;
 $statement = $pdo->prepare($sql);
-$statement->execute(array(str_replace("q","%",$_GET['event']))); 
+$statement->execute(array(str_replace("q","%",$_GET['event']),$text)); 
 $string = "";
 foreach ($statement as $ro) {
         $string .= $ro[0]."@".$ro[1]."@".$ro[2]."@"."<img class='mx-auto d-block img-fluid' src='/img/".$ro[2]."/".$ro[3].".jpg'>";

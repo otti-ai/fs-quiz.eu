@@ -12,6 +12,12 @@
 		<div id="filter" class="row row-cols-auto">
 			<div class="col">
 				<div class="form-floating">
+					<input onchange="questions()" id="textSearch" type="text" class="form-control" id="floatingInput" >
+  					<label for="floatingInput">Text</label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-floating">
 					<select onchange="questions()" class="form-select" id="eventSelect" aria-label="eventSelect">
 						<option value="q" selected>Any</option>
 						<option value="fsa">Austria</option>

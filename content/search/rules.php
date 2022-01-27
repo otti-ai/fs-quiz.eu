@@ -17,7 +17,7 @@
 						<option value="fscz">Czech</option>
 						<option value="fseast">East</option>
 						<option selected value="FSG22">Germany</option>
-						<option value="fsn">Netherland</option>
+						<option value="FSN22">Netherland</option>
 					</select>
 					<label for="eventSelect">Event</label>
 				</div>

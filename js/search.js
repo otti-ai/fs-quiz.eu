@@ -5,6 +5,7 @@ function changerSort(s){
 }
 
 function questions(){
+	var textSelect = document.getElementById('textSearch').value;
 	var eventSelect = document.getElementById('eventSelect');
 	var eventValue = eventSelect.options[eventSelect.selectedIndex].value;
 	var yearSelect = document.getElementById('yearSelect');
@@ -60,7 +61,7 @@ function questions(){
 			}
 			document.getElementById("doc").innerHTML = html;
 		}
-	xmlHttp.open( "GET", "/php/search/searchQuestion.php?event="+eventValue+yearValue+"&category="+categoryValue+"&class="+classValue+"&sort="+sort+"&img="+imgValue, true );
+	xmlHttp.open( "GET", "/php/search/searchQuestion.php?event="+eventValue+yearValue+"&category="+categoryValue+"&class="+classValue+"&sort="+sort+"&img="+imgValue+"&text="+textSelect, true );
 	xmlHttp.send( null );
 }
 
