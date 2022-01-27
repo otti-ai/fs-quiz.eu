@@ -21,7 +21,7 @@
         <p>Information about the registration procedure</p>
         <ul class="icon-list">
 		  <li><a target="_blank" href="/doc/reg/FSA-Registration-Procedure-2022_1-1.pdf">FS Austria (v1.1)</a></li>
-		  <li><a target="_blank" href="/doc/reg/FSAA_Registration_V2.pdf">FS East Registration Guide (v2)</a></li>
+		  <li><a target="_blank" href="/doc/reg/FSEast_Registration_guide_v2.pdf">FS East Registration Guide (v2)</a></li>
 		  <li><a target="_blank" href="https://fseast.eu/get-ready-for-fs-east-2022">FS East</a></li>
 		  <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
 		  <li><a target="_blank" href="https://formulastudent.ch/registration2022">FS Switzerland</a></li>
