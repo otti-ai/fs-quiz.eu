@@ -68,6 +68,7 @@
 		<div class="col">
 			<p class="fs-5">FS Netherlands:</p>
 			<ul class="icon-list">
+				<li><a href="/quiz/fsn/e/22">2022</a></li>
 				<li><a href="/quiz/fsn/e/19">2019</a></li>
 				<li><a href="/quiz/fsn/e/18t">2018 Test</a>*</li>
 			</ul>
