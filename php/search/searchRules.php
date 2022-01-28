@@ -8,12 +8,13 @@ require($_SERVER['DOCUMENT_ROOT']. '/php/datenbank.php');
 $year = $_GET['year'];
 $event = $_GET['event'];
 $text = "%".$_GET['text']."%";
+$rule = $_GET['rule']."%";
 
 //SELECT * FROM fsQuizRules WHERE ruleID NOT IN (SELECT r.ruleID FROM fsQuizRules r, fsQuizRulesVoided v WHERE r.ruleID LIKE CONCAT(v.voidRule,"%") AND v.ruleBook = "FSA22" AND v.voidBook = "FS2022") AND `rule` LIKE "%cars%" AND (`ruleBook` = "FS2022" OR `ruleBook` = "FSA22");
-$sql = "SELECT * FROM fsQuizRules WHERE ruleID NOT IN (SELECT r.ruleID FROM fsQuizRules r, fsQuizRulesVoided v WHERE r.ruleID LIKE CONCAT(v.voidRule,'%') AND v.ruleBook = ? AND v.voidBook = ?) AND `rule` LIKE ? AND (`ruleBook` = ? OR `ruleBook` = ?)";
+$sql = "SELECT * FROM fsQuizRules WHERE ruleID NOT IN (SELECT r.ruleID FROM fsQuizRules r, fsQuizRulesVoided v WHERE r.ruleID LIKE CONCAT(v.voidRule,'%') AND v.ruleBook = ? AND v.voidBook = ?) AND `rule` LIKE ? AND (`ruleBook` = ? OR `ruleBook` = ?) AND ruleID LIKE ?";
 $statement = $pdo->prepare($sql);
 $string = "";
-$statement->execute(array($event, $year, $text, $event, $year)); 
+$statement->execute(array($event, $year, $text, $event, $year, $rule)); 
 foreach ($statement as $ro) {
         $string .= $ro[0]."@@".$ro[1]."@@".$ro[2]."@@".$ro[3];
         if($ro['img']>0){

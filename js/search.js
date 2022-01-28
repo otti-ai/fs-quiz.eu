@@ -109,6 +109,7 @@ function searchDocuments(){
 	xmlHttp.send( null );
 }
 function searchRules(){
+	var ruleSearch = document.getElementById('ruleSearch').value;
 	var eventSelect = document.getElementById('eventSelect');
 	var eventValue = eventSelect.options[eventSelect.selectedIndex].value;
 	var textSelect = document.getElementById('textSearch').value;
@@ -137,7 +138,7 @@ function searchRules(){
 			}
 			document.getElementById("doc").innerHTML = html;
 		}
-	xmlHttp.open( "GET", "/php/search/searchRules.php?year="+"FS2022"+"&event="+eventValue+"&text="+textSelect, true );
+	xmlHttp.open( "GET", "/php/search/searchRules.php?year="+"FS2022"+"&event="+eventValue+"&text="+textSelect+"&rule="+ruleSearch, true );
 	xmlHttp.send( null );
 }
 //sort table

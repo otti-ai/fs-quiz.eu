@@ -28,6 +28,12 @@
   					<label for="floatingInput">Text</label>
 				</div>
 			</div>
+			<div class="col">
+				<div class="form-floating">
+					<input onchange="searchRules()" id="ruleSearch" type="text" class="form-control" id="floatingInput" >
+  					<label for="floatingInput">Rule</label>
+				</div>
+			</div>
 		</div>
 		<hr class="col-3 col-md-2">
 		<div class="row table-responsive">
