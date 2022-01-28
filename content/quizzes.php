@@ -57,6 +57,7 @@
 		<div class="col">
 			<p class="fs-5">FS East:</p>
 			<ul class="icon-list">
+				<li><a href="/quiz/fseast/e/21">2022</a></li>
 				<li><a href="/quiz/fseast/e/21">2021</a></li>
 				<li><a href="/quiz/fseast/e/20">2020</a></li>
 				<li><a href="/quiz/fseast/e/19">2019</a>*</li>
