@@ -38,6 +38,7 @@
 		<div class="col">
 			<p class="fs-5">FS Czech Republic:</p>
 			<ul class="icon-list">
+				<li><a href="/quiz/fscz/e/22">2021</a></li>
 				<li><a href="/quiz/fscz/e/21">2021</a></li>
 				<li><a href="/quiz/fscz/e/20">2020</a></li>
 				<li><a href="/quiz/fscz/e/19">2019</a>*</li>
