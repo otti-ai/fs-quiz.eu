@@ -9,16 +9,16 @@ $typ = $_GET['type'];
 $sql = "";
 switch ($typ) {
     case 0:
-        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` ORDER BY `Date` DESC LIMIT 5";
+        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` ORDER BY `Date` DESC, `ID` DESC LIMIT 5";
         break;
     case 1:
-        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` WHERE `Quiz` = 1 ORDER BY `Date` DESC LIMIT 5";
+        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` WHERE `Quiz` = 1 ORDER BY `Date` DESC, `ID` DESC LIMIT 5";
         break;
     case 2:
-        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` WHERE `Search` = 1 ORDER BY `Date` DESC LIMIT 5";
+        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` WHERE `Search` = 1 ORDER BY `Date` DESC, `ID` DESC LIMIT 5";
         break;
     default:
-        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` ORDER BY `Date` DESC";
+        $sql = "SELECT `Date`,`Text` FROM `fsQuizChangelog` ORDER BY `Date` DESC, `ID` DESC";
         break;
 }
 
