@@ -6,14 +6,15 @@
     <h1>Training for the registration quizzes</h1>
     <p class="fs-5">This page is for training for the European Formula Student Registration quizzes. Old quizzes can be worked through here in the original or an individual adapted mode.</p>
 
-    <div class="mb-5">
+    <div class="mb-2">
       <a href="/quizzes" class="btn btn-primary btn-lg px-4">Old quizzes</a>
     </div>
 
-    <hr class="col-3 col-md-2 mb-5">
+    <hr class="col-3 col-md-2">
 	<h2>Dates</h2>
-	<img class="mx-auto d-block img-fluid" src="/img/dates.jpg">
-	<hr class="col-3 col-md-2 mb-5">
+	<h3 class="text-center">FS Spain  28.2  12:00 CET</h3>
+	<!--img class="mx-auto d-block img-fluid" src="/img/dates.jpg"> -->
+	<hr class="col-3 col-md-2">
 	
     <div class="row g-5">
       <div class="col-md-6">
