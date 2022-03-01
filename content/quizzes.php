@@ -14,6 +14,7 @@
 		<div class="col">
 			<p class="fs-5">FS Germany:</p>
 			<ul class="icon-list">
+				<li><a href="/quiz/fsg/e/22">2022</a></li>
 				<li><a href="/quiz/fsg/e/21v">2021 V2</a></li>
 				<li><a href="/quiz/fsg/e/21">2021</a></li>
 				<li><a href="/quiz/fsg/e/20">2020</a></li>
