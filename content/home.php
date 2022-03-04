@@ -10,10 +10,10 @@
       <a href="/quizzes" class="btn btn-primary btn-lg px-4">Old quizzes</a>
     </div>
 
-    <hr class="col-3 col-md-2">
+    <!--<hr class="col-3 col-md-2">
 	<h2>Dates</h2>
 	<h3 class="text-center">FS Spain  28.2  12:00 CET</h3>
-	<!--img class="mx-auto d-block img-fluid" src="/img/dates.jpg"> -->
+	img class="mx-auto d-block img-fluid" src="/img/dates.jpg"> -->
 	<hr class="col-3 col-md-2">
 	
     <div class="row g-5">
