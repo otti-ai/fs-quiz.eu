@@ -27,6 +27,7 @@
 				<div class="form-floating">
 					<select onchange="search()" class="form-select" id="yearSelect" aria-label="yearSelect">
 						<option <?php if ($year == "") {echo 'selected';} ?> value="q">Any</option>
+						<option <?php if ($year == "23") {echo 'selected';} ?> value="23">2023</option>
 						<option <?php if ($year == "22") {echo 'selected';} ?> value="22">2022</option>
 						<option <?php if ($year == "21") {echo 'selected';} ?> value="21">2021</option>
 						<option <?php if ($year == "20") {echo 'selected';} ?> value="20">2020</option>
@@ -71,7 +72,7 @@ load();
 function search(){
 	year = document.getElementById("yearSelect").value;
 	event = document.getElementById("eventSelect").value;
-	window.history.pushState({ additionalInformation: 'Search Documents' }, "FS-Quiz - Documents'", "https://fs-quiz.eu/documents/"+event+"/"+year);
+	window.history.pushState({ additionalInformation: 'Search Documents' }, "FS-Quiz - Documents'", "https://fs-quiz.eu/search/documents/"+event+"/"+year);
 	load();
 }
 

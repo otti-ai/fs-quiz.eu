@@ -30,6 +30,7 @@
 				<div class="form-floating">
 					<select onchange="documents()" class="form-select" id="yearSelect" aria-label="yearSelect">
 						<option <?php if ($year == "") {echo 'selected';} ?> value="q">Any</option>
+						<option <?php if ($year == "23") {echo 'selected';} ?> value="23">2023</option>
 						<option <?php if ($year == "22") {echo 'selected';} ?> value="22">2022</option>
 						<option <?php if ($year == "21") {echo 'selected';} ?> value="21">2021</option>
 						<option <?php if ($year == "20") {echo 'selected';} ?> value="20">2020</option>
