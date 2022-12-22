@@ -13,7 +13,7 @@
     <hr class="col-3 col-md-2">
 	<h2>Dates</h2>
 	<?php require('./php/eventgraph.php'); ?>
-	<p>Testquiz from FS Switzerland on January 15, 13:00 CET</p>
+	<p>Testquiz from FS Switzerland on 15th January, 13:00 (CET)</p>
 	<hr class="col-3 col-md-2">
 	
     <div class="row g-5">

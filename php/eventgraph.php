@@ -1,5 +1,5 @@
 <div class="container" style="margin-left: auto; margin-right: auto;">
-        <div class="row justify-content-md-center flex-nowrap" style="transform: translateX(5%); margin-top: 5vw;">
+        <div class="row justify-content-md-center flex-nowrap" style="transform: translateX(5%);">
             <div class="col d-inline p-0 m-0">
               <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="./img/events/switzerland.png"/>
             </div>
