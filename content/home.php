@@ -12,7 +12,7 @@
 
     <hr class="col-3 col-md-2">
 	<h2>Dates</h2>
-	<img class="mx-auto d-block img-fluid" src="/img/dates1.jpg">
+	<?php require('./php/eventgraph.php'); ?>
 	<p>Testquiz from FS Switzerland on January 15, 13:00 CET</p>
 	<hr class="col-3 col-md-2">
 	
@@ -35,10 +35,11 @@
         <p>Important documents for the registration quizzes</p>
         <ul class="icon-list">
           <li><a target="_blank" href="/doc/23/FS-Rules_2023_v1.1.pdf">FSG Rules 2023 (v1.1)</a></li>
-		  <li><a target="_blank" href="/doc/23/FS-CV-Hybrid-Rules-Extension-2023-V1.1.pdf">FS Hybrid Rules 2023 (v1.1)</a></li>
-		  <li><a target="_blank" href="/doc/fseast23/FS_East_2023_Rules_Formatted_v1.0.pdf">FS East Rules 2023 (v1.0)</a></li>
-		  <li><a target="_blank" href="/doc/fsa23/FSA-Competition-Handbook-2023_1-1-0.pdf">FS Austria Competition Handbook 2023 (v1.1.0)</a></li>
-      <li><a target="_blank" href="/doc/fsitaly23/FSAE-Italy-2023_Information-_Rules_v1.pdf">FSAE Italy Rules 2023 (v1)</a></li>
+          <li><a target="_blank" href="/doc/fsg23/FSG23_Competition_Handbook_v1.0.pdf">FS Germany Competition Handbook 2023 (v1.0)</a></li>
+		      <li><a target="_blank" href="/doc/23/FS-CV-Hybrid-Rules-Extension-2023-V1.1.pdf">FS Hybrid Rules 2023 (v1.1)</a></li>
+		      <li><a target="_blank" href="/doc/fseast23/FS_East_2023_Rules_Formatted_v1.0.pdf">FS East Rules 2023 (v1.0)</a></li>
+		      <li><a target="_blank" href="/doc/fsa23/FSA-Competition-Handbook-2023_1-1-0.pdf">FS Austria Competition Handbook 2023 (v1.1.0)</a></li>
+          <li><a target="_blank" href="/doc/fsitaly23/FSAE-Italy-2023_Information-_Rules_v1.pdf">FSAE Italy Rules 2023 (v1)</a></li>
         </ul>
       </div>
     </div>
