@@ -21,6 +21,12 @@
     <title><?php echo $titel ?></title>
   </head>
   <body class="d-flex flex-column min-vh-100"> 
+
+  <div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">
+  	<strong>Maintenance on 30 December!</strong> Due to the change of my hosting provider and a major update (yes, it's about the API) this site will be down for several hours.
+  	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
   <!-- Navigation -->
 	<header class="p-3 bg-dark text-white">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
