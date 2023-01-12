@@ -1,7 +1,17 @@
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/header.php');
+	$jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/question/all');
+	$data = json_decode($jsonData);
+	$jsonEvents = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event');
+	$eventList = json_decode($jsonEvents);
 	$name = "";
-
+	$event = isset($event) ? $event : '';
+	$year = isset($year) ? $year : '';
+	$type = isset($type) ? $type : '';
+	$questYear = 0;
+	foreach($data->questions as $quest){
+		if($quest->year > $questYear){$questYear = $quest->year;}
+	}
 ?>
 <script src="/js/search.js" type="text/javascript"></script>
 <link href="/css/all.css" rel="stylesheet">
@@ -10,55 +20,56 @@
     <h1>Search for Question</h1>
     <div class="container container-fluid">
 		<div id="filter" class="row row-cols-auto">
-			<div class="col">
+			<div class="col mb-2">
 				<div class="form-floating">
-					<input onchange="questions()" id="textSearch" type="text" class="form-control" id="floatingInput" >
+					<input oninput="searchQuestions()" id="textSearch" type="text" class="form-control" id="floatingInput" >
   					<label for="floatingInput">Text</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="eventSelect" aria-label="eventSelect">
-						<option value="q" selected>Any</option>
-						<option value="fsa">Austria</option>
-						<option value="fscz">Czech</option>
-						<option value="fseast">East</option>
-						<option value="fsg">Germany</option>
-						<option value="fsn">Netherland</option>
-						<option value="fss">Spain</option>
-						<option value="fsch">Switzerland</option>
+					<select onchange="searchQuestions()" class="form-select" id="eventSelect" aria-label="eventSelect">
+						<option <?php if ($event == "") {echo 'selected';} ?> value="0">Any</option>
+						<?php
+						foreach($eventList->events as $e){
+							echo '<option ';
+							if($event == $e->id){echo 'selected';}
+							echo ' value="'.$e->id.'">'.str_replace('Formula', '', str_replace('Formula Student', 'FS', $e->event_name)).'</option>';
+						}
+						?>
 					</select>
 					<label for="eventSelect">Event</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="yearSelect" aria-label="yearSelect">
-						<option value="q" selected>Any</option>
-						<option value="14q">2014</option>
-						<option value="16q">2016</option>
-						<option value="17q">2017</option>
-						<option value="19q">2019</option>
-						<option value="20q">2020</option>
-						<option value="21q">2021</option>
+					<select onchange="searchQuestions()" class="form-select" id="yearSelect" aria-label="yearSelect">
+						<option <?php if ($year == "") {echo 'selected';} ?> value="0">Any</option>
+						<?php
+						for($i = $questYear;$i >= 2011;$i--){
+							echo '<option ';
+							if ($year == $i) {echo 'selected';}
+							echo ' value="'.$i.'">'.$i.'</option>';
+						}
+						?>
 					</select>
 					<label for="yearSelect">Year</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="classSelect" aria-label="classSelect">
+					<select onchange="searchQuestions()" class="form-select" id="classSelect" aria-label="classSelect">
 						<option value="q" selected>Any</option>
-						<option value="e">EV</option>
-						<option value="c">CV</option>
-						<option value="d">DV</option>
+						<option value="ev">EV</option>
+						<option value="cv">CV</option>
+						<option value="dv">DV</option>
 					</select> 
 					<label for="classSelect">Class</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="typSelect" aria-label="typSelect">
+					<select onchange="searchQuestions()" class="form-select" id="typSelect" aria-label="typSelect">
 						<option selected>Any</option>
 						<option value="math">Math</option>
 						<option value="rule">Rule</option>
@@ -69,7 +80,7 @@
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="categorySelect" aria-label="categorySelect">
+					<select onchange="searchQuestions()" class="form-select" id="categorySelect" aria-label="categorySelect">
 						<option selected>Any</option>
 						<option value="electronic">Electronic</option>
 						<option value="mechanical">Mechanical</option>
@@ -79,7 +90,7 @@
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="questions()" class="form-select" id="disSelect" aria-label="disSelect">
+					<select onchange="searchQuestions()" class="form-select" id="disSelect" aria-label="disSelect">
 						<option selected>Any</option>
 						<option value="dynamic">Dynamic</option>
 						<option value="static">Static</option>
@@ -89,8 +100,12 @@
 			</div>
 			<div class="col">
 				<div class="form-check">
-  					<input onchange="questions()" class="form-check-input" type="checkbox" value="" id="imgSelect">
+  					<input onchange="searchQuestions()" class="form-check-input" type="checkbox" value="" id="imgSelect">
   					<label class="form-check-label" for="imgSelect">only with image</label>
+				</div>
+				<div class="form-check">
+  					<input onchange="searchQuestions()" class="form-check-input" type="checkbox" value="" id="solutionSelect">
+  					<label class="form-check-label" for="solutionSelect">explanation available</label>
 				</div>
 			</div>
 		</div>
@@ -107,13 +122,10 @@
 							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Year</span>
 						</th>
 						<th style="cursor: pointer;" onclick="SortTable(this,2, false)" scope="col">
-							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Event</span>
-						</th>
-						<th style="cursor: pointer;" onclick="SortTable(this,3, false)" scope="col">
 							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Class</span>
 						</th>
-						<th style="cursor: pointer;" onclick="SortTable(this,4, false)" scope="col">
-							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Question</span>
+						<th style="cursor: pointer;" onclick="SortTable(this,3, false)" scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Text</span>
 						</th>
 						<th scope="col"></th>
 					</tr>
@@ -128,9 +140,9 @@
 
   </div> 
 <script>
-	window.onload = function() {
-		questions();
-	}
+var jsondata = <?php echo json_encode($data); ?>;
+
+searchQuestions();
 </script>
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/footer.php');

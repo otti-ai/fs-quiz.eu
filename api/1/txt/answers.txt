@@ -1,0 +1,21 @@
+Request:
+  https://api.fs-quiz.eu/1/{api_key}/answer
+
+Response:
+  {
+    "answers": [
+      {
+        "answer_id": 1,
+        "question_id": 1,
+        "answer_text": "135 GPa",
+        "is_correct": true
+      },
+      {
+        "answer_id": 2,
+        "question_id": 1,
+        "answer_text": "180 GPa",
+        "is_correct": false
+      },
+      ...
+    ]
+  }

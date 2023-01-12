@@ -1,133 +1,104 @@
 <?php 
-	require('./header.php');
-?>
+	require('header.php'); 
+	?>
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <main>
     <h1>Registration quizzes</h1>
     <p class="fs-5">This list is constantly updated.
 	More quizzes coming soon.</p>
-
     <hr class="col-3 col-md-2">
-	<h3>EV Class:</h3>
-	<div class="container-fluid">
-	<div class="row row-cols-auto">
-		<div class="col">
-			<p class="fs-5">FS Germany:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fsg/e/22">2022</a></li>
-				<li><a href="/quiz/fsg/e/21v">2021 V2</a></li>
-				<li><a href="/quiz/fsg/e/21">2021</a></li>
-				<li><a href="/quiz/fsg/e/20">2020</a></li>
-				<li><a href="/quiz/fsg/e/17">2017</a>*</li>
-				<li><a href="/quiz/fsg/e/16">2016</a></li>
-				<li><a href="/quiz/fsg/e/13">2013</a>*</li>
-				<li><a href="/quiz/fsg/e/12">2012</a>*</li>
-				<li><a href="/quiz/fsg/e/11">2011</a>*</li>
-			</ul>
-		</div>
-		<div class="col">
-			<p class="fs-5">FS Austria:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fsa/e/21">2021</a></li>
-				<li><a href="/quiz/fsa/e/20">2020</a></li>
-				<li><a href="/quiz/fsa/e/19">2019</a></li>
-				<li><a href="/quiz/fsa/e/17">2017</a></li>
-				<li><a href="/quiz/fsa/e/16">2016</a></li>
-				<li><a href="/quiz/fsa/e/14">2014</a></li>
-			</ul>
-		</div>
-		<div class="col">
-			<p class="fs-5">FS Czech Republic:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fscz/e/22">2022</a></li>
-				<li><a href="/quiz/fscz/e/21">2021</a></li>
-				<li><a href="/quiz/fscz/e/20">2020</a></li>
-				<li><a href="/quiz/fscz/e/19">2019</a>*</li>
-				<li><a href="/quiz/fscz/e/17">2017</a></li>
-				<li><a href="/quiz/fscz/e/16v">2016 V2</a></li>
-				<li><a href="/quiz/fscz/e/16">2016</a></li>
-			</ul>
-		</div>
-		<div class="col">
-			<p class="fs-5">FS Spain:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fss/e/22">2022</a></li>
-				<li><a href="/quiz/fss/e/20">2020</a></li>
-				<li><a href="/quiz/fss/e/19">2019</a></li>
-				<li><a href="/quiz/fss/e/16">2016</a></li>
-			</ul>
-		</div>
-		<div class="col">
-			<p class="fs-5">FS East:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fseast/e/22">2022</a></li>
-				<li><a href="/quiz/fseast/e/21">2021</a></li>
-				<li><a href="/quiz/fseast/e/20">2020</a></li>
-				<li><a href="/quiz/fseast/e/19">2019</a>*</li>
-				<li><a href="/quiz/fseast/e/18">2018</a>*</li>
-			</ul>
-		</div>
-		<div class="col">
-			<p class="fs-5">FS Netherlands:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fsn/e/22">2022</a></li>
-				<li><a href="/quiz/fsn/e/19">2019</a></li>
-				<li><a href="/quiz/fsn/e/18t">2018 Test</a>*</li>
-			</ul>
-		</div>
-		<div class="col">
-			<p class="fs-5">FS Switzerland:</p>
-			<ul class="icon-list">
-				<li><a href="/quiz/fsch/e/21">2021</a></li>
-				<li><a href="/quiz/fsch/e/20t">2020 Test</a></li>
-			</ul>
-		</div>
-	</div>
-	</div>
-	<hr class="col-3 col-md-2">
-	<div class="row row-cols-auto">
-		<div class="col">
-			<h3>CV Class:</h3>
-			<div class="container-fluid ">
-			<div class="row row-cols-auto">
-				<div class="col">
-					<p class="fs-5">FS Austria:</p>
-					<ul class="icon-list">
-						<li><a href="/quiz/fsa/c/21">2021</a></li>
-						<li><a href="/quiz/fsa/c/20">2020</a></li>
-						<li><a href="/quiz/fsa/c/19">2019</a></li>
-						<li><a href="/quiz/fsa/c/17">2017</a></li>
-					</ul>
-				</div>
-				<div class="col">
-					<p class="fs-5">FS Netherlands:</p>
-					<ul class="icon-list">
-						<li><a href="/quiz/fsn/c/19">2019</a></li>
-					</ul>
-				</div>
-				<div class="col">
-					
-				</div>
-				<div class="col">
-					
-				</div>
-			</div>
-			</div>
-		</div>
-		<div class="col">
-			<h3>DV Class:</h3>
-			<div class="container-fluid ">
-			<div class="row row-cols-auto">
-				<div class="col">
-					<p class="fs-5">FS Germany:</p>
-					<ul class="icon-list">
-						<li><a href="/quiz/fsg/d/17">2017</a>*</li>
-					</ul>
-				</div>
-			</div>
-			</div>
-		</div>
-	</div>
+
+<?php
+	$jsonEvent = json_decode(file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event'));
+	$events = $jsonEvent->events;
+	$htmlArrayEV = array();
+	$htmlArrayCV = array();
+	$htmlArrayDV = array();
+	foreach($events as $event){
+		$jsonQuizzes = json_decode(file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event/'. $event->id .'/quizzes'));
+		$quizzesEV = array();
+		$quizzesCV = array();
+		$quizzesDV = array();
+		foreach($jsonQuizzes->quizzes as $q){
+			if($q->status != 'unpublished'){
+				if($q->class == 'ev'){
+					array_push($quizzesEV, $q);
+				}else if($q->class == 'cv'){
+					array_push($quizzesCV, $q);
+				}else if($q->class == 'dv'){
+					array_push($quizzesDV, $q);
+				}
+			}
+		}
+		if(count($quizzesEV)>0){
+			$eventName = str_replace('Formula Student', 'FS', $event->event_name);
+			$htmlText = '<p class="fs-5">'.$eventName.':</p>';
+			usort($quizzesEV, function($a, $b) {
+				return $a->year > $b->year ? -1 : 1;
+			});
+			$htmlText .= '<ul class="icon-list">';
+			foreach($quizzesEV as $quiz){
+				$htmlText .= '<li><a href="/quiz/'.$quiz->quiz_id.'">'.$quiz->year;
+				if(str_contains($quiz->information,'Retake')){$htmlText .= ' V2';}
+				if(str_contains($quiz->information,'Testquiz')){$htmlText .= ' Test';}
+				$htmlText .= "</a>";
+				if($quiz->status == "missing_solution"){$htmlText .= "*";}
+				$htmlText .= '</li>';
+			}
+			$htmlText .= '</ul>';
+			array_push($htmlArrayEV,$htmlText);
+		}
+		if(count($quizzesCV)>0){
+			$eventName = str_replace('Formula Student', 'FS', $event->event_name);
+			$htmlText = '<p class="fs-5">'.$eventName.':</p>';
+			usort($quizzesCV, function($a, $b) {
+				return $a->year > $b->year ? -1 : 1;
+			});
+			$htmlText .= '<ul class="icon-list">';
+			foreach($quizzesCV as $quiz){
+				$htmlText .= '<li><a href="/quiz/'.$quiz->quiz_id.'">'.$quiz->year.'</a>';
+				if($quiz->status == "missing_solution"){$htmlText .= "*";}
+				$htmlText .= '</li>';
+			}
+			$htmlText .= '</ul>';
+			array_push($htmlArrayCV,$htmlText);
+		}
+		if(count($quizzesDV)>0){
+			$eventName = str_replace('Formula Student', 'FS', $event->event_name);
+			$htmlText = '<p class="fs-5">'.$eventName.':</p>';
+			usort($quizzesDV, function($a, $b) {
+				return $a->year > $b->year ? -1 : 1;
+			});
+			$htmlText .= '<ul class="icon-list">';
+			foreach($quizzesDV as $quiz){
+				$htmlText .= '<li><a href="/quiz/'.$quiz->quiz_id.'">'.$quiz->year.'</a>';
+				if($quiz->status == "missing_solution"){$htmlText .= "*";}
+				$htmlText .= '</li>';
+			}
+			$htmlText .= '</ul>';
+			array_push($htmlArrayDV,$htmlText);
+		}
+	}
+	usort($htmlArrayEV, function($a, $b) {
+		return strlen($a) > strlen($b) ? -1 : 1;
+	});
+	usort($htmlArrayCV, function($a, $b) {
+		return strlen($a) > strlen($b) ? -1 : 1;
+	});
+	echo '<h3>EV Class:</h3><div class="container-fluid"><div class="row row-cols-auto">';
+	foreach($htmlArrayEV as $text){
+		echo '<div class="col">'. $text .'</div>';
+	}
+	echo '</div></div><hr class="col-3 col-md-2"><h3>CV Class:</h3><div class="container-fluid"><div class="row row-cols-auto">';
+	foreach($htmlArrayCV as $text){
+		echo '<div class="col">'. $text .'</div>';
+	}
+	echo '</div></div><hr class="col-3 col-md-2"><h3>DV Class:</h3><div class="container-fluid"><div class="row row-cols-auto">';
+	foreach($htmlArrayDV as $text){
+		echo '<div class="col">'. $text .'</div></div></div>';
+	}
+?>
+
 	<p>* not all solutions available</p>
 	<hr class="col-3 col-md-2 mb-5">
 	<h4>Changelog:</h4>
@@ -152,5 +123,5 @@ function getChangelog(){
 </script>
   </div> 
 <?php 
-	require('./footer.php');
+	require('footer.php');
 ?>

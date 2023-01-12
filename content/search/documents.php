@@ -1,7 +1,17 @@
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/header.php');
+	$jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/document/all');
+	$jsonEvents = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event');
+	$data = json_decode($jsonData);
+	$eventList = json_decode($jsonEvents);
 	$name = "";
-
+	$event = isset($event) ? $event : '';
+	$year = isset($year) ? $year : '';
+	$type = isset($type) ? $type : '';
+	$docYear = 0;
+	foreach($data->documents as $doc){
+		if($doc->year > $docYear){$docYear = $doc->year;}
+	}
 ?>
 <script src="/js/search.js" type="text/javascript"></script>
 <link href="/css/all.css" rel="stylesheet">
@@ -13,15 +23,14 @@
 			<div class="col">
 				<div class="form-floating">
 					<select onchange="documents()" class="form-select" id="eventSelect" aria-label="eventSelect">
-						<option <?php if ($event == "") {echo 'selected';} ?> value="q">Any</option>
-						<option <?php if ($event == "fsaa") {echo 'selected';} ?> value="fsaa">Alpe Adria</option>
-						<option <?php if ($event == "fsa") {echo 'selected';} ?> value="fsa">Austria</option>
-						<option <?php if ($event == "fscz") {echo 'selected';} ?> value="fscz">Czech</option>
-						<option <?php if ($event == "fseast") {echo 'selected';} ?> value="fseast">East</option>
-						<option <?php if ($event == "fsg") {echo 'selected';} ?> value="fsg">Germany</option>
-						<option <?php if ($event == "fsn") {echo 'selected';} ?> value="fsn">Netherland</option>
-						<option <?php if ($event == "fss") {echo 'selected';} ?> value="fss">Spain</option>
-						<option <?php if ($event == "fsch") {echo 'selected';} ?> value="fsch">Switzerland</option>
+						<option <?php if ($event == "") {echo 'selected';} ?> value="0">Any</option>
+						<?php
+						foreach($eventList->events as $e){
+							echo '<option ';
+							if($event == $e->id){echo 'selected';}
+							echo ' value="'.$e->id.'">'.str_replace('Formula', '', str_replace('Formula Student', 'FS', $e->event_name)).'</option>';
+						}
+						?>
 					</select>
 					<label for="eventSelect">Event</label>
 				</div>
@@ -29,22 +38,30 @@
 			<div class="col">
 				<div class="form-floating">
 					<select onchange="documents()" class="form-select" id="yearSelect" aria-label="yearSelect">
-						<option <?php if ($year == "") {echo 'selected';} ?> value="q">Any</option>
-						<option <?php if ($year == "23") {echo 'selected';} ?> value="23">2023</option>
-						<option <?php if ($year == "22") {echo 'selected';} ?> value="22">2022</option>
-						<option <?php if ($year == "21") {echo 'selected';} ?> value="21">2021</option>
-						<option <?php if ($year == "20") {echo 'selected';} ?> value="20">2020</option>
-						<option <?php if ($year == "19") {echo 'selected';} ?> value="19">2019</option>
-						<option <?php if ($year == "18") {echo 'selected';} ?> value="18">2018</option>
-						<option <?php if ($year == "17") {echo 'selected';} ?> value="17">2017</option>
-						<option <?php if ($year == "16") {echo 'selected';} ?> value="16">2016</option>
-						<option <?php if ($year == "15") {echo 'selected';} ?> value="15">2015</option>
-						<option <?php if ($year == "14") {echo 'selected';} ?> value="14">2014</option>
-						<option <?php if ($year == "13") {echo 'selected';} ?> value="13">2013</option>
-						<option <?php if ($year == "12") {echo 'selected';} ?> value="12">2012</option>
-						<option <?php if ($year == "11") {echo 'selected';} ?> value="11">2011</option>
+						<option <?php if ($year == "") {echo 'selected';} ?> value="0">Any</option>
+						<?php
+						for($i = $docYear;$i >= 2011;$i--){
+							echo '<option ';
+							if ($year == $i) {echo 'selected';}
+							echo ' value="'.$i.'">'.$i.'</option>';
+						}
+						?>
 					</select>
 					<label for="yearSelect">Year</label>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-floating">
+					<select onchange="documents()" class="form-select" id="typeSelect" aria-label="typeSelect">
+						<option <?php if ($type == "") {echo 'selected';} ?> value="">Any</option>
+						<option <?php if ($type == "rulebook") {echo 'selected';} ?> value="Rulebook">Rulebook</option>
+						<option <?php if ($type == "hybrid") {echo 'selected';} ?> value="Hybrid Rules">Hybrid Rules</option>
+						<option <?php if ($type == "additional") {echo 'selected';} ?> value="Additional Rules">Additional Rules</option>
+						<option <?php if ($type == "handbook") {echo 'selected';} ?> value="Handbook">Handbook</option>
+						<option <?php if ($type == "registration") {echo 'selected';} ?> value="Registration">Registration</option>
+						<option <?php if ($type == "docs") {echo 'selected';} ?> value="Additional Documents">Additional Documents</option>
+					</select>
+					<label for="typeSelect">Type</label>
 				</div>
 			</div>
 		</div>
@@ -61,8 +78,12 @@
 							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Event</span>
 						</th>
 						<th style="cursor: pointer;" onclick="SortTable(this,2, false)"  scope="col">
-							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Document</span>
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Type</span>
 						</th>
+						<th style="cursor: pointer;" onclick="SortTable(this,3, false)"  scope="col">
+							<span style="display: flex; align-items:center;"><i style="margin-right: 0.4rem;" name="sort" class="fas fa-sort"></i>Version</span>
+						</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody id="doc">
@@ -75,11 +96,13 @@
 
   </div> 
  <script>
+var jsondata = <?php echo json_encode($data); ?>;
+var eventData = <?php echo json_encode($eventList); ?>;
 var event = "<?php echo $event; ?>";
-var year = "<?php echo substr($year,0,2); ?>";
-	window.onload = function() {
-		searchDocuments();
-	}
+var year = "<?php echo $year; ?>";
+var type = '';
+
+documents();
   </script>
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/footer.php');

@@ -12,7 +12,7 @@
         <div class="mb-5">
 			<h2>Search for questions</h2>
         	<p>Search by event, year, type and category for registration quiz Questions</p>
-      		<a href="/search/question" class="btn btn-primary btn-lg px-4">	<i class="fas fa-search"></i></a>
+      		<a href="/search/questions" class="btn btn-primary btn-lg px-4">	<i class="fas fa-search"></i></a>
     	</div>
       </div>
 

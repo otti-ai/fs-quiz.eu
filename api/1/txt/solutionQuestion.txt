@@ -1,0 +1,14 @@
+Request:
+  https://api.fs-quiz.eu/1/{api_key}/solution/question/59
+
+Response:
+  {
+    "solutions": [
+      {
+        "solution_id": 2,
+        "question_id": 59,
+        "text": "EV 4.7.6",
+        "images": []
+      }
+    ]
+  }

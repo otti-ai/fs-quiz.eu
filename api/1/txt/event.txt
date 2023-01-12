@@ -1,0 +1,11 @@
+Request:
+  https://api.fs-quiz.eu/1/{api_key}/event/1
+
+Response:
+  {
+    "id": 1,
+    "short_name": "FSN",
+    "event_name": "Formula Student Netherlands",
+    "country": "Netherlands",
+    "website": "https://formula-student.nl/"
+  }

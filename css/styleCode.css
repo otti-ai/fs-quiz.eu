@@ -1,0 +1,13 @@
+code {
+    font-family: monospace;
+    white-space: pre;
+    color: white;
+}
+
+.codeBox{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    overflow-x: auto;
+}

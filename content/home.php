@@ -1,5 +1,14 @@
 <?php 
 	require('./header.php');
+
+  $jsonEvent = json_decode(file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event'));
+	$events = $jsonEvent->events;
+  $jsondoc = json_decode(file_get_contents('https://api.fs-quiz.eu/1/'.$api.'/document?year=2023'));
+	$docs = $jsondoc->documents;
+  usort($docs, function($a, $b) {
+    return $a->event_id < $b->event_id ? -1 : 1;
+  });
+
 ?>
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <main>
@@ -21,12 +30,12 @@
         <h2>Registration</h2>
         <p>Information about the registration procedure</p>
         <ul class="icon-list">
-		  <li><a target="_blank" href="/doc/reg/FSA-Registration-Procedure-2022_1-1.pdf">FS Austria (v1.1) (old)</a></li>
-		  <li><a target="_blank" href="/doc/reg/FSEast_Registration_guide_v2.pdf">FS East Registration Guide (v2) (old)</a></li>
-		  <li><a target="_blank" href="https://fseast.eu/get-ready-for-fs-east-2022">FS East (old)</a></li>
-		  <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
-		  <li><a target="_blank" href="https://formulastudent.ch/registration2022">FS Switzerland (old)</a></li>
-		  <li><a target="_blank" href="/doc/reg/FSAA_Registration_V2.pdf">FS Alpe-Adria Registration Procedure Guide (old)</a></li>
+		      <li><a target="_blank" href="https://doc.fs-quiz.eu/FSA-Registration-Procedure-2022_1-1.pdf">FS Austria (v1.1) (old)</a></li>
+		      <li><a target="_blank" href="https://doc.fs-quiz.eu/FSEast_Registration_guide_v2.pdf">FS East Registration Guide (v2) (old)</a></li>
+		      <li><a target="_blank" href="https://fseast.eu/get-ready-for-fs-east-2022">FS East (old)</a></li>
+		      <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
+		      <li><a target="_blank" href="https://formulastudent.ch/registration2022">FS Switzerland (old)</a></li>
+		      <li><a target="_blank" href="https://doc.fs-quiz.eu/FSAA_Registration_V2.pdf">FS Alpe-Adria Registration Procedure Guide (old)</a></li>
         </ul>
       </div>
 
@@ -34,14 +43,31 @@
         <h2>Documents</h2>
         <p>Important documents for the registration quizzes</p>
         <ul class="icon-list">
-          <li><a target="_blank" href="/doc/23/FS-Rules_2023_v1.1.pdf">FSG Rules 2023 (v1.1)</a></li>
-          <li><a target="_blank" href="/doc/fsg23/FSG23_Competition_Handbook_v1.0.pdf">FS Germany Competition Handbook 2023 (v1.0)</a></li>
-		      <li><a target="_blank" href="/doc/23/FS-CV-Hybrid-Rules-Extension-2023-V1.1.pdf">FS Hybrid Rules 2023 (v1.1)</a></li>
-		      <li><a target="_blank" href="/doc/fseast23/FS_East_2023_Rules_Formatted_v1.0.pdf">FS East Rules 2023 (v1.0)</a></li>
-		      <li><a target="_blank" href="/doc/fsa23/FSA-Competition-Handbook-2023_1-1-0.pdf">FS Austria Competition Handbook 2023 (v1.1.0)</a></li>
-          <li><a target="_blank" href="/doc/fsitaly23/FSAE-Italy-2023_Information-_Rules_v1.pdf">FSAE Italy Rules 2023 (v1)</a></li>
+          <?php
+            foreach($docs as $doc){
+              echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
+              if($doc->event_id>0){
+                foreach($events as $event){
+                  if($event->id == $doc->event_id){
+                    echo str_replace('Formula Student', 'FS', $event->event_name);
+                  }
+                }
+              }else{
+                echo 'FS';
+              }
+              echo ' '.$doc->type.' '.$doc->year.' (v'.$doc->version.')'.'</a></li>';
+            }
+          ?>
         </ul>
       </div>
+    </div>
+    <hr class="col-3 col-md-2 mb-5">
+    <h2>API for quiz database</h2>
+    <p class="fs-5">Below you will find the access and documentation of the available methods for the Quiz, Event, Solution and Image API.</p>
+    <p class="text-muted" style="font-size:1rem;"><strong>Please note</strong> that the API documentation is not optimised for mobile devices. You should access these pages on a desktop computer and browser.</p>
+
+    <div class="mb-2">
+      <a href="http://api.fs-quiz.eu" class="btn btn-primary btn-lg px-4">View API</a>
     </div>
     <hr class="col-3 col-md-2 mb-5">
     <h3>Changelog</h3>

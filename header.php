@@ -1,20 +1,24 @@
+<?php
+	require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
+	require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
+?>
 <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<base href="https://fs-quiz.eu/">
+	<base href="/">         <!--  https://fs-quiz.eu/ -->
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
-	<script src="js/bootstrap.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<script src="js/bootstrap.min.js"></script>
 	<?php 
 		$menu = array(
-			'home' => 'Home',
-			'quizzes' => 'Quizzes',
-			'search' => 'Search',
-			'faq' => 'FAQ',
-			'about' => 'About'
+			'./home' => 'Home',
+			'./quizzes' => 'Quizzes',
+			'./search' => 'Search',
+			'http://api.fs-quiz.eu' => 'API',
+			'./about' => 'About'
 		);
 	?>
 	
@@ -22,10 +26,10 @@
   </head>
   <body class="d-flex flex-column min-vh-100"> 
 
-  <div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">
+  <!--<div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">
   	<strong>Maintenance on 30 December!</strong> Due to the change of my hosting provider and a major update (yes, it's about the API) this site will be down for several hours.
   	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+  </div>-->
 
   <!-- Navigation -->
 	<header class="p-3 bg-dark text-white">
@@ -39,7 +43,7 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<?php foreach( $menu as $menpage => $menlabel ) : ?>
 							<li class="nav-item">
-								<a class="nav-link <?php if ($pagename == $menpage) {echo 'active';} ?>" href="./<?php echo $menpage ; ?>"><?php echo $menlabel ; ?></a>
+								<a class="nav-link <?php if ($pagename == $menpage) {echo 'active';} ?>" href="<?php echo $menpage ; ?>"><?php echo $menlabel ; ?></a>
 							</li>
 						<?php endforeach ?>
 					</ul>

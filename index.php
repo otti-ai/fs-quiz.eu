@@ -3,11 +3,25 @@
 // Include router class
 include('Route.php');
 
-// Add base route (startpage)
 Route::add('/',function(){
     $titel = 'FS-Quiz - Home';
 	$pagename = 'home';
 	require('content/home.php');
+});
+Route::add('/privacy',function(){
+    $titel = 'FS-Quiz - Privacy';
+	$pagename = 'about';
+    require('content/privacy.php');
+});
+Route::add('/legal-notice',function(){
+    $titel = 'FS-Quiz - Legal notice';
+	$pagename = 'about';
+    require('content/legal-notice.php');
+});
+Route::add('/contact',function(){
+    $titel = 'FS-Quiz - Contact';
+	$pagename = 'about';
+    require('content/contact.php');
 });
 
 Route::add('/home',function(){
@@ -40,13 +54,24 @@ Route::add('/changelog',function(){
 	$pagename = 'about';
 	require('content/changelog.php');
 });
-Route::add('/quiz/([a-z]*)/([ced]*)/([0-9]*[tv]*)', function($event,$engine,$year) {
+Route::add('/quiz/([0-9]*)', function($quiz_id) {
 	$titel = 'FS-Quiz - Quiz';
 	$pagename = 'quizzes';
 	require('content/quiz.php');
 }, 'get');
+
 //documents
-Route::add('/search/documents/([a-z]*)/([0-9]*[q]*)', function($event,$year) {
+Route::add('/search/documents/([0-9]*)', function($event) {
+	$titel = 'FS-Quiz - Documents';
+	$pagename = 'search';
+	require('content/search/documents.php');
+}, 'get');
+Route::add('/search/documents/([0-9]*)/([0-9]*)', function($event,$year) {
+	$titel = 'FS-Quiz - Documents';
+	$pagename = 'search';
+	require('content/search/documents.php');
+}, 'get');
+Route::add('/search/documents/([0-9]*)/([0-9]*)/([a-z]*)', function($event,$year,$type) {
 	$titel = 'FS-Quiz - Documents';
 	$pagename = 'search';
 	require('content/search/documents.php');
@@ -56,10 +81,18 @@ Route::add('/search/documents', function() {
 	$pagename = 'search';
 	require('content/search/documents.php');
 });
-Route::add('/search/question', function() {
-	$titel = 'FS-Quiz - Question';
+
+//questions
+Route::add('/search/questions', function() {
+	$titel = 'FS-Quiz - Questions';
 	$pagename = 'search';
 	require('content/search/question.php');
+});
+
+Route::add('/question/([0-9]*)', function($question_id) {
+	$titel = 'FS-Quiz - Question';
+	$pagename = 'search';
+	require('content/question.php');
 });
 Route::add('/bremergy/([0-9]*)', function($num) {
 	require('bremergy/gruppe.php');
@@ -69,8 +102,15 @@ Route::add('/master/admin',function(){
 	$pagename = 'home';
 	require('bremergy/admin.php');
 });
+
+// Add base route (startpage)
+Route::add('/api',function(){
+    header("Location: http://api.fs-quiz.eu");
+	exit();
+});
+
 Route::pathNotFound(function($path) {
-  $titel = 'FS-Quiz - 404';
+  	$titel = 'FS-Quiz - 404';
 	$pagename = '404';
 	require('content/404.php');
 });

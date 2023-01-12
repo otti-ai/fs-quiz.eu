@@ -1,0 +1,9 @@
+# ModRewrite aktivieren
+RewriteEngine On
+
+# ModRewrite nicht bei Dateien oder Ordnern greifen lassen
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Url umschreiben
+RewriteRule (.+) index.php?path=$0 [L,QSA]

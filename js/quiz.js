@@ -40,7 +40,7 @@ function loadFullQuiz(){
 	timeEndSetting = document.getElementById("settingAutoNextDiv");
 	submitSetting = document.getElementById("settingSubmit");
 	modusSwitch();
-	getQuestionIDs();//can remove 
+	loadInformation();
 	getQuiz();
 	loaddocuments();
 }
@@ -116,13 +116,11 @@ function start(){
 				startQuizTime();
 			}
 			currentQuestions = -2;
-			setStatistic();
 		  	break;
 	}
 }
 
 function showNextQuestion(){
-	setStatistic();
 	document.getElementById("submitButton").style.display = "";
 	document.getElementById("submitButton").value = "Submit";
 	document.getElementById("count").innerHTML = (currentQuestions+1)+"/"+(maxQuestions);
@@ -136,7 +134,7 @@ function showNextQuestion(){
 
 function getQuestionTime(){
 	var time = parseInt(document.getElementById('quest'+currentQuestions).getAttribute('data-time'));
-	if(time<1){
+	if(time<1 || isNaN(time)){
 		time = parseInt(durationSetting.value)*60;
 	}
 	return time;
@@ -221,7 +219,7 @@ function showResult(){
 	document.getElementById("divResult").innerHTML = html;
 }
 
-function htmlResultPart(i,correct,question,yAnswer,answer){
+function htmlResultPart(i,correct,question,yAnswer,answer, id){
 	var html = '<div class="accordion-item">';
 	html += '<h2 class="accordion-header" id="panelTitel'+i+'"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panel'+i+'" aria-expanded="false" aria-controls="panel'+i+'">';
 	if(correct){
@@ -229,7 +227,7 @@ function htmlResultPart(i,correct,question,yAnswer,answer){
 	}else{
 		html += (i+1)+'/'+maxQuestions+': failed';
 	}
-	html += '</button></h2><div id="panel'+i+'" class="accordion-collapse collapse" aria-labelledby="panelTitel'+i+'"><div class="accordion-body">';
+	html += '</button></h2><div id="panel'+i+'" class="accordion-collapse collapse" aria-labelledby="panelTitel'+i+'"><div class="accordion-body"><p style="color:gray;margin:0px;" class"small fw-light">ID: '+id+'</p>';
 	html += question;
 	html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="';
 	if(correct){
@@ -237,7 +235,7 @@ function htmlResultPart(i,correct,question,yAnswer,answer){
 	}else{
 		html += 'text-danger';
 	}
-	html += '">You: '+yAnswer+'</p><p style="margin-left: 2rem;">Correct: '+answer+'</p></div></div></div>';
+	html += '">You:<br>'+yAnswer+'</p><p style="margin-left: 2rem;">Correct:<br>'+answer+'</p></div></div></div>';
 	return html;
 }
 
@@ -245,43 +243,45 @@ function checkAnswers(){
 	countTrue = 0;
 	for(var i = 0; i< maxQuestions; i++){
 		var question = document.getElementById('questText'+i).innerHTML;
+		var id = document.getElementById('quest'+i).getAttribute('data-id');
 		var yAnswer = "";
 		var answer = "";
 		var typ = document.getElementById('quest'+i).getAttribute('data-typ');
 		var options = document.getElementsByName("answer"+i);
 		var result = false;
 		switch(typ) {
-			case "normal":
+			case "single-choice":
 				options.forEach(function(item){
-					if(item.value == "1"){
+					if(item.value == "true"){
 						answer = item.getAttribute('data-ans');
 					}
 					if(item.checked == true){
 						yAnswer = item.getAttribute('data-ans');
-						if(item.value == "1"){
+						if(item.value == "true"){
 							result = true;
 						}
 					}
 				});
 				break;
-			case "multi":
+			case "multi-choice":
 				result = true;
 				options.forEach(function(item){
-					if(item.value == "1"){
-						answer += item.getAttribute('data-ans');
+					if(item.value == "true"){
+						answer += item.getAttribute('data-ans')+"<br>";
 					}
 					if(item.checked == true){
-						yAnswer += item.getAttribute('data-ans');
-						if(item.value=="0"){
+						yAnswer += item.getAttribute('data-ans')+"<br>";
+						if(item.value=="false"){
+							result = false;
+						}
+					}else{
+						if(item.value=="true"){
 							result = false;
 						}
 					}
-					if(item.checked == false && item.value == "1"){
-						result = false;
-					}
 				});
 				break;
-			case "number":
+			case "input":
 				yAnswer = document.getElementById('numberInput'+i).value;
 				answer += document.getElementById('numberInput'+i).getAttribute('data-answer');
 				if(document.getElementById('numberInput'+i).value == document.getElementById('numberInput'+i).getAttribute('data-answer')){
@@ -290,7 +290,7 @@ function checkAnswers(){
 					result = false;
 				}
 				break;
-			case "range":
+			case "input-range":
 				yAnswer = document.getElementById('numberInput'+i).value;
 				answer += document.getElementById('numberInput'+i).getAttribute('data-answer');
 				var ans = document.getElementById('numberInput'+i).getAttribute('data-answer').split('-');
@@ -303,65 +303,89 @@ function checkAnswers(){
 		if(result){
 			countTrue++;
 		}
-		htmlResult += htmlResultPart(i,result,question,yAnswer,answer);
+		htmlResult += htmlResultPart(i,result,question,yAnswer,answer, id);
 		document.getElementById("resultCount").innerHTML = "Correct answers: " + countTrue + "/" + maxQuestions;
 		document.getElementById('divResult').style.display = "block";
 	}
 }
 
-function getQuestionIDs(){//todo
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-			var r = "";
-			var r = xmlHttp.responseText;
-			var a = r.split(';');
-			maxQuestions = a.length;
-			a.forEach(function(item){
-				f = item.split("@");
-				questionsIDs.push(f[0]);
-				quizDuration = quizDuration+ parseInt(f[1]);
-				if(f[1]<1){
-					questionsWithoutDuration += 1;
-				}
-			});
-			updateUI();
+function loadInformation(){
+	var question = jsondata.questions;
+	maxQuestions = question.length;
+	questionsWithoutDuration = question.length;
+	question.forEach(function(item){
+		quizDuration = quizDuration + item.time;
+		if(item.time>0){
+			questionsWithoutDuration -= 1;
 		}
-	}
-	xmlHttp.open( "GET", "/php/getQuestionsIDs.php?engine="+engine+"&event="+eventID, true );
-	xmlHttp.send( null );
+	});
+	updateUI();
 }
-function getQuiz(){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
-			var r = "";
-			var r = xmlHttp.responseText;
-			document.getElementById("questionBody").innerHTML = r;
-			statisticID = document.getElementById('quest1').getAttribute('data-id');
+
+function getQuiz(){//types anedern; bilder
+	var html = "";
+	var i = 0;
+	var question = jsondata.questions;
+	question.sort(function(a, b) {
+		var keyA = new Date(a.position_index),
+		  keyB = new Date(b.position_index);
+		// Compare the 2 dates
+		if (keyA < keyB) return -1;
+		if (keyA > keyB) return 1;
+		return 0;
+	  });
+	question.forEach(function(item){
+		//question
+		html += '<div class="question" data-id="'+item.question_id+'" data-time="'+item.time+'" data-typ="'+item.type+'" id="quest'+i+'" style="display: none;"><p style="color:gray;margin:0px;" class"small fw-light">ID: '+item.question_id+'</p><h4 style="display: none;" id="questTitel'+i+'">Question: '+(i+1)+'</h4><div id="questText'+i+'">';
+		html += '<p>'+item.text.replace(/\\n/g,"<br />")+'</p>';
+		var images = item.images
+		if(images.length>0){
+			html += "<div class='container'><div class='row'><div class='col'>";
+			images.forEach(function(img){
+				html += "<img class='mx-auto d-block img-fluid' src='https://img.fs-quiz.eu/"+img.path+"'>";
+			});
+			html += '</div></div></div>';
 		}
-	}
-	xmlHttp.open( "GET", "/php/getQuiz.php?engine="+engine+"&event="+eventID, true );
-	xmlHttp.send( null );
+		html += '</div><hr class="col-3 col-md-2">';
+		//answer
+		switch (item.type) {
+			case 'multi-choice':
+				$c = 0;
+				answers = item.answers;
+				answers.forEach(function(ans){
+					html += '<div class="form-check"><input class="form-check-input" type="checkbox" name="answer'+i+'" id="answer'+i+'" value="'+ans.is_correct;
+					html += '" data-ans="'+ans.answer_text+'"><label id="ansText" class="form-check-label">'+ans.answer_text+'</label></div>';
+					$c++;
+				});
+			  	break;
+			case 'single-choice':
+				$c = 0;
+				answers = item.answers;
+				answers.forEach(function(ans){
+					html += '<div class="form-check"><input class="form-check-input" type="radio" name="answer'+i+'" id="answer'+i+'" value="'+ans.is_correct;
+					html += '" data-ans="'+ans.answer_text+'"><label id="ansText" class="form-check-label">'+ans.answer_text+'</label></div>';
+					$c++;
+				});
+			  	break;
+			default:
+				answers = item.answers[0];
+				html += '<input data-answer="'+answers.answer_text+'" type="text" class="form-control" id="numberInput'+i+'" placeholder="Enter answer">';
+				break;
+		  }
+		  html += '<hr class="col-3 col-md-2"></div>';
+		  i++;
+	});
+	document.getElementById("questionBody").innerHTML = html.replace(new RegExp('\r?\n','g'), '<br />');
+	//statisticID = document.getElementById('quest1').getAttribute('data-id');
 }
 function loaddocuments(){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			var r = "";
-			var r = xmlHttp.responseText;
-			var ans = r.split(';');
-			var html = "";
-			ans.forEach(function(item){
-				var link = item.split('@')[0];
-				html += "<li>"+link+"</li>";
-			});
-			document.getElementById("doc").innerHTML = html;
-		}
-	xmlHttp.open( "GET", "/php/getDocuments.php?e="+event+"&y="+year, true );
-	xmlHttp.send( null );
+	var documents = jsondata.documents;
+	documents.forEach(function(item){
+		document.getElementById("doc").innerHTML += "<li><a href='https://doc.fs-quiz.eu/"+item.path+"' target='_blank'/>"+item.path.substring(0,item.path.length-4)+"</li>";
+	});
 }
-function setSolution(){
+
+function setSolution(){ //todo
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function() { 
 		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -379,16 +403,5 @@ function setSolution(){
 			});
 		}
 	xmlHttp.open( "GET", "/php/getSolution.php?id="+questionID, true );
-	xmlHttp.send( null );
-}
-function setStatistic(){
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			var r = "";
-			solution = "";
-			var r = xmlHttp.responseText;
-		}
-	xmlHttp.open( "GET", "/php/setStatistic.php?id="+statisticID+"&count="+(currentQuestions+1), true );
 	xmlHttp.send( null );
 }

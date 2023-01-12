@@ -1,36 +1,9 @@
 <?php
-$name = "";
-switch ($event) {
-    case "fsn":
-        $name = "Netherland";
-        break;
-    case "fsa":
-        $name = "Austria";
-        break;
-    case "fsg":
-        $name = "Germany";
-        break;
-	case "fscz":
-        $name = "Czech Republic";
-        break;
-	case "fsch":
-        $name = "Switzerland";
-        break;
-	case "fseast":
-        $name = "East";
-        break;
-	case "fss":
-        $name = "Spain";
-        break;
-}
-$version = substr($year,0,2);
-if(strlen($year)>2){
-	if (strpos($year, 't') !== FALSE){
-		$version = $version." Test";
-	}else{
-		$version = $version.' V2';
-	}
-}
+require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
+$jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/quiz/'. $quiz_id);
+$data = json_decode(nl2br($jsonData));
+$eventName = str_replace('Formula Student', 'FS', $data->event->event_name);
+
 ?>
 
 <!doctype html>
@@ -41,12 +14,12 @@ if(strlen($year)>2){
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
-	<script src="/js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+	<script src="../js/bootstrap.min.js"></script>
 	
 	<!-- Quiz -->
-	<script src="/js/quiz.js"></script>
-	<script src="/js/time.js"></script>
+	<script src="../js/quiz.js?<%=DateTime.Now.Ticks.ToString()%>"></script>
+	<script src="../js/time.js?<%=DateTime.Now.Ticks.ToString()%>"></script>
 	
     <title>FS-Quiz - Play</title>
   </head>
@@ -63,13 +36,14 @@ if(strlen($year)>2){
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <main>
 	<div id="divStart" style="display: block;">
-		<h1>FS <?php echo $name; ?> Registration Quiz 20<?php echo $version ?></h1>
+		<h1><?php echo $eventName; ?> Registration Quiz <?php echo $data->year; ?></h1>
 		<div class="row g-5">
 		<div class="col-md-6">
 			<h3>Information</h3>
-			<p id="maxInfo" style="margin-bottom: 0;">Questions: x</p>
+			<p id="maxInfo" style="margin-bottom: 0;">Questions: <?php echo count($data->questions); ?></p>
 			<p id="timeInfo" style="margin-bottom: 0;">Time: x</p>
-			<p id="classInfo" style="margin-bottom: 0;">Class: <?php echo strtoupper($engine); ?>V</p>
+			<p id="classInfo" style="margin-bottom: 0;">Class: <?php echo $data->class; ?></p>
+			<p id="Infoinfo" style="margin-bottom: 0;">Infomation: <?php echo $data->information; ?></p>
 		</div>
 		<div class="col-md-6">
 			<h3>Settings</h3>
@@ -118,7 +92,7 @@ if(strlen($year)>2){
 		<div class="row g-5">
 		<div class="col-md-6">
 			<h3>Documents</h3>
-			<ul  id="doc" class="icon-list">
+			<ul id="doc" class="icon-list">
 			</ul>
 		</div>
 		<div class="col-md-6">
@@ -150,19 +124,30 @@ if(strlen($year)>2){
 </div>
  
 </div> 
-  </main>
-  <footer class="footer mt-auto bg-light">
-  <div class="col-lg-8 mx-auto p-3">
-    <span class="text-muted">Created by Yannik Ottens · © 2022</span>
+</main>
+</div> 
+<script>
+var jsondata = <?php echo json_encode($data); ?>;
+</script>
+<footer class="footer mt-auto bg-light">
+  <div class="col-lg-8 mx-auto p-3 text-dark">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <a href="../contact" class="text-muted" style="text-decoration: none;">Contact</a>
+    </div>
+    <div class="col-md-auto">
+      <a href="../legal-notice" class="text-muted" style="text-decoration: none;">Legal notice</a>
+    </div>
+    <div class="col-md-auto">
+      <a href="../privacy" class="text-muted" style="text-decoration: none;">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="row justify-content-md-center">
+  <div class="col-md-auto text-muted mt-2">
+      <a> Created by Yannik Ottens · © <?php echo date('Y'); ?></a>
+    </div>
+  </div>
   </div>
 </footer>
-
  </body>
- 
-<script>
-var eventID = "<?php echo $event.$year; ?>";
-var event = "<?php echo $event; ?>";
-var year = "<?php echo substr($year,0,2); ?>";
-var engine = "<?php echo $engine; ?>";
-</script>
 </html>

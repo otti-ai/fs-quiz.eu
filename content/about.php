@@ -12,9 +12,8 @@
 			<p class="fs-5">My name is Yannik Ottens and I study computer science at the University of Bremen in Germany. I have been 
 			a member of Bremergy since 2016 and I am currently part of the team leadership. From the beginning one of my tasks was to 
 			prepare the team for the registration quizzes. For this I programmed some helpful tools and collected a lot of 
-			data from the past quizzes. As my time at Bremergy is coming to an end, not at last because of the new rules (<a href="#" data-bs-toggle="modal" id="rule">FSG A 4.2.8</a>), 
-			I want to make this data available to all teams. Therefore this page displays the collected data and offers a 
-			possibility to train with it.</p>
+			data from the past quizzes. As my time at Bremergy is coming to an end I want to make this data available to all teams. 
+      Therefore this page displays the collected data and offers a possibility to train with it. More about this page in the <a href="/faq">FAQ.</a></p>
 		</div>
 	</div>
 	<!-- Modal -->
