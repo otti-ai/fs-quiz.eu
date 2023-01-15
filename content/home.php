@@ -23,6 +23,7 @@
 	<h2>Dates</h2>
 	<?php require('./php/eventgraph.php'); ?>
 	<p>Testquiz from FS Switzerland on 15th January, 13:00 (CET)</p>
+  <p>Fs Alpe Adria on 28th January</p>
 	<hr class="col-3 col-md-2">
 	
     <div class="row g-5">
