@@ -369,7 +369,11 @@ function getQuiz(){//types anedern; bilder
 			  	break;
 			default:
 				answers = item.answers[0];
-				html += '<input data-answer="'+answers.answer_text+'" type="text" class="form-control" id="numberInput'+i+'" placeholder="Enter answer">';
+				if(answers){
+					html += '<input data-answer="'+answers.answer_text+'" type="text" class="form-control" id="numberInput'+i+'" placeholder="Enter answer">';
+				}else{
+					html += '<input data-answer="" type="text" class="form-control" id="numberInput'+i+'" placeholder="Enter answer">';
+				}
 				break;
 		  }
 		  html += '<hr class="col-3 col-md-2"></div>';

@@ -43,7 +43,8 @@ $eventName = str_replace('Formula Student', 'FS', $data->event->event_name);
 			<p id="maxInfo" style="margin-bottom: 0;">Questions: <?php echo count($data->questions); ?></p>
 			<p id="timeInfo" style="margin-bottom: 0;">Time: x</p>
 			<p id="classInfo" style="margin-bottom: 0;">Class: <?php echo $data->class; ?></p>
-			<p id="Infoinfo" style="margin-bottom: 0;">Infomation: <?php echo $data->information; ?></p>
+			<p id="statusInfo" style="margin-bottom: 0;">Status: <?php echo $data->status; ?></p>
+			<p id="Infoinfo" style="margin-bottom: 0;">Infomation: <?php echo nl2br(stripslashes($data->information)); ?></p>
 		</div>
 		<div class="col-md-6">
 			<h3>Settings</h3>

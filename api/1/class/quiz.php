@@ -16,7 +16,7 @@ class QuizModel {
         array_push($param, new TableItem('year', 'integer', '', $required, $tabel,false, false, $id));
         array_push($param, new TableItem('class', 'string', 'Allowed Values: ev, cv, dv', $required, $tabel,false, false, $id));
         array_push($param, new TableItem('information', 'string', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('status', 'string', 'Allowed Values: complete, missing_questions, missing_solution, planned, unpublished', $required, $tabel, false,false, $id));
+        array_push($param, new TableItem('status', 'string', 'Allowed Values: complete, missing_questions, missing_correct_answer, incomplete, unpublished', $required, $tabel, false,false, $id));
         return $param;
     }
     public static function getItemTableSingle($required, $id, $tabel){
@@ -27,7 +27,7 @@ class QuizModel {
         array_push($param, new TableItem('year', 'integer', '', $required, $tabel,false, false, $id));
         array_push($param, new TableItem('class', 'string', 'Allowed Values: ev, cv, dv', $required, $tabel,false, false, $id));
         array_push($param, new TableItem('information', 'string', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('status', 'string', 'Allowed Values: complete, missing_questions, missing_solution, planned, unpublished', $required, $tabel, false,false, $id));
+        array_push($param, new TableItem('status', 'string', 'Allowed Values: complete, missing_questions, missing_correct_answer, incomplete, unpublished', $required, $tabel, false,false, $id));
         array_push($param, new TableItem('questions', 'array(object)', '', $required, true, false, true, $id));
         $param = array_merge($param, QuestionModel::getItemTableArray($required, $id, true));
         return $param;
@@ -37,7 +37,7 @@ class QuizModel {
 
 class QuizHandle {
     private $pdo;
-    private $status = array('','complete', 'missing_questions', 'missing_solution', 'planned', 'unpublished');
+    private $status = array('','complete', 'missing_questions', 'missing_correct_answer', 'incomplete', 'unpublished');
 
     public function __construct($pdo){
         $this->pdo = $pdo;
