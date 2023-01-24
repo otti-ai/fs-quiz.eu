@@ -8,7 +8,6 @@
   usort($docs, function($a, $b) {
     return $a->event_id < $b->event_id ? -1 : 1;
   });
-
 ?>
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <main>
@@ -22,8 +21,7 @@
     <hr class="col-3 col-md-2">
 	<h2>Dates</h2>
 	<?php require('./php/eventgraph.php'); ?>
-	<p>Testquiz from FS Switzerland on 15th January, 13:00 (CET)</p>
-  <p>Fs Alpe Adria on 28th January</p>
+  <p>Fs Alpe Adria on 28th January, 11:00 (CET)</p>
 	<hr class="col-3 col-md-2">
 	
     <div class="row g-5">
@@ -31,12 +29,24 @@
         <h2>Registration</h2>
         <p>Information about the registration procedure</p>
         <ul class="icon-list">
-		      <li><a target="_blank" href="https://doc.fs-quiz.eu/FSA-Registration-Procedure-2022_1-1.pdf">FS Austria (v1.1) (old)</a></li>
-		      <li><a target="_blank" href="https://doc.fs-quiz.eu/FSEast_Registration_guide_v2.pdf">FS East Registration Guide (v2) (old)</a></li>
-		      <li><a target="_blank" href="https://fseast.eu/get-ready-for-fs-east-2022">FS East (old)</a></li>
-		      <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
-		      <li><a target="_blank" href="https://formulastudent.ch/registration2022">FS Switzerland (old)</a></li>
-		      <li><a target="_blank" href="https://doc.fs-quiz.eu/FSAA_Registration_V2.pdf">FS Alpe-Adria Registration Procedure Guide (old)</a></li>
+          <?php
+            foreach($docs as $doc){
+              if($doc->type == "Registration"){
+                echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
+                if($doc->event_id>0){
+                  foreach($events as $event){
+                    if($event->id == $doc->event_id){
+                      echo str_replace('Formula Student', 'FS', $event->event_name);
+                    }
+                  }
+                }else{
+                  echo 'FS';
+                }
+                echo ' '.$doc->type.' '.$doc->year.' (v'.$doc->version.')'.'</a></li>';
+              }
+            }
+          ?>
+          <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
         </ul>
       </div>
 
@@ -46,6 +56,9 @@
         <ul class="icon-list">
           <?php
             foreach($docs as $doc){
+              if($doc->type == "Registration"){
+                break;
+              }
               echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
               if($doc->event_id>0){
                 foreach($events as $event){

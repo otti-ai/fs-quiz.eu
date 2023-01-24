@@ -34,6 +34,11 @@ Route::add('/quizzes',function(){
 	$pagename = 'quizzes';
 	require('content/quizzes.php');
 });
+Route::add('/quizzesNew',function(){
+    $titel = 'FS-Quiz - Quizzes';
+	$pagename = 'quizzes';
+	require('content/quizzesNew.php');
+});
 Route::add('/search',function(){
     $titel = 'FS-Quiz - Search';
 	$pagename = 'search';
