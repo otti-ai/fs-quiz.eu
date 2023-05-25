@@ -7,6 +7,7 @@ The repository contains the most important documents for the registration quizze
 - Hybrid Rules,
 - Additional Rules,
 - Handbook.
+
 For the web page an additional entry in the database is required, which contains the information about the version, year, event and type of the document.
 See [API](https://api.fs-quiz.eu/) documentation [GET: /document/{doc_id}](https://api.fs-quiz.eu/#get-document)
 
