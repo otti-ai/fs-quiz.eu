@@ -1,7 +1,7 @@
 <?php 
 	require('header.php'); 
 	?>
-<div class="col-lg-8 mx-auto p-3 py-md-5">
+<div class="col-lg-8 mx-auto p-3">
   <main>
   <h1>Contact</h1>
 <h4>Address</h4>

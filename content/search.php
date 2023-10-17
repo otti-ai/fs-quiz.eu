@@ -2,7 +2,7 @@
 	require($_SERVER['DOCUMENT_ROOT']. '/header.php');
 ?>
 <link href="/css/all.css" rel="stylesheet">
-<div class="col-lg-8 mx-auto p-3 py-md-5">
+<div class="col-lg-8 mx-auto p-3">
   <main>
     <h1>Search tools</h1>
     <p class="fs-5">On this page there are some search tools which give the possibility to find old questions or documents.</p>

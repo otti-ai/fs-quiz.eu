@@ -3,13 +3,13 @@
 
   $jsonEvent = json_decode(file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event'));
 	$events = $jsonEvent->events;
-  $jsondoc = json_decode(file_get_contents('https://api.fs-quiz.eu/1/'.$api.'/document?year=2023'));
+  $jsondoc = json_decode(file_get_contents('https://api.fs-quiz.eu/1/'.$api.'/document?year=2024'));
 	$docs = $jsondoc->documents;
   usort($docs, function($a, $b) {
     return $a->event_id < $b->event_id ? -1 : 1;
   });
 ?>
-<div class="col-lg-8 mx-auto p-3 py-md-5">
+<div class="col-lg-8 mx-auto p-3">
   <main>
     <h1>Training for the registration quizzes</h1>
     <p class="fs-5">This page is for training for the European Formula Student Registration quizzes. Old quizzes can be worked through here in the original or an individual adapted mode.</p>
@@ -18,16 +18,12 @@
       <a href="/quizzes" class="btn btn-primary btn-lg px-4">Old quizzes</a>
     </div>
 
-    <hr class="col-3 col-md-2">
-	<h2>Dates</h2>
-	<?php require('./php/eventgraph.php'); ?>
-  <p>Fs Alpe Adria on 28th January, 11:00 (CET)</p>
 	<hr class="col-3 col-md-2">
 	
     <div class="row g-5">
       <div class="col-md-6">
         <h2>Registration</h2>
-        <p>Information about the registration procedure</p>
+        <p>Information about the registration procedure (old)</p>
         <ul class="icon-list">
           <?php
             foreach($docs as $doc){

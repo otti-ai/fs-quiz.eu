@@ -5,7 +5,7 @@ $data = json_decode(nl2br($jsonData));
 require('header.php'); 
 ?>
   
-<div class="col-lg-8 mx-auto p-3 py-md-5">
+<div class="col-lg-8 mx-auto p-3">
   <main>
 	<div id="divResult" style="display: none;">
 	</div>
