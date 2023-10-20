@@ -18,6 +18,12 @@ Route::pathNotFound(function($path) {
 	http_response_code(404);
 });
 
+//status no apikey needed
+Route::add('/([1])/systemStatus', function($api_version) {
+    $addition = 'all';
+    require($api_version. '/status/get.php');
+}, 'get');
+
 //quizzes
 Route::add('/([1])/([0-9a-zA-Z]*)/quiz', function($api_version, $api_key) {
     $addition = 'list';
