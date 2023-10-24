@@ -88,7 +88,7 @@
         </div>
         <div class="row justify-content-md-center text-center">
           <div class="col">
-            <p>Friday, 27th January 2023 (CET)</p>
+            <p>Friday, 26th January 2023 (CET)</p>
           </div>
         </div>
     </div>
