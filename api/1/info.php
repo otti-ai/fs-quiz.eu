@@ -47,8 +47,8 @@
       <div class="d-md-flex collapse" id="navbarToggleExternalContent" style="flex: 0 0 auto;">
       <div class="p-3 bg-white" style="min-width: 15vw;">
         <div class="align-items-center mb-3 text-dark text-decoration-none border-bottom">
-          <p >Version: <br><small class="text-muted">1.0.3</small>
-          <br>Last Update: <br><small class="text-muted">20th Oct, 2023</small></p>
+          <p >Version: <br><small class="text-muted">1.0.4</small>
+          <br>Last Update: <br><small class="text-muted">26th Oct, 2023</small></p>
         </div>
         <ul class="list-unstyled ps-0">
           <li class="mb-1">

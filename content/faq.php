@@ -14,8 +14,9 @@
     </h2>
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
       <div class="accordion-body">
-          The data was kindly provided by Bremergy the Formula Student Team of the University of Bremen.
-		<br>If you have further data, please contact me at info@fs-quiz.eu.
+      Most of the data was provided by Bremergy, the Formula Student Team of the University of Bremen.
+      <br> A couple of teams were also very friendly to provide additional data.
+		  <br>If you have further data, please contact me at info@fs-quiz.eu.
 		<ul class="icon-list">
           <li><a target="_blank" href="https://bremergy.de/">Bremergy</a></li>
         </ul>
@@ -30,9 +31,13 @@
     </h2>
     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
       <div class="accordion-body">
-        For statistical purposes, I record the number of quiz starts and the ratio of finishes. Other data such 
-		as the results are not stored. Furthermore, my provider stores your IP address, the operating system used, 
-		the browser used and the page views. This data is stored without any relation to each other and is not assignable.
+      For statistical purposes I record the number of views. Other data such as the results are not stored. 
+      These will be available in the future via the API.
+      <br>Also, my provider logs your IP address which is not related to any other data.
+      <br>More about this under the Privacy Policy.
+      <ul class="icon-list">
+          <li><a target="_blank" href="/privacy">Privacy Policy</a></li>
+        </ul>
 		</div>
     </div>
   </div>
@@ -60,7 +65,7 @@
     </h2>
     <div id="panelsStayOpen-collapseThree1" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree1">
       <div class="accordion-body">
-      I have been part of a Formula Student team since 2016 and my first task within the team was to develop a playful solution to practice for the Registration Quiz. Since then, I have been working on my tools for these quizzes every autumn and presenting them to my team. As my time at Bremergy is coming to an end, not at last because of the new rules (FSG A 4.2.8), I would like to make these tools available to all teams. 
+      I've been part of a Formula Student team since 2016, and my first task within the team was to develop a game-like solution to practice for the registration quiz. Since then, I have been working on my tools for these quizzes every fall and presenting them to my team. As my time at Bremergy is coming to an end, I would like to make these tools available to all teams.
 	  </div>
     </div>
   </div>

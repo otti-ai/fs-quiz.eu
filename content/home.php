@@ -21,7 +21,7 @@
 	<hr class="col-3 col-md-2">
 
 	<h2>Dates</h2>
-	<p>Most of the European registration quizzes will be held on January 26th, 2024. Confirmed by FSS</p>
+	<p>Most of the European registration quizzes will be held on January 26th, 2024. Confirmed by FS Switzerland</p>
 	<hr class="col-3 col-md-2">
 
     <div class="row g-5">
