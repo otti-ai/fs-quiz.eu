@@ -47,6 +47,9 @@
 							</li>
 						<?php endforeach ?>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item"><a target="_blank" href="https://github.com/otti-ai/fs-quiz.eu"><img src="/img/icons/github.svg" alt="Github Logo" width="25" height="25" style="filter: invert(1);" class="d-inline-block align-text-center"></a></li>
+					</ul>
 				</div>
 			</div>
 		</nav>
