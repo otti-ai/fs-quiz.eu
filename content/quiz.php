@@ -45,7 +45,7 @@ $eventName = str_replace('Formula Student', 'FS', $data->event->event_name);
 			<p id="classInfo" style="margin-bottom: 0;">Class: <?php echo $data->class; ?></p>
 			<p id="statusInfo" style="margin-bottom: 0;">Status: <?php echo str_replace("_", " ", $data->status); ?></p>
 			<p id="Infoinfo" style="margin-bottom: 0;">Date: <?php echo (is_null($data->date)) ? '-' : date_format(date_create($data->date), 'jS F Y') ; ?></p>
-			<p id="Infoinfo" style="margin-bottom: 0;">Infomation: <?php echo (is_null($data->information)) ? '-' : nl2br(stripslashes($data->information)); ?></p>
+			<p id="Infoinfo" style="margin-bottom: 0;">Infomation: <?php echo (is_null($data->information)) ? '-' : str_replace("\\n", "<br>",$data->information); ?></p>
 		</div>
 		<div class="col-md-6">
 			<h3>Settings</h3>
