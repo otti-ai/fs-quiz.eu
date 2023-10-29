@@ -89,15 +89,17 @@ class QuestionHandle {
         $db->addWhere('fs-questions','id',$id);
         $db->addSelects('fs-questions',array('text','time','type'));
         $question = $db->get_Data()->fetchObject('QuestionModel');
-        $question->question_id = $id;
-        $quizzes = new QuestionQuizHandle($this->pdo);
-        $question->quizzes = $quizzes->getByQuestionID($id);
-        $answerH = new AnswerHandle($this->pdo);
-        $question->answers = $answerH->getByQuestionID($id);
-        $imageH = new ImageHandle($this->pdo);
-        $question->images = $imageH->getByAllQuestionID($id);
-        $solutionH = new SolutionHandle($this->pdo);
-        $question->solution = $solutionH->getListByQuestionID($id);
+        if($question){
+            $question->question_id = $id;
+            $quizzes = new QuestionQuizHandle($this->pdo);
+            $question->quizzes = $quizzes->getByQuestionID($id);
+            $answerH = new AnswerHandle($this->pdo);
+            $question->answers = $answerH->getByQuestionID($id);
+            $imageH = new ImageHandle($this->pdo);
+            $question->images = $imageH->getByAllQuestionID($id);
+            $solutionH = new SolutionHandle($this->pdo);
+            $question->solution = $solutionH->getListByQuestionID($id);
+        }
         return $question;
     }
 

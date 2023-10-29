@@ -177,9 +177,21 @@ Route::add('/([1])/([0-9a-zA-Z]*)/image/question', function($api_version, $api_k
 }, 'get');
 
 
-
-
-
+//last-qualifier
+Route::add('/([1])/([0-9a-zA-Z]*)/last-qualifier', function($api_version, $api_key) {
+    $addition = 'list';
+	require($api_version. '/last-qualifier/get.php');
+}, 'get');
+//last-qualifier/1
+Route::add('/([1])/([0-9a-zA-Z]*)/last-qualifier/([0-9]*)', function($api_version, $api_key, $last_qualifier_id) {
+    $addition = 'single';
+	require($api_version. '/last-qualifier/get.php');
+}, 'get');
+//last-qualifier/quiz/1
+Route::add('/([1])/([0-9a-zA-Z]*)/last-qualifier/quiz/([0-9]*)', function($api_version, $api_key, $quiz_id) {
+    $addition = 'quiz';
+	require($api_version. '/last-qualifier/get.php');
+}, 'get');
 
 Route::run('/');
 ?>

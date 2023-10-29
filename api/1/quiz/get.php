@@ -10,6 +10,7 @@ require("1/class/document.php");
 require("1/class/answer.php");
 require("1/class/image.php");
 require("1/class/solution.php");
+require("1/class/last-qualifier.php");
 require("1/class/quiz.php");
 require("1/class/db_orginal.php");
 require("1/class/questionQuiz.php");

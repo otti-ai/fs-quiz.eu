@@ -33,6 +33,10 @@ class QuizModel {
         array_push($param, new TableItem('status', 'string', 'Allowed Values: complete, missing_questions, missing_correct_answer, incomplete, unpublished', $required, $tabel, false,false, $id));
         array_push($param, new TableItem('questions', 'array(object)', '', $required, true, false, true, $id));
         $param = array_merge($param, QuestionModel::getItemTableArray($required, $id, true));
+        array_push($param, new TableItem('document', 'array(object)', '', $required, true, false, true, $id));
+        $param = array_merge($param, DocumentModel::getItemTable($required, $id, true, false));
+        array_push($param, new TableItem('last-qualifier', 'object', 'Result of the last direct qualifier', $required, true, false, true, $id));
+        $param = array_merge($param, LastQualifierModel::getItemTable($required, $id, true, false));
         return $param;
     }
     
@@ -71,16 +75,21 @@ class QuizHandle {
         $db->setTable('fs-quizzes');
         $db->addWhere('fs-quizzes','quiz_id',$id);
         $quiz = $db->get_Data()->fetchObject('QuizModel');
-        $quiz->status = $this->status[($quiz->status)];
-        $event = new EventHandle($this->pdo);
-        $g = $event->getByID($quiz->event_id);
-        $quiz->event = $g;
-        $questionH = new QuestionHandle($this->pdo);
-        $quiz->questions = $questionH->getListByQuizIDFull($id);
-        $docH = new DocumentHandle($this->pdo);
-        $d = $docH->getListByQuizID($id);
-        $quiz->documents = $d;
-        unset($quiz->event_id);
+        if($quiz) {
+            $quiz->status = $this->status[($quiz->status)];
+            $event = new EventHandle($this->pdo);
+            $g = $event->getByID($quiz->event_id);
+            $quiz->event = $g;
+            $questionH = new QuestionHandle($this->pdo);
+            $quiz->questions = $questionH->getListByQuizIDFull($id);
+            $docH = new DocumentHandle($this->pdo);
+            $d = $docH->getListByQuizID($id);
+            $quiz->documents = $d;
+            $last = new LastQualifierHandle($this->pdo);
+            $l = $last->getListByQuizID($id);
+            $quiz->last_qualifier = $l;
+            unset($quiz->event_id);
+        }
         return $quiz;
     }
 
@@ -89,14 +98,21 @@ class QuizHandle {
         $db->setTable('fs-quizzes');
         $db->addWhere('fs-quizzes','quiz_id',$id);
         $quiz = $db->get_Data()->fetchObject('QuizModel');
-        $quiz->status = $this->status[($quiz->status)];
-        $event = new EventHandle($this->pdo);
-        $g = $event->getByID($quiz->event_id);
-        $quiz->event = $g; 
-        $docH = new DocumentHandle($this->pdo);
-        $d = $docH->getListByQuizID($id);
-        $quiz->documents = $d;
-        unset($quiz->event_id);
+        if($quiz) {
+            $quiz->status = $this->status[($quiz->status)];
+            $event = new EventHandle($this->pdo);
+            $g = $event->getByID($quiz->event_id);
+            $quiz->event = $g; 
+            $docH = new DocumentHandle($this->pdo);
+            $d = $docH->getListByQuizID($id);
+            $quiz->documents = $d;
+            $last = new LastQualifierHandle($this->pdo);
+            if($last) {
+                $l = $last->getListByQuizID($id);
+                $quiz->last_qualifier = $l;
+            }
+            unset($quiz->event_id);
+        }
         return $quiz;
     }
 

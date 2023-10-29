@@ -1,0 +1,11 @@
+Request:
+  https://api.fs-quiz.eu/1/{api_key}/last-qualifier/quiz/5
+
+Response:
+  {
+    "last_qualifier_id": 4,
+    "time": 2969,
+    "score": null,
+    "correct_answers": null,
+    "method": "time"
+  }

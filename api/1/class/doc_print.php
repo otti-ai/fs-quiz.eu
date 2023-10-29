@@ -75,6 +75,9 @@ class Part {
             case 'questionf':
                 $p = array_merge($p, QuestionModel::getItemTableArray($required, $id, true, false));
                 break;
+            case 'last-qualifier':
+                $p = array_merge($p, LastQualifierModel::getItemTable($required, $id, true, false));
+                break;
         }
         return $p;
     }
@@ -107,6 +110,9 @@ class Part {
                 break;
             case 'questionInfo':
                 $p = array_merge($p, QuestionModel::getItemTable($required, 0, false, false));
+                break;
+            case 'last-qualifier':
+                $p = array_merge($p, LastQualifierModel::getItemTableSingle($required, 0, false, false));
                 break;
         }
         return $p;
@@ -306,13 +312,34 @@ class Doc_Print {
         return $chapter;
     }
 
+    public function getLast(){
+        $chapter = new Chapter('last-qualifier', 'Last Qualifier');
+        //last-qualifier
+        $part = $chapter->createPart('last-qualifiers', 'Get List', 'get', '/last-qualifier');
+        $part->param[] = $part->addItem('start_id', 'integer','first entry of response',false);
+        $part->response = $part->setItemByArrayObjects('last-qualifier','last-qualifier', 'array(object)', 'Results of the last direct qualifiers; limit to 25', false,0);
+        $chapter->parts[] = $part;
+        //last-qualifier/1
+        $part = $chapter->createPart('last-qualifier', 'Get Last Qualifier', 'get', '/last-qualifier/{last_qualifier_id}');
+        $part->param[] = $part->addItem('last_qualifier_id', 'integer','',true);
+        $part->response = $part->setItemByObtject('last-qualifier',false,0);
+        $chapter->parts[] = $part;
+        //last-qualifier/quiz/1
+        $part = $chapter->createPart('last-qualifierQuiz', 'Get Last Qualifier of Quiz', 'get', '/last-qualifier/quiz/{quiz_id}');
+        $part->param[] = $part->addItem('quiz_id', 'integer','',true);
+        $part->response = $part->setItemByObtject('last-qualifier',false,0);
+        $chapter->parts[] = $part;
+        return $chapter;
+    }
+
     public function createChapter(){
         $chapters = array();
         $chapters[] = $this->getAnswers();
         $chapters[] = $this->getDocs();
         $chapters[] = $this->getEvent();
         $chapters[] = $this->getImage();
-        $chapters[] = $this->getQuestions();
+        $chapters[] = $this->getImage();
+        $chapters[] = $this->getLast();
         $chapters[] = $this->getQuiz();
         $chapters[] = $this->getSolutions();
         //echo json_encode($chapters);
