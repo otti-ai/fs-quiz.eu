@@ -1,3 +1,7 @@
+<div style="display:flex;" align="center">
+  <img alt="FS-Quiz logo" src="img/icons/favicon/logo-text.png" width="400px" />
+</div>
+
 <p align="center">
     <a href="https://fs-quiz.eu/" alt="Website">
         <img alt="Uptime Robot status" src="https://img.shields.io/uptimerobot/status/m795514430-858284ba79462111b7be85f4?label=website" /></a>
@@ -44,11 +48,10 @@ The API documentation can be found under [api.fs-quiz.eu](https://api.fs-quiz.eu
 
 ## Future
 Here is a listing of planned changes on my part:
-- API extended with create function to allow other teams to add questions, solutions and documents to the database.
+- API V2 without registration/api-key
 - Extension of the settings for a quiz start
-- Estimate if the result would have been enough for a qualification (based on the real results)
 - Real test quiz in the middle of January (2-3 weeks before the official quizzes)
-- Release and integration of my rule search tool from Team [Bremergy](https://bremergy.de/). Solves dependencies of rules and respects event specific rules.
+- ~~Release and integration of my rule search tool from Team [Bremergy](https://bremergy.de/). Solves dependencies of rules and respects event specific rules.~~ [outsourced](https://github.com/otti-ai/fs-rule-tool)
 
 ## Known unfixed bugs
 - When multiple answers to a question with a single correct solution are correct (accepted after protest) only one is displayed
