@@ -1,0 +1,17 @@
+Request:
+  https://api.fs-quiz.eu/1/{api_key}/image/question
+
+Response:
+  {
+    "images": [
+      {
+        "img_id": 1,
+        "path": "12_1.jpg"
+      },
+      {
+        "img_id": 2,
+        "path": "12_2.jpg"
+      },
+      ...
+    ]
+  }

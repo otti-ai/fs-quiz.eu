@@ -1,0 +1,21 @@
+Request:
+  https://api.fs-quiz.eu/1/{api_key}/question
+
+Response:
+  {
+    "questions": [
+      {
+        "text": "What will Young's Modulus be for a 20 mm square bar and with a length...",
+        "time": null,
+        "type": "single-choice",
+        "question_id": 1
+      },
+      {
+        "text": "What is the maximum vertical distance allowed between the lowest part...",
+        "time": null,
+        "type": "single-choice",
+        "question_id": 2
+      },
+      ...
+    ]
+  }

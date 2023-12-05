@@ -29,6 +29,10 @@ Route::add('/([1])/([0-9a-zA-Z]*)/quiz', function($api_version, $api_key) {
     $addition = 'list';
     require($api_version. '/quiz/get.php');
 }, 'get');
+Route::add('/2/quiz', function() {
+    $addition = 'list';
+    require('/quiz/get.php');
+}, 'get');
 //quizzes/1
 Route::add('/([1])/([0-9a-zA-Z]*)/quiz/([0-9]*)', function($api_version, $api_key, $quiz_id) {
     $addition = 'single';

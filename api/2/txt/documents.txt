@@ -1,0 +1,25 @@
+Request:
+  https://api.fs-quiz.eu/1/{api_key}/document
+
+Response:
+  {
+    "documents": [
+      {
+        "doc_id": 3,
+        "type": "Handbook",
+        "path": "FSG23_Competition_Handbook_v1.0.pdf",
+        "year": 2023,
+        "version": "1.0",
+        "event_id": 7
+      },
+      {
+        "doc_id": 4,
+        "type": "Handbook",
+        "path": "FSG22_Competition_Handbook_v1.2.pdf",
+        "year": 2022,
+        "version": "1.2",
+        "event_id": 7
+      },
+    ...
+    ]
+  }
