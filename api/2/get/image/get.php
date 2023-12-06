@@ -30,5 +30,5 @@ if(isset($data) && $data != null){
 }else{
     $status = 204;
 }
-require('1/print.php');
+require('2/print.php');
 ?>
