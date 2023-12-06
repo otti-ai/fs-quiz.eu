@@ -15,7 +15,7 @@ require("2/class/solution.php");
 require("2/class/status.php");
 
  //Statistic
- $sqlStatistic = "INSERT INTO `fs-statistic-api` (`apikey`, `request`) VALUES (?, ?)";
+ $sqlStatistic = "INSERT INTO `fs-statistic-api` (`request`) VALUES (?)";
  $statementStatistic = $pdoStatistic->prepare($sqlStatistic);
- $statementStatistic->execute(array($api_key,$_SERVER['REQUEST_URI']));
+ $statementStatistic->execute(array('v2',$_SERVER['REQUEST_URI']));
 ?>
