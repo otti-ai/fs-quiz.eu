@@ -4,18 +4,6 @@ class QuestionQuizModel {
 	//Definition der Eigenschaften
     public $position_index;
 
-    public static function getItemTableQuiz($required, $id, $tabel, $isArray){
-        $param = array();
-        array_push($param, new TableItem('question_id', 'integer', '', $required, $tabel,$isArray, false, $id));
-        array_push($param, new TableItem('position_index', 'integer', '', $required, $tabel,$isArray, false, $id));
-        return $param;
-    }
-    public static function getItemTableQuestion($required, $id, $tabel, $isArray){
-        $param = array();
-        array_push($param, new TableItem('quiz_id', 'integer', '', $required, $tabel,$isArray, false, $id));
-        array_push($param, new TableItem('position_index', 'integer', '', $required, $tabel,$isArray, false, $id));
-        return $param;
-    }
 }
 
 class QuestionQuizHandle {

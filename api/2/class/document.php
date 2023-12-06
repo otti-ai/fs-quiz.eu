@@ -8,17 +8,6 @@ class DocumentModel {
     public $year;
     public $version;
     public $event_id;
-
-    public static function getItemTable($required, $id, $tabel){
-        $param = array();
-        array_push($param, new TableItem('doc_id', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('type', 'string', 'Allowed Values: Rulebook, Hybrid Rules, Additional Rules, Handbook, Registration, Additional Documents', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('path', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('year', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('version', 'string', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('event_id', 'integer', 'ID 0 for all events', $required, $tabel,false, false, $id));
-        return $param;
-    }
 }
 class DocumentHandle {
     private $pdo;

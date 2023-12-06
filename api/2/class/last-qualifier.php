@@ -7,26 +7,6 @@ class LastQualifierModel {
     public $score;
     public $correct_answers;
     public $method;
-
-    public static function getItemTable($required, $id, $tabel , $inArray){
-        $param = array();
-        array_push($param, new TableItem('last_qualifier_id', 'integer', '', $required, $tabel, $inArray, false, $id));
-        array_push($param, new TableItem('time', 'integer', 'in sec', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('correct_answers', 'integer', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('score', 'float', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('method', 'string', 'Allowed Values: time, correctness, score', $required, $tabel, $inArray,false, $id));
-        return $param;
-    }
-    public static function getItemTableSingle($required, $id, $tabel , $inArray){
-        $param = array();
-        array_push($param, new TableItem('last_qualifier_id', 'integer', '', $required, $tabel, $inArray, false, $id));
-        array_push($param, new TableItem('quiz_id', 'integer', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('time', 'integer', 'in sec', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('correct_answers', 'integer', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('score', 'float', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('method', 'string', 'Allowed Values: time, correctness, score', $required, $tabel, $inArray,false, $id));
-        return $param;
-    }
 }
 class LastQualifierHandle {
     private $pdo;

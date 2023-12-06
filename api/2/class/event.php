@@ -7,16 +7,6 @@ class EventModel {
     public $event_name;
     public $country;
     public $website;
-
-    public static function getItemTable($required, $id, $tabel, $isArray){
-        $param = array();
-        array_push($param, new TableItem('id', 'integer', '', $required, $tabel,$isArray, false, $id));
-        array_push($param, new TableItem('short_name', 'string', '', $required, $tabel,$isArray, false, $id));
-        array_push($param, new TableItem('event_name', 'string', '', $required, $tabel,$isArray, false, $id));
-        array_push($param, new TableItem('country', 'string', '', $required, $tabel,$isArray, false, $id));
-        array_push($param, new TableItem('website', 'string', '', $required, $tabel,$isArray, false, $id));
-        return $param;
-    }
 }
 
 class EventHandle {

@@ -1,9 +1,6 @@
 <?php
-//PDO
-require('1/orginal_db.php');
-//Klassen
-require("1/class/db_orginal.php");
-require("1/class/systemStatus.php");
+//init pdo and classes
+require('2/init.php');
 
 //Statistic
 $sqlStatistic = "INSERT INTO `fs-statistic-api` (`apikey`, `request`) VALUES (?, ?)";

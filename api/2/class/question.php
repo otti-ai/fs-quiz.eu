@@ -5,44 +5,6 @@ class QuestionModel {
     public $text;
     public $time;
     public $type;
-
-    public static function getItemTable($required, $id, $tabel , $inArray){
-        $param = array();
-        array_push($param, new TableItem('question_id', 'integer', '', $required, $tabel, $inArray, false, $id));
-        array_push($param, new TableItem('text', 'string', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('time', 'integer', 'in sec', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('type', 'string', 'Allowed Values: single-choice, multi-choice, input, input-range', $required, $tabel, $inArray,false, $id));
-        return $param;
-    }
-    public static function getItemTableSingle($required, $id, $tabel , $inArray){
-        $param = array();
-        array_push($param, new TableItem('question_id', 'integer', '', $required, $tabel, $inArray, false, $id));
-        array_push($param, new TableItem('text', 'string', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('time', 'integer', 'in sec', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('type', 'string', 'Allowed Values: single-choice, multi-choice, input, input-range', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('quizzes', 'array(object)', '', $required, true, false, true, $id));
-        $param = array_merge($param, QuestionQuizModel::getItemTableQuestion($required, $id, true, false));
-        array_push($param, new TableItem('answers', 'array(object)', '', $required, true, false, true, $id));
-        $param = array_merge($param, AnswerModel::getItemTable($required, $id, true, false));
-        array_push($param, new TableItem('images', 'array(object)', '', $required, true, false, true, $id));
-        $param = array_merge($param, ImageModel::getItemTable($required, $id, true, false));
-        array_push($param, new TableItem('solutions', 'array(object)', '', $required, true, false, true, $id));
-        $param = array_merge($param, SolutionModel::getItemTable($required, $id, true, false));
-        return $param;
-    }
-    public static function getItemTableArray($required, $id, $tabel){
-        $param = array();
-        array_push($param, new TableItem('question_id', 'integer', '', $required, $tabel, false, false, $id));
-        array_push($param, new TableItem('text', 'string', '', $required, $tabel, false,false, $id));
-        array_push($param, new TableItem('time', 'integer', 'in sec', $required, $tabel, false,false, $id));
-        array_push($param, new TableItem('type', 'string', 'Allowed Values: single-choice, multi-choice, input, input-range', $required, $tabel, false,false, $id));
-        array_push($param, new TableItem('position_index', 'integer', '', $required, $tabel, false,false, $id));
-        array_push($param, new TableItem('answers', 'array(object)', '', $required, true, true, true, $id));
-        $param = array_merge($param, AnswerModel::getItemTable($required, $id, true, true));
-        array_push($param, new TableItem('images', 'array(object)', '', $required, true, true, true, $id));
-        $param = array_merge($param, ImageModel::getItemTable($required, $id, true, true));
-        return $param;
-    }
 }
 class QuestionHandle {
     private $pdo;

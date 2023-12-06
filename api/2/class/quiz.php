@@ -8,38 +8,7 @@ class QuizModel {
     public $class;
     public $information;
     public $date;
-    public $status;
-
-    public static function getItemTable($required, $id, $tabel){
-        $param = array();
-        array_push($param, new TableItem('quiz_id', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('event_id', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('year', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('class', 'string', 'Allowed Values: ev, cv, dv', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('information', 'string', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('date', 'string', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('status', 'string', 'Allowed Values: complete, missing_questions, missing_correct_answer, incomplete, unpublished', $required, $tabel, false,false, $id));
-        return $param;
-    }
-    public static function getItemTableSingle($required, $id, $tabel){
-        $param = array();
-        array_push($param, new TableItem('quiz_id', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('event', 'object', '', $required, true, false, true, $id));
-        $param = array_merge($param, EventModel::getItemTable($required, $id, true, false));
-        array_push($param, new TableItem('year', 'integer', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('class', 'string', 'Allowed Values: ev, cv, dv', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('information', 'string', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('date', 'string', '', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('status', 'string', 'Allowed Values: complete, missing_questions, missing_correct_answer, incomplete, unpublished', $required, $tabel, false,false, $id));
-        array_push($param, new TableItem('questions', 'array(object)', '', $required, true, false, true, $id));
-        $param = array_merge($param, QuestionModel::getItemTableArray($required, $id, true));
-        array_push($param, new TableItem('document', 'array(object)', '', $required, true, false, true, $id));
-        $param = array_merge($param, DocumentModel::getItemTable($required, $id, true, false));
-        array_push($param, new TableItem('last-qualifier', 'object', 'Result of the last direct qualifier', $required, true, false, true, $id));
-        $param = array_merge($param, LastQualifierModel::getItemTable($required, $id, true, false));
-        return $param;
-    }
-    
+    public $status;    
 }
 
 class QuizHandle {

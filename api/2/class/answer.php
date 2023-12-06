@@ -6,15 +6,6 @@ class AnswerModel {
 	public $question_id;
     public $answer_text;
     public $is_correct;
-
-    public static function getItemTable($required, $id, $tabel , $inArray){
-        $param = array();
-        array_push($param, new TableItem('answer_id', 'integer', '', $required, $tabel, $inArray, false, $id));
-        array_push($param, new TableItem('question_id', 'integer', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('answer_text', 'string', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('is_correct', 'boolean', '', $required, $tabel, $inArray,false, $id));
-        return $param;
-    }
 }
 class AnswerHandle {
     private $pdo;

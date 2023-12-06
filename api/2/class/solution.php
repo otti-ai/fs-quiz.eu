@@ -5,25 +5,6 @@ class SolutionModel {
 	public $solution_id;
     public $question_id;
 	public $text;
-
-    public static function getItemTable($required, $id, $tabel , $inArray){
-        $param = array();
-        array_push($param, new TableItem('solution_id', 'integer', '', $required, $tabel, $inArray, false, $id));
-        array_push($param, new TableItem('question_id', 'integer', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('text', 'string', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('images', 'array(object)', '', $required, true, true, true, $id));
-        $param = array_merge($param, ImageModel::getItemTable($required, $id, true, true));
-        return $param;
-    }
-    public static function getItemTableSingle($required, $id, $tabel , $inArray){
-        $param = array();
-        array_push($param, new TableItem('solution_id', 'integer', '', $required, $tabel, $inArray, false, $id));
-        array_push($param, new TableItem('question_id', 'integer', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('text', 'string', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('images', 'array(object)', '', $required, true, false, true, $id));
-        $param = array_merge($param, ImageModel::getItemTable($required, $id, true, false));
-        return $param;
-    }
 }
 class SolutionHandle {
     private $pdo;

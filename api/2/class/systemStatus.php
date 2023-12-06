@@ -6,25 +6,6 @@ class SystemStatusModel {
 	public $questions;
 	public $last_change;
     public $avg_daily_views;
-
-    public static function getItemTable($required, $id, $tabel){
-        $param = array();
-        array_push($param, new TableItem('quizzes', 'integer', 'Total number of quizzes in the database', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('questions', 'integer', 'Total number of questions in the database', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('last_change', 'string', 'Date of the latest change', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('avg_daily_views', 'integer', 'Average views in the last 7 days', $required, $tabel,false, false, $id));
-        return $param;
-    }
-    public static function getItemTableSingle($required, $id, $tabel){
-        $param = array();
-        array_push($param, new TableItem('quizzes', 'integer', 'Total number of quizzes in the database', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('questions', 'integer', 'Total number of questions in the database', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('last_change', 'string', 'Date of the latest change', $required, $tabel,false, false, $id));
-        array_push($param, new TableItem('avg_daily_views', 'integer', 'Average views in the last 7 days', $required, $tabel,false, false, $id));
-        $param = array_merge($param, QuestionModel::getItemTableArray($required, $id, true));
-        return $param;
-    }
-    
 }
 
 class SystemStatusHandle {

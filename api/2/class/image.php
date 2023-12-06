@@ -4,13 +4,6 @@ class ImageModel {
 	//Definition der Eigenschaften
 	public $img_id;
     public $path;
-
-    public static function getItemTable($required, $id, $tabel, $inArray){
-        $param = array();
-        array_push($param, new TableItem('img_id', 'integer', '', $required, $tabel, $inArray,false, $id));
-        array_push($param, new TableItem('path', 'string', '', $required, $tabel, $inArray,false, $id));
-        return $param;
-    }
 }
 class ImageHandle {
     private $pdo;
