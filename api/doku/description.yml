@@ -1,0 +1,33 @@
+introduction: |
+  # Getting Started
+  The fs-quiz.eu API provides programmatic access to reading European Formula Student Quiz data. 
+  Retrieve a quiz, individual questions or documents, filter them, etc.
+
+  **To use this API, you will need an API-Key!** Please contact me at *api@fs-quiz.eu* to get your 
+  own API-Key. The API-Key is used to limit the number of accesses and is completely free of 
+  charge. This limitation is used to keep the server performance stable so please avoid unnecessary 
+  accesses. More than **10 requests within one minute will result in a 10 minute timeout.**
+  
+  Please keep the API-Key for yourself and do not publish it. Each team gets only one API-Key, if 
+  it gets lost you will get a new one, the old one will be deactivated!
+  
+  As the API-Keys are created manually, it takes a little time for the request to be processed. It 
+  should not take longer than 24 hours. So that I can process the request directly, please write 
+  a contactable email and the team name in the email.
+  
+  # Images
+  The API gives the path to each image. To call up an image, the path is appended to *img.fs-quiz.eu*. 
+  A fully functional image URL looks like this: *https://img.fs-quiz.eu/57_1.jpg*
+  
+  # Documents
+  The current and former documents of the rules and events are stored in the database. In addition to 
+  the year and version, each document is also assigned to a type. These are:
+  - Rulebook: General rules of the season
+  - Hybrid Rules: Rules for hybrid vehicles which are supported by some events
+  - Additional Rules: Additional event specific rules that partly override the general rules
+  - Handbook: Event Handbooks
+  - Registration: Documents about the registration process
+  - Additional Documents: Documents that are useful but do not fit into any other category
+  Similar to the images, the API gives the path to each document. To access a document, the path is 
+  appended to *doc.fs-quiz.eu*. A fully functional document URL looks like this: 
+  *https://doc.fs-quiz.eu/FS-Rules_2023_v1.1.pdf*

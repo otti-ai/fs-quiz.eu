@@ -1,0 +1,2708 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "FS Quiz API v1",
+        "version": "1.1.2",
+        "description": {
+            "$ref": "description.yml#/introduction"
+        },
+        "contact": {
+            "name": "Yannik Ottens",
+            "email": "api@fs-quiz.eu",
+            "url": "https://fs-quiz.eu/contact"
+        },
+        "license":{
+            "name": "Open Database License (ODC-ODbL)",
+            "url": "https://opendatacommons.org/licenses/odbl/"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://api.fs-quiz.eu/1/"
+        }
+    ],
+    "paths": {
+        "/{api_key}/answer": {
+            "get": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Get list of Answers",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "([0-9a-zA-Z]*)",
+                            "minLength": 4,
+                            "maxLength": 12
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/answers"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/answer/{answer_id}": {
+            "get": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Get Answer by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "answer_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the answer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/answer"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/document/{doc_id}": {
+            "get": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get Document by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "doc_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the document"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/document"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/document": {
+            "get": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get list of Documents",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Year of the document (optional)"
+                    },
+                    {
+                        "name": "event_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Event ID associated with the document (optional)"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/documents"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/event/{event_id}": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get Event by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the event"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/event"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/event/{event_id}/quizzes": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get Quizzes by Event ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the event"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/quizzes"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/events": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get list of Events",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/events"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/image": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get list of Images",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/images"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/image/{img_id}": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get Image by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "img_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the image"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/image"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/image/solution": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get list of Images of type Solutions",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/images"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/image/question": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Get list of Images of type questions",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/images"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/last-qualifier/{last_qualifier_id}": {
+            "get": {
+                "tags": [
+                    "Qualifiers"
+                ],
+                "summary": "Get Last Qualifier by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "last_qualifier_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the last qualifier"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/last"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/last-qualifier": {
+            "get": {
+                "tags": [
+                    "Qualifiers"
+                ],
+                "summary": "Get list of Last Qualifiers",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/lasts"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/last-qualifier/quiz/{quiz_id}": {
+            "get": {
+                "tags": [
+                    "Qualifiers"
+                ],
+                "summary": "Get Last Qualifier by Quiz ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "quiz_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the quiz"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/last"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/solution/{solution_id}": {
+            "get": {
+                "tags": [
+                    "Solutions"
+                ],
+                "summary": "Get Solution by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "solution_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the solution"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/solution"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/solution": {
+            "get": {
+                "tags": [
+                    "Solutions"
+                ],
+                "summary": "Get list of Solutions",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/solutions"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/solution/{solution_id}/images": {
+            "get": {
+                "tags": [
+                    "Solutions"
+                ],
+                "summary": "Get list of Images from Solution by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "solution_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the solution"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/images"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/solution/question/{question_id}": {
+            "get": {
+                "tags": [
+                    "Solutions"
+                ],
+                "summary": "Get list of Solutions by Question ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the question"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/solutions"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/question/{question_id}": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get Question by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the question"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/question"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/question/{question_id}/info": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get Info of Question by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the question"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/questionInfo"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/question/{question_id}/answers": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get List of Answers by Question ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the question"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/answers"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/question/{question_id}/images": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get List of Images by Question ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the question"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/images"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/question": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Get list of Questions",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/questions"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/quiz/{quiz_id}": {
+            "get": {
+                "tags": [
+                    "Quizzes"
+                ],
+                "summary": "Get Quiz by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "quiz_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the quiz"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/quiz"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/quiz": {
+            "get": {
+                "tags": [
+                    "Quizzes"
+                ],
+                "summary": "Get list of Quizzes",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "start_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Start ID for the query (optional)"
+                    },{
+                        "name": "event_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Event ID for the query (optional)"
+                    },{
+                        "name": "year",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Year for the query (optional)"
+                    },{
+                        "name": "class",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["ev", "cv", "dv"]
+                        },
+                        "description": "Class for the query (optional)"
+                    },{
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["complete", "missing_questions", "missing_solution", "planned", "unpublished"]
+                        },
+                        "description": "Status for the query (optional)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/quizzes"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/quiz/{quiz_id}/info": {
+            "get": {
+                "tags": [
+                    "Quizzes"
+                ],
+                "summary": "Get infos of Quiz by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "quiz_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the quiz"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/quizinfo"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/quiz/{quiz_id}/questions": {
+            "get": {
+                "tags": [
+                    "Quizzes"
+                ],
+                "summary": "Get list of all Questions from Quiz by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "quiz_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the quiz"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/questions"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/{api_key}/quiz/{quiz_id}/documents": {
+            "get": {
+                "tags": [
+                    "Quizzes"
+                ],
+                "summary": "Get list of Documents from Quiz by ID",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "API-Key"
+                    },
+                    {
+                        "name": "quiz_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "ID of the quiz"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/documents"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "API-KEY": []
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Answer": {
+                "type": "object",
+                "properties": {
+                    "answer_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "question_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "answer_text": {
+                        "type": "string"
+                    },
+                    "is_correct": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "answer_id",
+                    "question_id",
+                    "answer_text",
+                    "is_correct"
+                ]
+            },
+            "Document": {
+                "type": "object",
+                "properties": {
+                    "doc_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["Rulebook", "Hybrid Rules", "Additional Rules", "Handbook", "Registration", "Additional Documents"]
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "year": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 2000,
+                        "maximum": 2030
+                    },
+                    "version": {
+                        "type": "string"
+                    },
+                    "event_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    }
+                },
+                "required": [
+                    "doc_id",
+                    "type",
+                    "path",
+                    "year",
+                    "version",
+                    "event_id"
+                ]
+            },
+            "Event": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "short_name": {
+                        "type": "string"
+                    },
+                    "event_name": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "website": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "required": [
+                    "id",
+                    "short_name",
+                    "event_name",
+                    "country",
+                    "website"
+                ]
+            },
+            "Image": {
+                "type": "object",
+                "properties": {
+                    "img_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "path": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "img_id",
+                    "path"
+                ]
+            },
+            "LastQualifier": {
+                "type": "object",
+                "properties": {
+                    "last_qualifier_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "time": {
+                        "type": "integer",
+                        "description": "in sec",
+                        "nullable": true,
+                        "minimum": 0,
+                        "maximum": 3600
+                    },
+                    "score": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "correct_answers": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "method": {
+                        "type": "string",
+                        "enum": ["time", "correctness", "score"]
+                    },
+                    "quiz_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    }
+                },
+                "required": [
+                    "last_qualifier_id",
+                    "time",
+                    "method",
+                    "quiz_id"
+                ]
+            },
+            "Solution": {
+                "type": "object",
+                "properties": {
+                    "solution_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "question_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Image"
+                        }
+                    }
+                },
+                "required": [
+                    "solution_id",
+                    "question_id",
+                    "text",
+                    "images"
+                ]
+            },
+            "SolutionList": {
+                "type": "object",
+                "properties": {
+                    "solutions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Solution"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "solutions"
+                ]
+            },
+            "LastQualifierList": {
+                "type": "object",
+                "properties": {
+                    "last_qualifiers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LastQualifier"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "last_qualifiers"
+                ]
+            },
+            "AnswerList": {
+                "type": "object",
+                "properties": {
+                    "answers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Answer"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "answers"
+                ]
+            },
+            "DocumentList": {
+                "type": "object",
+                "properties": {
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Document"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "documents"
+                ]
+            },
+            "EventList": {
+                "type": "object",
+                "properties": {
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Event"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "events"
+                ]
+            },
+            "ImageList": {
+                "type": "object",
+                "properties": {
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Image"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "images"
+                ]
+            },
+            "Quiz": {
+                "type": "object",
+                "properties": {
+                    "quiz_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "year": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 2000,
+                        "maximum": 2030
+                    },
+                    "class": {
+                        "type": "string",
+                        "enum": ["ev", "cv", "dv"]
+                    },
+                    "information": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["complete", "missing_questions", "missing_correct_answer", "incomplete", "unpublished"]
+                    },
+                    "event": {
+                        "$ref": "#/components/schemas/Event"
+                    },
+                    "questions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Question"
+                        }
+                    },
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Document"
+                        }
+                    },
+                    "last_qualifier": {
+                        "$ref": "#/components/schemas/LastQualifier"
+                    }
+                },
+                "required": [
+                    "quiz_id",
+                    "year",
+                    "class",
+                    "information",
+                    "date",
+                    "status",
+                    "event",
+                    "questions",
+                    "documents",
+                    "last_qualifier"
+                ]
+            },
+            "QuizInfo": {
+                "type": "object",
+                "properties": {
+                    "quiz_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "year": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 2000,
+                        "maximum": 2030
+                    },
+                    "class": {
+                        "type": "string",
+                        "enum": ["ev", "cv", "dv"]
+                    },
+                    "information": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["complete", "missing_questions", "missing_correct_answer", "incomplete", "unpublished"]
+                    },
+                    "event": {
+                        "$ref": "#/components/schemas/Event"
+                    },
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Document"
+                        }
+                    },
+                    "last_qualifier": {
+                        "$ref": "#/components/schemas/LastQualifier"
+                    }
+                },
+                "required": [
+                    "quiz_id",
+                    "year",
+                    "class",
+                    "information",
+                    "date",
+                    "status",
+                    "event",
+                    "documents",
+                    "last_qualifier"
+                ]
+            },
+            "QuizShort": {
+                "type": "object",
+                "properties": {
+                    "quiz_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "year": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 2000,
+                        "maximum": 2030
+                    },
+                    "class": {
+                        "type": "string"
+                    },
+                    "information": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "event_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    }
+                },
+                "required": [
+                    "quiz_id",
+                    "year",
+                    "class",
+                    "date",
+                    "information",
+                    "status",
+                    "event_id"
+                ]
+            },
+            "QuizList": {
+                "type": "object",
+                "properties": {
+                    "quizzes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/QuizShort"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "quizzes"
+                ]
+            },
+            "QuizReference": {
+                "type": "object",
+                "properties": {
+                    "quiz_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "position_index": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "quiz_id",
+                    "position_index"
+                ]
+            },
+            "Question": {
+                "type": "object",
+                "properties": {
+                    "question_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "integer",
+                        "description": "in sec",
+                        "nullable": true,
+                        "minimum": 0,
+                        "maximum": 3600
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["single-choice", "multi-choice", "input", "input-range"]
+                    },
+                    "quizzes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/QuizReference"
+                        }
+                    },
+                    "answers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Answer"
+                        }
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Image"
+                        }
+                    },
+                    "solutions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Solution"
+                        }
+                    }
+                },
+                "required": [
+                    "question_id",
+                    "text",
+                    "time",
+                    "type",
+                    "quizzes",
+                    "answers",
+                    "images",
+                    "solutions"
+                ]
+            },
+            "QuestionInfo": {
+                "type": "object",
+                "properties": {
+                    "question_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "integer",
+                        "description": "in sec",
+                        "nullable": true,
+                        "minimum": 0,
+                        "maximum": 3600
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["single-choice", "multi-choice", "input", "input-range"]
+                    }
+                },
+                "required": [
+                    "question_id",
+                    "text",
+                    "time",
+                    "type"
+                ]
+            },
+            "QuestionList": {
+                "type": "object",
+                "properties": {
+                    "questions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Question"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "questions"
+                ]
+            },
+            "Error": {
+                "title": "Error",
+                "description": "Error",
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                },
+                "required": [
+                    "status"
+                ]
+            },
+            "Status": {
+                "title": "Status",
+                "description": "Status for Error",
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "integer"
+                  },
+                  "massage": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                    "code",
+                    "massage"
+                ]
+            }
+        },
+        "responses": {
+            "not_found": {
+                "description": "Content not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Error"
+                        },
+                        "examples": {
+                            "default-response": {
+                              "$ref": "#/components/examples/not_found"
+                            }
+                        }
+                      }
+                }
+            },
+            "answer": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Answer"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/answer"
+                            }
+                        }
+                      }
+                }
+            },
+            "answers": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/AnswerList"
+                          },
+                          "examples": {
+                              "default-response": {
+                                "$ref": "#/components/examples/answers"
+                              }
+                          }
+                    }
+                }
+            },
+            "document": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Document"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/document"
+                            }
+                        }
+                    }
+                }
+            },
+            "documents": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/DocumentList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/documents"
+                            }
+                        }
+                    }
+                }
+            },
+            "event": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Event"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/event"
+                            }
+                        }
+                    }
+                }
+            },
+            "events": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/EventList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/events"
+                            }
+                        }
+                    }
+                }
+            },
+            "image": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Image"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/img"
+                            }
+                        }
+                    }
+                }
+            },
+            "images": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/ImageList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/imgs"
+                            }
+                        }
+                    }
+                }
+            },
+            "last": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/LastQualifier"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/last"
+                            }
+                        }
+                    }
+                }
+            },
+            "lasts": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/LastQualifierList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/lasts"
+                            }
+                        }
+                    }
+                }
+            },
+            "question": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Question"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/questions"
+                            }
+                        }
+                    }
+                }
+            },
+            "questionInfo": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/QuestionInfo"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/questionInfo"
+                            }
+                        }
+                    }
+                }
+            },
+            "questions": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/QuestionList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/questions"
+                            }
+                        }
+                    }
+                }
+            },
+            "quiz": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Quiz"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/quiz"
+                            }
+                        }
+                    }
+                }
+            },
+            "quizzes": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/QuizList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/quizzes"
+                            }
+                        }
+                    }
+                }
+            },
+            "quizinfo": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/QuizInfo"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/quizInfo"
+                            }
+                        }
+                    }
+                }
+            },
+            "solution": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Solution"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/solution"
+                            }
+                        }
+                    }
+                }
+            },
+            "solutions": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/SolutionList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/solutions"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "examples": {
+            "not_found":{
+                "value":{
+                    "status":{
+                        "code": 404,
+                        "massage": "Content not found"
+                    }
+                }
+            },
+            "answer":{
+                "value":{
+                    "answer_id": 1,
+                    "question_id": 1,
+                    "answer_text": "135 GPa",
+                    "is_correct": true
+                }
+            },
+            "answers":{
+                "value":{
+                    "answers": [
+                        {
+                            "answer_id": 1,
+                            "question_id": 1,
+                            "answer_text": "135 GPa",
+                            "is_correct": true
+                        },{
+                            "answer_id": 2,
+                            "question_id": 1,
+                            "answer_text": "180 GPa",
+                            "is_correct": false
+                        }
+                    ]
+                }
+            },
+            "document":{
+                "value":{
+                    "doc_id": 3,
+                    "type": "Handbook",
+                    "path": "FSG23_Competition_Handbook_v1.0.pdf",
+                    "year": 2023,
+                    "version": "1.0",
+                    "event_id": 7
+                }
+            },
+            "documents":{
+                "value":{
+                    "documents": [
+                        {
+                            "doc_id": 3,
+                            "type": "Handbook",
+                            "path": "FSG23_Competition_Handbook_v1.0.pdf",
+                            "year": 2023,
+                            "version": "1.0",
+                            "event_id": 7
+                        },{
+                            "doc_id": 5,
+                            "type": "Rulebook",
+                            "path": "FS-Rules_2022_v1.0.pdf",
+                            "year": 2022,
+                            "version": "1.0",
+                            "event_id": 0
+                        }
+                    ]
+                }
+            },
+            "event":{
+                "value":{
+                    "id": 1,
+                    "short_name": "FSN",
+                    "event_name": "Formula Student Netherlands",
+                    "country": "Netherlands",
+                    "website": "https://formula-student.nl/"
+                }
+            },
+            "events":{
+                "value":{
+                    "events": [
+                        {
+                            "id": 1,
+                            "short_name": "FSN",
+                            "event_name": "Formula Student Netherlands",
+                            "country": "Netherlands",
+                            "website": "https://formula-student.nl/"
+                        },{
+                            "id": 2,
+                            "short_name": "FSCH",
+                            "event_name": "Formula Student Switzerland",
+                            "country": "Switzerland",
+                            "website": "https://formulastudent.ch/"
+                        }
+                    ]
+                }
+            },
+            "img":{
+                "value":{
+                    "img_id": 1,
+                    "path": "12_1.jpg"
+                }
+            },
+            "imgs":{
+                "value":{
+                    "images": [
+                        {
+                            "img_id": 1,
+                            "path": "12_1.jpg"
+                        },{
+                            "img_id": 2,
+                            "path": "12_2.jpg"
+                        }
+                    ]
+                }
+            },
+            "last":{
+                "value":{
+                    "last_qualifier_id": 1,
+                    "time": 2160,
+                    "score": null,
+                    "correct_answers": null,
+                    "method": "time",
+                    "quiz_id": 30
+                }
+            },
+            "lasts":{
+                "value":{
+                    "last_qualifiers": [
+                        {
+                            "last_qualifier_id": 1,
+                            "time": 2160,
+                            "score": null,
+                            "correct_answers": null,
+                            "method": "time",
+                            "quiz_id": 30
+                        },{
+                            "last_qualifier_id": 2,
+                            "time": 3172,
+                            "score": null,
+                            "correct_answers": null,
+                            "method": "time",
+                            "quiz_id": 33
+                        }
+                    ]
+                }
+            },
+            "question":{
+                "value":{
+                    "text": "What will Young's Modulus be for a 20 mm square bar and with a length of 600mm when it lengthens by 0.5 mm under a load of 45 kN?    ",
+                    "time": null,
+                    "type": "single-choice",
+                    "question_id": "1",
+                    "quizzes": [
+                        {
+                        "position_index": 1,
+                        "quiz_id": 1
+                        },
+                        {
+                        "position_index": 1,
+                        "quiz_id": 2
+                        }
+                    ],
+                    "answers": [
+                        {
+                            "answer_id": 1,
+                            "question_id": 1,
+                            "answer_text": "135 GPa",
+                            "is_correct": true
+                        },{
+                            "answer_id": 2,
+                            "question_id": 1,
+                            "answer_text": "180 GPa",
+                            "is_correct": false
+                        }
+                    ],
+                    "images": [
+                        {
+                            "img_id": 1,
+                            "path": "12_1.jpg"
+                        },{
+                            "img_id": 2,
+                            "path": "12_2.jpg"
+                        }
+                    ],
+                    "solution": [
+                    ]
+                }
+            },
+            "questionInfo":{
+                "value":{
+                    "text": "What will Young's Modulus be for a 20 mm square bar and with a length of 600mm when it lengthens by 0.5 mm under a load of 45 kN?    ",
+                    "time": null,
+                    "type": "single-choice",
+                    "question_id": "1"
+                }
+            },
+            "questions":{
+                "value":{
+                    "questions": [
+                        {
+                            "text": "What will Young's Modulus be for a 20 mm square bar and with a length of 600mm when it lengthens by 0.5 mm under a load of 45 kN?    ",
+                            "time": null,
+                            "type": "single-choice",
+                            "question_id": "1",
+                            "quizzes": [
+                                {
+                                "position_index": 1,
+                                "quiz_id": 1
+                                },
+                                {
+                                "position_index": 1,
+                                "quiz_id": 2
+                                }
+                            ],
+                            "answers": [
+                                {
+                                    "answer_id": 1,
+                                    "question_id": 1,
+                                    "answer_text": "135 GPa",
+                                    "is_correct": true
+                                },{
+                                    "answer_id": 2,
+                                    "question_id": 1,
+                                    "answer_text": "180 GPa",
+                                    "is_correct": false
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "img_id": 1,
+                                    "path": "12_1.jpg"
+                                },{
+                                    "img_id": 2,
+                                    "path": "12_2.jpg"
+                                }
+                            ],
+                            "solution": [
+                            ]
+                        },{
+                            "text": "What is the maximum vertical distance allowed between the lowest part of the front hoop and the lowest part of the diagonal bracing in the front bulkhead support when the diagonal bracing is attached at the top at the FBH?",
+                            "time": null,
+                            "type": "single-choice",
+                            "question_id": "2",
+                            "quizzes": [
+                                {
+                                "position_index": 2,
+                                "quiz_id": 1
+                                },
+                                {
+                                "position_index": 2,
+                                "quiz_id": 2
+                                }
+                            ],
+                            "answers": [
+                                {
+                                "answer_id": 6,
+                                "question_id": 2,
+                                "answer_text": "0 mm",
+                                "is_correct": true
+                                },
+                                {
+                                "answer_id": 7,
+                                "question_id": 2,
+                                "answer_text": "25 mm",
+                                "is_correct": false
+                                },
+                                {
+                                "answer_id": 8,
+                                "question_id": 2,
+                                "answer_text": "50 mm",
+                                "is_correct": false
+                                },
+                                {
+                                "answer_id": 9,
+                                "question_id": 2,
+                                "answer_text": "60 mm",
+                                "is_correct": false
+                                },
+                                {
+                                "answer_id": 10,
+                                "question_id": 2,
+                                "answer_text": "100 mm",
+                                "is_correct": false
+                                }
+                            ],
+                            "images": [],
+                            "solution": []
+                        }
+                    ]
+                }
+            },
+            "quiz":{
+                "value":{
+                    "quiz_id": 1,
+                    "year": "2019",
+                    "class": "ev",
+                    "information": null,
+                    "date": "2019-02-01",
+                    "status": "complete",
+                    "event": {
+                        "id": 1,
+                        "short_name": "FSN",
+                        "event_name": "Formula Student Netherlands",
+                        "country": "Netherlands",
+                        "website": "https://formula-student.nl/"
+                    },
+                    "questions": [
+                        {
+                            "text": "What will Young's Modulus be for a 20 mm square bar and with a length of 600mm when it lengthens by 0.5 mm under a load of 45 kN?    ",
+                            "time": null,
+                            "type": "single-choice",
+                            "question_id": "1",
+                            "quizzes": [
+                                {
+                                "position_index": 1,
+                                "quiz_id": 1
+                                },
+                                {
+                                "position_index": 1,
+                                "quiz_id": 2
+                                }
+                            ],
+                            "answers": [
+                                {
+                                    "answer_id": 1,
+                                    "question_id": 1,
+                                    "answer_text": "135 GPa",
+                                    "is_correct": true
+                                },{
+                                    "answer_id": 2,
+                                    "question_id": 1,
+                                    "answer_text": "180 GPa",
+                                    "is_correct": false
+                                }
+                            ],
+                            "images": [
+                                {
+                                    "img_id": 1,
+                                    "path": "12_1.jpg"
+                                },{
+                                    "img_id": 2,
+                                    "path": "12_2.jpg"
+                                }
+                            ],
+                            "solution": [
+                            ]
+                        },{
+                            "text": "What is the maximum vertical distance allowed between the lowest part of the front hoop and the lowest part of the diagonal bracing in the front bulkhead support when the diagonal bracing is attached at the top at the FBH?",
+                            "time": null,
+                            "type": "single-choice",
+                            "question_id": "2",
+                            "quizzes": [
+                                {
+                                "position_index": 2,
+                                "quiz_id": 1
+                                },
+                                {
+                                "position_index": 2,
+                                "quiz_id": 2
+                                }
+                            ],
+                            "answers": [
+                                {
+                                "answer_id": 6,
+                                "question_id": 2,
+                                "answer_text": "0 mm",
+                                "is_correct": true
+                                },
+                                {
+                                "answer_id": 7,
+                                "question_id": 2,
+                                "answer_text": "25 mm",
+                                "is_correct": false
+                                },
+                                {
+                                "answer_id": 8,
+                                "question_id": 2,
+                                "answer_text": "50 mm",
+                                "is_correct": false
+                                },
+                                {
+                                "answer_id": 9,
+                                "question_id": 2,
+                                "answer_text": "60 mm",
+                                "is_correct": false
+                                },
+                                {
+                                "answer_id": 10,
+                                "question_id": 2,
+                                "answer_text": "100 mm",
+                                "is_correct": false
+                                }
+                            ],
+                            "images": [],
+                            "solution": []
+                        }
+                    ],
+                    "documents": [
+                        {
+                            "doc_id": 3,
+                            "type": "Handbook",
+                            "path": "FSG23_Competition_Handbook_v1.0.pdf",
+                            "year": 2023,
+                            "version": "1.0",
+                            "event_id": 7
+                        },{
+                            "doc_id": 5,
+                            "type": "Rulebook",
+                            "path": "FS-Rules_2022_v1.0.pdf",
+                            "year": 2022,
+                            "version": "1.0",
+                            "event_id": 0
+                        }
+                    ],
+                    "last_qualifier": null
+                }
+            },
+            "quizInfo":{
+                "value":{
+                    "quiz_id": 1,
+                    "year": "2019",
+                    "class": "ev",
+                    "information": null,
+                    "date": "2019-02-01",
+                    "status": "complete",
+                    "event": {
+                        "$ref": "#/components/examples/event"
+                    },
+                    "documents": [
+                        {
+                            "$ref": "#/components/examples/documents"
+                        }
+                    ],
+                    "last_qualifier": null
+                }
+            },
+            "quizzes":{
+                "value":{
+                    "quizzes": [
+                        {
+                            "quiz_id": 1,
+                            "event_id": 1,
+                            "year": "2019",
+                            "class": "ev",
+                            "information": null,
+                            "date": "2019-02-01",
+                            "status": "complete"
+                        },{
+                            "quiz_id": 2,
+                            "event_id": 1,
+                            "year": "2019",
+                            "class": "cv",
+                            "information": null,
+                            "date": "2019-02-01",
+                            "status": "complete"
+                        }
+                    ]
+                }
+            },
+            "solution":{
+                "value":{
+                    "solution_id": 2,
+                    "question_id": 59,
+                    "text": "EV 4.7.6",
+                    "images": []
+                }
+            },
+            "solutions":{
+                "value":{
+                    "solutions": [
+                        {
+                            "solution_id": 2,
+                            "question_id": 59,
+                            "text": "EV 4.7.6",
+                            "images": []
+                        },{
+                            "solution_id": 3,
+                            "question_id": 56,
+                            "text": "1800*0.64=1152\r\n1152-144=1008\r\n1008/1800=0.56 rear\r\n1-0.56=0.44 front",
+                            "images": [
+                                {
+                                    "img_id": 1,
+                                    "path": "12_1.jpg"
+                                },{
+                                    "img_id": 2,
+                                    "path": "12_2.jpg"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "securitySchemes": {
+            "API-KEY": {
+                "type": "apiKey",
+                "name": "api_key",
+                "in": "header"
+            }
+        }
+    }
+}
