@@ -1,4 +1,6 @@
-<?php 
+<?php
+header("Access-Control-Allow-Origin: *");
+
 require('1/orginal_db.php');
 $statementLogin = $pdo->prepare("SELECT *  FROM `fs-api-user` WHERE `apikey` = :apikey");
 $result = $statementLogin->execute(array('apikey' => $api_key));

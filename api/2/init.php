@@ -1,4 +1,6 @@
-<?php 
+<?php
+header("Access-Control-Allow-Origin: *");
+
 //PDO
 require('2/orginal_db.php');
 //Klassen
