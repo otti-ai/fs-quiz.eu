@@ -1,0 +1,26 @@
+.sl-py-16{
+    padding-top: 32px !important;
+}
+.sl-px-24 {
+    padding-left: 32px  !important;
+    padding-right: 32px  !important;
+}
+.sl-pt-8 {
+    padding-top: 16px;
+}
+
+.sl-flex.sl-items-center.sl-mb-5.sl-ml-4{
+    display: none  !important;
+}
+.sl-flex.sl-overflow-y-auto.sl-flex-col.sl-sticky.sl-inset-y-0.sl-pt-8.sl-bg-canvas-100.sl-border-r{
+    background-color: rgb(248,249,250);
+}
+.sl-overflow-y-auto.sl-w-full.sl-bg-canvas-100{
+    background-color: rgb(248,249,250);
+}
+.sl-flex.sl-items-center.sl-h-md.sl-pr-4.sl-pl-4.sl-bg-canvas-100{
+    background-color: rgb(248,249,250);
+}
+.sl-flex.sl-items-center.sl-h-md.sl-pr-4.sl-pl-8.sl-bg-canvas-100{
+    background-color: rgb(248,249,250);
+}

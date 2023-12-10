@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "FS Quiz API v2",
+        "title": "FS-Quiz API v2",
         "version": "2.0.0",
         "description": {
-            "$ref": "description.yml#/introduction"
+            "$ref": "description-v2.yml#/introduction"
         },
         "contact": {
             "name": "Yannik Ottens",

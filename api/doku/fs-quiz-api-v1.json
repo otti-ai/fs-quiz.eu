@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "FS Quiz API v1",
+        "title": "FS-Quiz API v1",
         "version": "1.1.2",
         "description": {
-            "$ref": "description.yml#/introduction"
+            "$ref": "description-v1.yml#/introduction"
         },
         "contact": {
             "name": "Yannik Ottens",
@@ -59,6 +59,9 @@
                     "200": {
                         "$ref": "#/components/responses/answers"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -102,6 +105,9 @@
                     "200": {
                         "$ref": "#/components/responses/answer"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -144,6 +150,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/document"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -212,6 +221,9 @@
                     "200": {
                         "$ref": "#/components/responses/documents"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -254,6 +266,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/event"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -298,6 +313,9 @@
                     "200": {
                         "$ref": "#/components/responses/quizzes"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -340,6 +358,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/events"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -384,6 +405,9 @@
                     "200": {
                         "$ref": "#/components/responses/images"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -426,6 +450,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/image"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -470,6 +497,9 @@
                     "200": {
                         "$ref": "#/components/responses/images"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -512,6 +542,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/images"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -556,6 +589,9 @@
                     "200": {
                         "$ref": "#/components/responses/last"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -598,6 +634,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/lasts"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -642,6 +681,9 @@
                     "200": {
                         "$ref": "#/components/responses/last"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -684,6 +726,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/solution"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -728,6 +773,9 @@
                     "200": {
                         "$ref": "#/components/responses/solutions"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -770,6 +818,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/images"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -814,6 +865,9 @@
                     "200": {
                         "$ref": "#/components/responses/solutions"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -856,6 +910,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/question"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -900,6 +957,9 @@
                     "200": {
                         "$ref": "#/components/responses/questionInfo"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -942,6 +1002,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/answers"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -986,6 +1049,9 @@
                     "200": {
                         "$ref": "#/components/responses/images"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -1029,6 +1095,9 @@
                     "200": {
                         "$ref": "#/components/responses/questions"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -1071,6 +1140,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/quiz"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -1155,6 +1227,9 @@
                     "200": {
                         "$ref": "#/components/responses/quizzes"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -1197,6 +1272,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/quizinfo"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -1241,6 +1319,9 @@
                     "200": {
                         "$ref": "#/components/responses/questions"
                     },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
+                    },
                     "404": {
                         "$ref": "#/components/responses/not_found"
                     }
@@ -1283,6 +1364,9 @@
                 "responses": {
                     "200": {
                         "$ref": "#/components/responses/documents"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/unauthorized"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -1936,6 +2020,21 @@
                       }
                 }
             },
+            "unauthorized": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Error"
+                        },
+                        "examples": {
+                            "default-response": {
+                              "$ref": "#/components/examples/unauthorized"
+                            }
+                        }
+                      }
+                }
+            },
             "answer": {
                 "description": "Successful query",
                 "content": {
@@ -2213,6 +2312,14 @@
                     "status":{
                         "code": 404,
                         "massage": "Content not found"
+                    }
+                }
+            },
+            "unauthorized":{
+                "value":{
+                    "status":{
+                        "code": 401,
+                        "massage": "Unauthorized"
                     }
                 }
             },
