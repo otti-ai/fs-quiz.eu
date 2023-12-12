@@ -34,7 +34,14 @@ Route::add('/2/quiz', function() {
     require('2/get/quiz/get.php');
 }, 'get');
 //quizzes/1
-
+Route::add('/1/([0-9a-zA-Z]*)/quiz/([0-9]*)', function($api_key, $quiz_id) {
+    $addition = 'single';
+	require('1/quiz/get.php');
+}, 'get');
+Route::add('/2/quiz/([0-9]*)', function($quiz_id) {
+    $addition = 'single';
+	require('2/get/quiz/get.php');
+}, 'get');
 //quizzes/1/details
 Route::add('/1/([0-9a-zA-Z]*)/quiz/([0-9]*)/info', function($api_key, $quiz_id) {
     $addition = 'details';

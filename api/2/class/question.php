@@ -18,6 +18,9 @@ class QuestionHandle {
         $db->setTable('fs-questions');
         $start_id = isset($_GET["start_id"]) ? $_GET["start_id"] : 1;
 		$db->setLimitTo($start_id,25);
+        //optional
+        isset($_GET["type"]) ?  $db->addWhere('fs-questions','type',$_GET["type"]):0;
+
         $questions = array();
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'QuestionModel');
         foreach($response as $row) {

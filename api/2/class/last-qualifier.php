@@ -19,6 +19,7 @@ class LastQualifierHandle {
         $db = new DB_Orginal($this->pdo);
         $db->setTable('fs-last-qualifier');
 		$db->addWhere('fs-last-qualifier','quiz_id',$id);
+        
         $last_qualifier = $db->get_Data()->fetchObject('LastQualifierModel');
         unset($last_qualifier->quiz_id);
         if(!$last_qualifier){
@@ -38,6 +39,7 @@ class LastQualifierHandle {
         $db->setTable('fs-last-qualifier');
         $start_id = isset($_GET["start_id"]) ? $_GET["start_id"] : 1;
 		$db->setLimitTo($start_id,25);
+        isset($_GET["method"]) ?  $db->addWhere('fs-last-qualifier','method',$_GET["method"]):0;
 
         $last_qualifier = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'LastQualifierModel');
 

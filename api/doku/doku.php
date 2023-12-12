@@ -26,7 +26,12 @@
     <!-- Embed elements Elements via Web Component -->
     <script src="./web-components.min.js"></script>
     <link rel="stylesheet" href="./styles.min.css">
-    <script src="./adjustments.js"></script>
+    <script type="text/JavaScript">  
+      function selectVersion() {
+        var v = document.getElementById("version").value;
+        location.replace('https://api.fs-quiz.eu/doku/doku.php?v='+v);
+      }
+    </script>
     <link rel="stylesheet" href="./customStyle.css">
 
     <!-- Bootstrap -->
@@ -37,7 +42,7 @@
     <header class="p-3 bg-dark text-white">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"> <img src="https://fs-quiz.eu/img/icons/favicon/favicon-32x32.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz - API</a>
+          <a class="navbar-brand" href="#"> <img src="https://fs-quiz.eu/img/icons/favicon/favicon-96x96.png"" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz - API</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -51,8 +56,8 @@
               </li>
               <li class="nav-item">
                 <select class="form-select form-select-sm" id="version" onchange="selectVersion()">
-                  <option selected value="2">v2</option>
-                  <option value="1">v1</option>  
+                  <option <?php echo(($_GET['v'] == 2) ? 'selected' : '') ?> value="2" disabel>v2</option>
+                  <option <?php echo(($_GET['v'] != 2) ? 'selected' : '') ?> value="1">v1</option>  
                 </select>
               </li>
 
@@ -64,20 +69,12 @@
       </nav>
     </header>
 
-    <div id="v1" style="display: none;">
+    <div id="v1">
       <elements-api id="docs"
         router="hash"
         layout="sidebar"
         hideSchemas="true"
-        apiDescriptionURL="./fs-quiz-api-v1.json"
-      />
-    </div>
-    <div id="v2" style="display: none;">
-      <elements-api id="docs2"
-        router="hash"
-        layout="sidebar"
-        hideSchemas="true"
-        apiDescriptionURL="./fs-quiz-api-v2.json"
+        apiDescriptionURL="<?php echo(($_GET['v'] != 2) ? './fs-quiz-api-v1.json' : './fs-quiz-api-v2.json') ?>"
       />
     </div>
 

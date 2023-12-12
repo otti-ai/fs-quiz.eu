@@ -19,6 +19,9 @@ class AnswerHandle {
         $db->setTable('fs-answer');
 		$start_id = isset($_GET["start_id"]) ? $_GET["start_id"] : 1;
 		$db->setLimitTo($start_id,25);
+        //optional
+        isset($_GET["question_id"]) ?  $db->addWhere('fs-answer','question_id',$_GET["question_id"]):0;
+
 		$answers = array();
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'AnswerModel');
         foreach($response as $row) {

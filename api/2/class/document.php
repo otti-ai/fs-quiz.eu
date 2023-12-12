@@ -41,6 +41,7 @@ class DocumentHandle {
         //optional
         isset($_GET["year"]) ?  $db->addWhere('fs-documents','year',$_GET["year"]):0;
         isset($_GET["event_id"]) ?  $db->addWhere('fs-documents','event_id',$_GET["event_id"]):0;
+        isset($_GET["type"]) ?  $db->addWhere('fs-documents','type',$_GET["type"]):0;
 		$documents = array();
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'DocumentModel');
         foreach($response as $row) {

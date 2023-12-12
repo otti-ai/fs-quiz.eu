@@ -18,11 +18,11 @@
     },
     "servers": [
         {
-            "url": "https://api.fs-quiz.eu/1/"
+            "url": "https://api.fs-quiz.eu/2/"
         }
     ],
     "paths": {
-        "/{api_key}/answer": {
+        "/answer": {
             "get": {
                 "tags": [
                     "Answers"
@@ -30,18 +30,6 @@
                 "summary": "Get list of Answers",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "pattern": "([0-9a-zA-Z]*)",
-                            "minLength": 4,
-                            "maxLength": 12
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "start_id",
                         "in": "query",
@@ -53,6 +41,17 @@
                             "maximum": 1000000
                         },
                         "description": "Start ID for the query (optional)"
+                    },{
+                        "name": "question_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Question ID for the query (optional)"
                     }
                 ],
                 "responses": {
@@ -65,7 +64,7 @@
                 }
             }
         },
-        "/{api_key}/answer/{answer_id}": {
+        "/answer/{answer_id}": {
             "get": {
                 "tags": [
                     "Answers"
@@ -73,18 +72,6 @@
                 "summary": "Get Answer by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "answer_id",
                         "in": "path",
@@ -108,7 +95,7 @@
                 }
             }
         },
-        "/{api_key}/document/{doc_id}": {
+        "/document/{doc_id}": {
             "get": {
                 "tags": [
                     "Documents"
@@ -116,18 +103,6 @@
                 "summary": "Get Document by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "doc_id",
                         "in": "path",
@@ -151,7 +126,7 @@
                 }
             }
         },
-        "/{api_key}/document": {
+        "/document": {
             "get": {
                 "tags": [
                     "Documents"
@@ -159,18 +134,6 @@
                 "summary": "Get list of Documents",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "year",
                         "in": "query",
@@ -181,7 +144,7 @@
                             "minimum": 0,
                             "maximum": 1000000
                         },
-                        "description": "Year of the document (optional)"
+                        "description": "Year of the documents (optional)"
                     },
                     {
                         "name": "event_id",
@@ -193,7 +156,17 @@
                             "minimum": 0,
                             "maximum": 1000000
                         },
-                        "description": "Event ID associated with the document (optional)"
+                        "description": "Event ID associated with the documents (optional)"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["Rulebook", "Hybrid Rules", "Additional Rules", "Handbook", "Registration", "Additional Documents"]
+                        },
+                        "description": "Type of the documents (optional)"
                     },
                     {
                         "name": "start_id",
@@ -218,7 +191,7 @@
                 }
             }
         },
-        "/{api_key}/event/{event_id}": {
+        "/event/{event_id}": {
             "get": {
                 "tags": [
                     "Events"
@@ -226,18 +199,6 @@
                 "summary": "Get Event by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "event_id",
                         "in": "path",
@@ -261,7 +222,7 @@
                 }
             }
         },
-        "/{api_key}/event/{event_id}/quizzes": {
+        "/event/{event_id}/quizzes": {
             "get": {
                 "tags": [
                     "Events"
@@ -269,18 +230,6 @@
                 "summary": "Get Quizzes by Event ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "event_id",
                         "in": "path",
@@ -304,7 +253,7 @@
                 }
             }
         },
-        "/{api_key}/events": {
+        "/events": {
             "get": {
                 "tags": [
                     "Events"
@@ -312,18 +261,6 @@
                 "summary": "Get list of Events",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "start_id",
                         "in": "query",
@@ -347,7 +284,7 @@
                 }
             }
         },
-        "/{api_key}/image": {
+        "/image": {
             "get": {
                 "tags": [
                     "Images"
@@ -355,18 +292,6 @@
                 "summary": "Get list of Images",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "start_id",
                         "in": "query",
@@ -390,7 +315,7 @@
                 }
             }
         },
-        "/{api_key}/image/{img_id}": {
+        "/image/{img_id}": {
             "get": {
                 "tags": [
                     "Images"
@@ -398,18 +323,6 @@
                 "summary": "Get Image by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "img_id",
                         "in": "path",
@@ -433,7 +346,7 @@
                 }
             }
         },
-        "/{api_key}/image/solution": {
+        "/image/solution": {
             "get": {
                 "tags": [
                     "Images"
@@ -442,18 +355,6 @@
                 "security": [],
                 "parameters": [
                     {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
-                    {
                         "name": "start_id",
                         "in": "query",
                         "required": false,
@@ -476,7 +377,7 @@
                 }
             }
         },
-        "/{api_key}/image/question": {
+        "/image/question": {
             "get": {
                 "tags": [
                     "Images"
@@ -485,18 +386,6 @@
                 "security": [],
                 "parameters": [
                     {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
-                    {
                         "name": "start_id",
                         "in": "query",
                         "required": false,
@@ -519,7 +408,7 @@
                 }
             }
         },
-        "/{api_key}/last-qualifier/{last_qualifier_id}": {
+        "/last-qualifier/{last_qualifier_id}": {
             "get": {
                 "tags": [
                     "Qualifiers"
@@ -527,18 +416,6 @@
                 "summary": "Get Last Qualifier by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "last_qualifier_id",
                         "in": "path",
@@ -562,7 +439,7 @@
                 }
             }
         },
-        "/{api_key}/last-qualifier": {
+        "/last-qualifier": {
             "get": {
                 "tags": [
                     "Qualifiers"
@@ -570,18 +447,6 @@
                 "summary": "Get list of Last Qualifiers",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "start_id",
                         "in": "query",
@@ -593,6 +458,15 @@
                             "maximum": 1000000
                         },
                         "description": "Start ID for the query (optional)"
+                    }, {
+                        "name": "method",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["time", "correctness", "score"]
+                        },
+                        "description": "Type of the last qualifiers (optional)"
                     }
                 ],
                 "responses": {
@@ -605,7 +479,7 @@
                 }
             }
         },
-        "/{api_key}/last-qualifier/quiz/{quiz_id}": {
+        "/last-qualifier/quiz/{quiz_id}": {
             "get": {
                 "tags": [
                     "Qualifiers"
@@ -613,18 +487,6 @@
                 "summary": "Get Last Qualifier by Quiz ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "quiz_id",
                         "in": "path",
@@ -648,7 +510,7 @@
                 }
             }
         },
-        "/{api_key}/solution/{solution_id}": {
+        "/solution/{solution_id}": {
             "get": {
                 "tags": [
                     "Solutions"
@@ -656,18 +518,6 @@
                 "summary": "Get Solution by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "solution_id",
                         "in": "path",
@@ -691,7 +541,7 @@
                 }
             }
         },
-        "/{api_key}/solution": {
+        "/solution": {
             "get": {
                 "tags": [
                     "Solutions"
@@ -699,18 +549,6 @@
                 "summary": "Get list of Solutions",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "start_id",
                         "in": "query",
@@ -734,7 +572,7 @@
                 }
             }
         },
-        "/{api_key}/solution/{solution_id}/images": {
+        "/solution/{solution_id}/images": {
             "get": {
                 "tags": [
                     "Solutions"
@@ -742,18 +580,6 @@
                 "summary": "Get list of Images from Solution by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "solution_id",
                         "in": "path",
@@ -777,7 +603,7 @@
                 }
             }
         },
-        "/{api_key}/solution/question/{question_id}": {
+        "/solution/question/{question_id}": {
             "get": {
                 "tags": [
                     "Solutions"
@@ -785,18 +611,6 @@
                 "summary": "Get list of Solutions by Question ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "question_id",
                         "in": "path",
@@ -820,7 +634,7 @@
                 }
             }
         },
-        "/{api_key}/question/{question_id}": {
+        "/question/{question_id}": {
             "get": {
                 "tags": [
                     "Questions"
@@ -828,18 +642,6 @@
                 "summary": "Get Question by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "question_id",
                         "in": "path",
@@ -863,7 +665,7 @@
                 }
             }
         },
-        "/{api_key}/question/{question_id}/info": {
+        "/question/{question_id}/info": {
             "get": {
                 "tags": [
                     "Questions"
@@ -871,18 +673,6 @@
                 "summary": "Get Info of Question by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "question_id",
                         "in": "path",
@@ -906,7 +696,7 @@
                 }
             }
         },
-        "/{api_key}/question/{question_id}/answers": {
+        "/question/{question_id}/answers": {
             "get": {
                 "tags": [
                     "Questions"
@@ -914,18 +704,6 @@
                 "summary": "Get List of Answers by Question ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "question_id",
                         "in": "path",
@@ -949,7 +727,7 @@
                 }
             }
         },
-        "/{api_key}/question/{question_id}/images": {
+        "/question/{question_id}/images": {
             "get": {
                 "tags": [
                     "Questions"
@@ -957,18 +735,6 @@
                 "summary": "Get List of Images by Question ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "question_id",
                         "in": "path",
@@ -992,7 +758,7 @@
                 }
             }
         },
-        "/{api_key}/question": {
+        "/question": {
             "get": {
                 "tags": [
                     "Questions"
@@ -1000,18 +766,6 @@
                 "summary": "Get list of Questions",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "start_id",
                         "in": "query",
@@ -1023,6 +777,15 @@
                             "maximum": 1000000
                         },
                         "description": "Start ID for the query (optional)"
+                    },{
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["single-choice", "multi-choice", "input", "input-range"]
+                        },
+                        "description": "Type of questions (optional)"
                     }
                 ],
                 "responses": {
@@ -1035,7 +798,7 @@
                 }
             }
         },
-        "/{api_key}/quiz/{quiz_id}": {
+        "/quiz/{quiz_id}": {
             "get": {
                 "tags": [
                     "Quizzes"
@@ -1043,18 +806,6 @@
                 "summary": "Get Quiz by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "quiz_id",
                         "in": "path",
@@ -1078,7 +829,7 @@
                 }
             }
         },
-        "/{api_key}/quiz": {
+        "/quiz": {
             "get": {
                 "tags": [
                     "Quizzes"
@@ -1086,18 +837,6 @@
                 "summary": "Get list of Quizzes",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "start_id",
                         "in": "query",
@@ -1161,7 +900,7 @@
                 }
             }
         },
-        "/{api_key}/quiz/{quiz_id}/info": {
+        "/quiz/{quiz_id}/info": {
             "get": {
                 "tags": [
                     "Quizzes"
@@ -1169,18 +908,6 @@
                 "summary": "Get infos of Quiz by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "quiz_id",
                         "in": "path",
@@ -1204,7 +931,7 @@
                 }
             }
         },
-        "/{api_key}/quiz/{quiz_id}/questions": {
+        "/quiz/{quiz_id}/questions": {
             "get": {
                 "tags": [
                     "Quizzes"
@@ -1212,18 +939,6 @@
                 "summary": "Get list of all Questions from Quiz by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "quiz_id",
                         "in": "path",
@@ -1247,7 +962,7 @@
                 }
             }
         },
-        "/{api_key}/quiz/{quiz_id}/documents": {
+        "/quiz/{quiz_id}/documents": {
             "get": {
                 "tags": [
                     "Quizzes"
@@ -1255,18 +970,6 @@
                 "summary": "Get list of Documents from Quiz by ID",
                 "security": [],
                 "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 0,
-                            "maximum": 1000000
-                        },
-                        "description": "API-Key"
-                    },
                     {
                         "name": "quiz_id",
                         "in": "path",
@@ -1291,11 +994,6 @@
             }
         }
     },
-    "security": [
-        {
-            "API-KEY": []
-        }
-    ],
     "components": {
         "schemas": {
             "Answer": {
@@ -2695,13 +2393,6 @@
                         }
                     ]
                 }
-            }
-        },
-        "securitySchemes": {
-            "API-KEY": {
-                "type": "apiKey",
-                "name": "api_key",
-                "in": "header"
             }
         }
     }
