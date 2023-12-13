@@ -3,27 +3,27 @@
             <div class="col d-none p-0 m-0">
             </div>
             <div class="col d-inline p-0 m-0">
-              <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/switzerland.png">
+              <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/switzerland.png"><p style="font-size: 1.3vw; position: absolute">*</p>
             </div>
             <div class="col d-inline p-0 m-0">
             </div>
             <div class="col d-inline p-0 m-0">
-                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/east.png">
+                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/east.png"><p style="font-size: 1.3vw; position: absolute">*</p>
             </div>
             <div class="col d-inline p-0 m-0">
             </div>
             <div class="col d-inline p-0 m-0">
-                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/germany.png">
+                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/germany.png"><p style="font-size: 1.3vw; position: absolute">*</p>
             </div>
             <div class="col d-inline p-0 m-0">
             </div>
             <div class="col d-inline p-0 m-0">
-                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/czech.png">
+                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/czech.png"><p style="font-size: 1.3vw; position: absolute">*</p>
             </div>
             <div class="col d-inline p-0 m-0">
             </div>
             <div class="col d-inline p-0 m-0">
-                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/netherlands.png">
+                <img style="max-width:100%;max-height:75px;transform: translateX(-50%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/netherlands.png"><p style="font-size: 1.3vw; position: absolute">*</p>
             </div>
             <div class="col d-inline p-0 m-0">
             </div>
@@ -35,12 +35,12 @@
         </div>
         <div class="row justify-content-md-center flex-nowrap" style="transform: translateX(5%);">
             <div class="col d-none p-0 m-0">
-                <p id='8cet'style="margin: 10px 0px 0px 0px;transform: translateX(-50%); text-align: center; font-size: 1.3vw;">8:00</p>
+                <p id='8cet'style="margin: 10px 0px 0px 0px;transform: translateX(-50%); text-align: center; font-size: 1.3vw;">08:00</p>
                 <div id="up" style="background-color: red;width: 2px;height: 2vw;"></div>
                 <div id="0go" style="background: linear-gradient(90deg, red -2105.99%, black -2105.99%); width: 100%; height: 2px;"></div>
               </div>
           <div class="col d-inline p-0 m-0">
-            <p id='9cet' style="margin: 10px 0px 0px 0px;transform: translateX(-50%); text-align: center; font-size: 1.3vw;">9:00</p>
+            <p id='9cet' style="margin: 10px 0px 0px 0px;transform: translateX(-50%); text-align: center; font-size: 1.3vw;">09:00</p>
             <div id="0up" style="background-color: black;width: 2px;height: 2vw;"></div>
             <div id="1go" style="background-color: black;width: 100%;height: 2px;"></div>
           </div>
@@ -109,30 +109,30 @@
           <h5 id="demo"> </h5>
         </div>
       </div>
-      <p class='m-0 p-0' id='alpedate2'>Fs Alpe Adria on 28th January, 11:00 CET</p>
+      <p class='m-0 p-0' id='alpedate2'>* provisional based on previous data</p>
       <p class='mt-1 p-0 text-end text-muted' id='timezone'>Timezone: CET</p>
 <script>
 var offset = new Date().getTimezoneOffset();
 
-var countQuiz1 = new Date("Fri Jan 27 2023 09:00:00 GMT+0100 (CET)");
-var countQuiz2 = new Date("Fri Jan 27 2023 11:00:00 GMT+0100 (CET)");
-var countQuiz3 = new Date("Fri Jan 27 2023 13:00:00 GMT+0100 (CET)");
-var countQuiz4 = new Date("Fri Jan 27 2023 15:00:00 GMT+0100 (CET)");
-var countQuiz5 = new Date("Fri Jan 27 2023 17:00:00 GMT+0100 (CET)");
-var countQuiz6 = new Date("Fri Jan 27 2023 19:00:00 GMT+0100 (CET)");
-var countQuiz7 = new Date("Fri Jan 28 2023 11:00:00 GMT+0100 (CET)");
+var countQuiz1 = new Date("Fri Jan 26 2024 09:00:00 GMT+0100 (CET)");
+var countQuiz2 = new Date("Fri Jan 26 2024 11:00:00 GMT+0100 (CET)");
+var countQuiz3 = new Date("Fri Jan 26 2024 13:00:00 GMT+0100 (CET)");
+var countQuiz4 = new Date("Fri Jan 26 2024 15:00:00 GMT+0100 (CET)");
+var countQuiz5 = new Date("Fri Jan 26 2024 17:00:00 GMT+0100 (CET)");
+var countQuiz6 = new Date("Fri Jan 26 2024 19:00:00 GMT+0100 (CET)");
+var countQuiz7 = new Date("Fri Jan 28 2024 11:00:00 GMT+0100 (CET)");
 
-var color1 = new Date("Fri Jan 27 2023 09:00:00 GMT+0100 (CET)");
-var color2 = new Date("Fri Jan 27 2023 10:00:00 GMT+0100 (CET)");
-var color3 = new Date("Fri Jan 27 2023 11:00:00 GMT+0100 (CET)");
-var color4 = new Date("Fri Jan 27 2023 12:00:00 GMT+0100 (CET)");
-var color5 = new Date("Fri Jan 27 2023 13:00:00 GMT+0100 (CET)");
-var color6 = new Date("Fri Jan 27 2023 14:00:00 GMT+0100 (CET)");
-var color7 = new Date("Fri Jan 27 2023 15:00:00 GMT+0100 (CET)");
-var color8 = new Date("Fri Jan 27 2023 16:00:00 GMT+0100 (CET)");
-var color9 = new Date("Fri Jan 27 2023 17:00:00 GMT+0100 (CET)");
-var color10 = new Date("Fri Jan 27 2023 18:00:00 GMT+0100 (CET)");
-var color11 = new Date("Fri Jan 27 2023 19:00:00 GMT+0100 (CET)");
+var color1 = new Date("Fri Jan 26 2024 09:00:00 GMT+0100 (CET)");
+var color2 = new Date("Fri Jan 26 2024 10:00:00 GMT+0100 (CET)");
+var color3 = new Date("Fri Jan 26 2024 11:00:00 GMT+0100 (CET)");
+var color4 = new Date("Fri Jan 26 2024 12:00:00 GMT+0100 (CET)");
+var color5 = new Date("Fri Jan 26 2024 13:00:00 GMT+0100 (CET)");
+var color6 = new Date("Fri Jan 26 2024 14:00:00 GMT+0100 (CET)");
+var color7 = new Date("Fri Jan 26 2024 15:00:00 GMT+0100 (CET)");
+var color8 = new Date("Fri Jan 26 2024 16:00:00 GMT+0100 (CET)");
+var color9 = new Date("Fri Jan 26 2024 17:00:00 GMT+0100 (CET)");
+var color10 = new Date("Fri Jan 26 2024 18:00:00 GMT+0100 (CET)");
+var color11 = new Date("Fri Jan 26 2024 19:00:00 GMT+0100 (CET)");
 
 document.getElementById("9cet").innerHTML = color1.getHours() + ":" + (color1.getMinutes()+'').padStart(2, '0');
 document.getElementById("10cet").innerHTML = color2.getHours() + ":" + (color2.getMinutes()+'').padStart(2, '0');
@@ -147,8 +147,8 @@ document.getElementById("18cet").innerHTML = color10.getHours() + ":" + (color10
 document.getElementById("19cet").innerHTML = color11.getHours() + ":" + (color11.getMinutes()+'').padStart(2, '0');
 
 var alpe = countQuiz7.getMinutes()+'';
-document.getElementById("alpedate").innerHTML = 'Fs Alpe Adria on '+ countQuiz7.getDate()+'th January, ' + countQuiz7.getHours() +':'+ alpe.padStart(2, '0');
-document.getElementById("alpedate2").innerHTML = 'Fs Alpe Adria on '+ countQuiz7.getDate()+'th January, ' + countQuiz7.getHours() +':'+ alpe.padStart(2, '0');
+//document.getElementById("alpedate").innerHTML = 'Fs Alpe Adria on '+ countQuiz7.getDate()+'th January, ' + countQuiz7.getHours() +':'+ alpe.padStart(2, '0');
+//document.getElementById("alpedate2").innerHTML = 'Fs Alpe Adria on '+ countQuiz7.getDate()+'th January, ' + countQuiz7.getHours() +':'+ alpe.padStart(2, '0');
 
 document.getElementById("timezone").innerHTML = 'Timezone: ' + countQuiz7.toLocaleString('en', {timeZoneName:'short'}).split(' ').pop();
 
