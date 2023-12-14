@@ -910,7 +910,7 @@
                 "parameters": [
                     {
                         "name": "quiz_id",
-                        "in": "path",
+                        "in": "query",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -992,7 +992,148 @@
                     }
                 }
             }
-        }
+        },
+        "/statistic": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get list of Statistics",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "start_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2021-01-30"
+                        },
+                        "description": "First date of quary"
+                    },{
+                        "name": "end_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2021-01-30"
+                        },
+                        "description": "Last date of quary"
+                    },{
+                        "name": "days",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 500
+                        },
+                        "description": "length of quary"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/statistic"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/statistic/{date}": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get Statistic by date",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2021-01-30"
+                        },
+                        "description": "date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/statistics"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/statistic/{date}/calls": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get most endpoint calls by date",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2021-01-30"
+                        },
+                        "description": "date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/statisticscalls"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
+        "/statistic/{date}/views": {
+            "get": {
+                "tags": [
+                    "Statistics"
+                ],
+                "summary": "Get visited sites by date",
+                "security": [],
+                "parameters": [
+                    {
+                        "name": "date",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2021-01-30"
+                        },
+                        "description": "date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/statisticsviews"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        }            
     },
     "components": {
         "schemas": {
@@ -1200,6 +1341,134 @@
                 },
                 "required": [
                     "solutions"
+                ]
+            },
+            "Statistic": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-12-14"
+                    },
+                    "api_calls": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "website_views": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "most_popular_site": {
+                        "type": "string"
+                    },
+                    "most_used_api_call": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "date",
+                    "api_calls",
+                    "website_views",
+                    "most_popular_site",
+                    "most_used_api_call"
+                ]
+            },
+            "StatisticList": {
+                "type": "object",
+                "properties": {
+                    "statistics": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Statistic"
+                        },
+                        "description": "default: last 14 days"
+                    }
+                },
+                "required": [
+                    "statistics"
+                ]
+            },
+            "StatisticCalls": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-12-14"
+                    },
+                    "calls": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "endpoint": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "date",
+                    "calls",
+                    "endpoint"
+                ]
+            },
+            "StatisticCallsList": {
+                "type": "object",
+                "properties": {
+                    "statistics": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StatisticCalls"
+                        },
+                        "description": "10 most used api calls"
+                    }
+                },
+                "required": [
+                    "statistics"
+                ]
+            },
+            "StatisticViews": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-12-14"
+                    },
+                    "views": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "path": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "date",
+                    "calls",
+                    "endpoint"
+                ]
+            },
+            "StatisticViewsList": {
+                "type": "object",
+                "properties": {
+                    "statistics": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/StatisticViews"
+                        },
+                        "description": "10 most visited sites"
+                    }
+                },
+                "required": [
+                    "statistics"
                 ]
             },
             "LastQualifierList": {
@@ -1903,6 +2172,66 @@
                         }
                     }
                 }
+            },
+            "statistic": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Statistic"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/statistic"
+                            }
+                        }
+                    }
+                }
+            },
+            "statistics": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/StatisticList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/statistics"
+                            }
+                        }
+                    }
+                }
+            },
+            "statisticsviews": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/StatisticViewsList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/statisticsViews"
+                            }
+                        }
+                    }
+                }
+            },
+            "statisticscalls": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/StatisticCallsList"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/statisticsCalls"
+                            }
+                        }
+                    }
+                }
             }
         },
         "examples": {
@@ -2390,6 +2719,64 @@
                                     "path": "12_2.jpg"
                                 }
                             ]
+                        }
+                    ]
+                }
+            },
+            "statistic":{
+                "value":{
+                    "date": "2023-10-20",
+                    "api_calls": 3171,
+                    "website_views": 949,
+                    "most_popular_site": "/favicon.ico",
+                    "most_used_api_call": "/1/{api-key}/event"
+                }
+            },
+            "statistics":{
+                "value":{
+                    "statistics": [
+                        {
+                            "date": "2023-10-20",
+                            "api_calls": 3171,
+                            "website_views": 949,
+                            "most_popular_site": "/favicon.ico",
+                            "most_used_api_call": "/1/{api-key}/event"
+                        },{
+                            "date": "2023-10-19",
+                            "api_calls": 1618,
+                            "website_views": 542,
+                            "most_popular_site": "/favicon.ico",
+                            "most_used_api_call": "/1/{api-key}/event"
+                        }
+                    ]
+                }
+            },
+            "statisticsCalls":{
+                "value":{
+                    "most_calls": [
+                        {
+                            "date": "2023-12-13",
+                            "calls": 1908,
+                            "endpoint": "/1/{api-key}/event"
+                        },{
+                            "date": "2023-12-13",
+                            "calls": 976,
+                            "endpoint": "/1/{api-key}/event/7/quizzes"
+                        }
+                    ]
+                }
+            },
+            "statisticsViews":{
+                "value":{
+                    "most_views": [
+                        {
+                            "date": "2023-12-13",
+                            "path": "/quizzes",
+                            "views": 976
+                        },{
+                            "date": "2023-12-13",
+                            "path": "/home",
+                            "views": 889
                         }
                     ]
                 }

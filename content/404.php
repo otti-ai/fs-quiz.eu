@@ -1,5 +1,6 @@
 <?php 
 	require('./header.php');
+  require($_SERVER['DOCUMENT_ROOT']. '/error.php');
 ?>
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <main>

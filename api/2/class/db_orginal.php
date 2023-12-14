@@ -9,6 +9,7 @@ class DB_Orginal {
     private $param = array();
     private $table;
     private $limit = 0;
+    private $orderTable = 0;
     private $start = 0;
 
     public function __construct($pdo){
@@ -40,6 +41,9 @@ class DB_Orginal {
                 array_push($this->param,$i['param']);
             }
             $sql = substr($sql,0,-5);
+        }
+        if($this->orderTable>0){
+            $sql .= " ORDER BY `".$this->orderTable."` DESC";
         }
         if($this->limit>0){
             $sql .= " LIMIT ?, ?";
@@ -95,5 +99,8 @@ class DB_Orginal {
         $this->start = $start-1;
     }
 
+    public function setOrderBy($toOrder){
+        $this->orderTable = $toOrder;
+    }
 }
 ?>

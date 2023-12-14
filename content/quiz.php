@@ -3,7 +3,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
 $jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/quiz/'. $quiz_id);
 $data = json_decode(nl2br($jsonData));
 $eventName = str_replace('Formula Student', 'FS', $data->event->event_name);
-
+require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 ?>
 
 <!doctype html>

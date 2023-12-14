@@ -19,7 +19,7 @@ Route::pathNotFound(function($path) {
 });
 
 //status no apikey needed
-Route::add('/1/systemStatus', function($api_version) {
+Route::add('/1/systemStatus', function() {
     $addition = 'all';
     require('1/status/get.php');
 }, 'get');
@@ -313,6 +313,27 @@ Route::add('/1/([0-9a-zA-Z]*)/last-qualifier/quiz/([0-9]*)', function($api_key, 
 Route::add('/2/last-qualifier/quiz/([0-9]*)', function($quiz_id) {
     $addition = 'quiz';
 	require('2/get/last-qualifier/get.php');
+}, 'get');
+
+//statistic
+Route::add('/2/statistic', function() {
+    $addition = 'list';
+	require('2/get/statistic/get.php');
+}, 'get');
+//statistic/2023-12-12
+Route::add('/2/statistic/(\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))', function($date) {
+    $addition = 'single';
+	require('2/get/statistic/get.php');
+}, 'get');
+//statistic/2023-12-12/views
+Route::add('/2/statistic/(\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))/views', function($date) {
+    $addition = 'views';
+	require('2/get/statistic/get.php');
+}, 'get');
+//statistic/2023-12-12/calls
+Route::add('/2/statistic/(\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))/calls', function($date) {
+    $addition = 'calls';
+	require('2/get/statistic/get.php');
 }, 'get');
 
 Route::run('/');

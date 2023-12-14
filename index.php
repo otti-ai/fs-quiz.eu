@@ -23,6 +23,22 @@ Route::add('/contact',function(){
 	$pagename = 'about';
     require('content/contact.php');
 });
+//favicon
+Route::add('/favicon.ico',function(){
+	header('Content-Type: image/jpeg');
+	readfile('img/icons/favicon/favicon.ico');
+	exit;
+});
+Route::add('/(android-icon-(36|48|72|96|144|192)x(36|48|72|96|144|192)\.png$)',function($favLink){
+	header('Content-Type: image/jpeg');
+	readfile('img/icons/favicon/'.$favLink);
+	exit;
+});
+Route::add('/(apple-touch-icon(-(57|60|72|76|114|120|144|152|180)x(57|60|72|76|114|120|144|152|180))?(-precomposed)?\.png$)',function($favLink){
+	header('Content-Type: image/jpeg');
+	readfile('img/icons/favicon/'.$favLink);
+	exit;
+});
 
 Route::add('/home',function(){
     $titel = 'FS-Quiz - Home';
@@ -64,6 +80,12 @@ Route::add('/quiz/([0-9]*)', function($quiz_id) {
 	$pagename = 'quizzes';
 	require('content/quiz.php');
 }, 'get');
+
+Route::add('/statistics',function(){
+    $titel = 'FS-Quiz - Statistics';
+	$pagename = 'home';
+	require('content/statistics.php');
+});
 
 //documents
 Route::add('/search/documents/([0-9]*)', function($event) {

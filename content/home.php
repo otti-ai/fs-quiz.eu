@@ -21,7 +21,9 @@
 	<hr class="col-3 col-md-2">
 
 	<h2>Dates</h2>
+  <h3>26th January:</h3>
 	<?php require('./php/eventgraph2.php'); ?>
+  <h3>FS-Quiz testquiz in the middle of January</h3>
 	<hr class="col-3 col-md-2">
 
     <div class="row g-5">

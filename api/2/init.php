@@ -15,6 +15,7 @@ require("2/class/questionQuiz.php");
 require("2/class/quiz.php");
 require("2/class/solution.php");
 require("2/class/status.php");
+require("2/class/statistic.php");
 
  //Statistic
  //$sqlStatistic = "INSERT INTO `fs-statistic-api` (`request`) VALUES (?)";
