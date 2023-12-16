@@ -335,6 +335,26 @@ Route::add('/2/statistic/(\d{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01]))/call
     $addition = 'calls';
 	require('2/get/statistic/get.php');
 }, 'get');
+//statistic/2023-12/views
+Route::add('/2/statistic/(\d{4}-(0?[1-9]|1[0-2]))/views', function($date) {
+    $addition = 'views';
+	require('2/get/statistic/get.php');
+}, 'get');
+//statistic/2023-12/calls
+Route::add('/2/statistic/(\d{4}-(0?[1-9]|1[0-2]))/calls', function($date) {
+    $addition = 'calls';
+	require('2/get/statistic/get.php');
+}, 'get');
+//statistic/2023/views
+Route::add('/2/statistic/(\d{4})/views', function($date) {
+    $addition = 'views';
+	require('2/get/statistic/get.php');
+}, 'get');
+//statistic/2023/calls
+Route::add('/2/statistic/(\d{4})/calls', function($date) {
+    $addition = 'calls';
+	require('2/get/statistic/get.php');
+}, 'get');
 
 Route::run('/');
 ?>

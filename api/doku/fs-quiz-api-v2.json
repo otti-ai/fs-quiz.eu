@@ -1079,7 +1079,7 @@
                 "tags": [
                     "Statistics"
                 ],
-                "summary": "Get most endpoint calls by date",
+                "summary": "Get most endpoint calls by date/month/year",
                 "security": [],
                 "parameters": [
                     {
@@ -1089,7 +1089,7 @@
                         "schema": {
                             "type": "string",
                             "format": "date",
-                            "example": "2021-01-30"
+                            "example": ["2021-01-30", "2021-01", "2021"]
                         },
                         "description": "date"
                     }
@@ -1109,7 +1109,7 @@
                 "tags": [
                     "Statistics"
                 ],
-                "summary": "Get visited sites by date",
+                "summary": "Get visited sites by date/month/year",
                 "security": [],
                 "parameters": [
                     {
@@ -1119,7 +1119,7 @@
                         "schema": {
                             "type": "string",
                             "format": "date",
-                            "example": "2021-01-30"
+                            "example": ["2021-01-30", "2021-01", "2021"]
                         },
                         "description": "date"
                     }

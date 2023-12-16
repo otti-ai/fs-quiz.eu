@@ -10,13 +10,11 @@ class StatisticModel {
 }
 class StatisticViewsModel {
 	//Definition der Eigenschaften
-	public $date;
     public $path;
 	public $views;
 }
 class StatisticCallsModel {
 	//Definition der Eigenschaften
-	public $date;
     public $endpoint;
 	public $calls;
 }
@@ -34,6 +32,7 @@ class StatisticHandle {
         $statistic = $db->get_Data()->fetchObject('StatisticModel');
         return $statistic;
     }
+
     public function getList(){
         $db = new DB_Orginal($this->pdo);
         $db->setTable('fs-statistic');
@@ -68,14 +67,11 @@ class StatisticHandle {
 
     public function getListOfViewsByDate($date){
         $db = new DB_Orginal($this->pdo);
-        $db->setTable('fs-statistic-views');
-        $db->addWhere('fs-statistic-views','date',$date);
-        $db->setLimitTo(1,10);
-        $db->setOrderBy('views');
-
-        $statistic = array();
-        $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'StatisticViewsModel');
+        $sql = 'SELECT `path`, SUM(`views`) as "views" FROM `fs-statistic-views` WHERE `date` LIKE ? GROUP BY `path` ORDER BY `views` DESC LIMIT 10;';
+        $systemStatus = array();
+        $response = $db->direct_sql($sql,array("%".$date.'%'))->fetchAll(PDO::FETCH_CLASS, 'StatisticViewsModel');
         foreach($response as $row) {
+            unset($row->date);
             $statistic[] = $row;
         }
         return $statistic;
@@ -83,14 +79,11 @@ class StatisticHandle {
 
     public function getListOfCallsByDate($date){
         $db = new DB_Orginal($this->pdo);
-        $db->setTable('fs-statistic-calls');
-        $db->addWhere('fs-statistic-calls','date',$date);
-        $db->setLimitTo(1,10);
-        $db->setOrderBy('calls');
-
-        $statistic = array();
-        $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'StatisticCallsModel');
+        $sql = 'SELECT `endpoint`, SUM(`calls`) as "calls" FROM `fs-statistic-calls` WHERE `date` LIKE ? GROUP BY `endpoint` ORDER BY `calls` DESC LIMIT 10;';
+        $systemStatus = array();
+        $response = $db->direct_sql($sql,array("%".$date.'%'))->fetchAll(PDO::FETCH_CLASS, 'StatisticCallsModel');
         foreach($response as $row) {
+            unset($row->date);
             if(substr($row->endpoint,0,2)=="/1"){
                 $row->endpoint = "/1/{api-key}".substr($row->endpoint,7);
             }
@@ -98,5 +91,6 @@ class StatisticHandle {
         }
         return $statistic;
     }
+
 }
 ?>
