@@ -5,6 +5,9 @@
       <a href="/contact" class="text-muted" style="text-decoration: none;">Contact</a>
     </div>
     <div class="col-md-auto">
+      <a href="/statistics" class="text-muted" style="text-decoration: none;">Statistics</a>
+    </div>
+    <div class="col-md-auto">
       <a href="/legal-notice" class="text-muted" style="text-decoration: none;">Legal notice</a>
     </div>
     <div class="col-md-auto">

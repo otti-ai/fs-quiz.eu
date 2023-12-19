@@ -16,12 +16,12 @@
 	$jsonViewsYear = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/2023/views'));
 	$viewsYear = $jsonViewsYear->most_views;
 
-	$jsonCallsDay = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/'.$date.'/calls'));
-	$callsDay = $jsonCallsDay->most_calls;
-	$jsonCallsMonth = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/'.$datem.'/calls'));
-	$callsMonth = $jsonCallsMonth->most_calls;
-	$jsonCallsYear = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/2023/calls'));
-	$callsYear = $jsonCallsYear->most_calls;
+	//$jsonCallsDay = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/'.$date.'/calls'));
+	//$callsDay = $jsonCallsDay->most_calls;
+	//$jsonCallsMonth = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/'.$datem.'/calls'));
+	//$callsMonth = $jsonCallsMonth->most_calls;
+	//$jsonCallsYear = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/2023/calls'));
+	//$callsYear = $jsonCallsYear->most_calls;
 
 ?>
 <script src="js/chart.js"></script>
@@ -88,7 +88,7 @@
 			</table>
 		</div>
 	</div>
-	<hr class="col-3 col-md-2">
+	<!--<hr class="col-3 col-md-2">
 	<h2>API</h2>
 	<div class="row">
 		<div class="col-sm-4">
@@ -102,9 +102,9 @@
 				</thead>
 				<tbody>
 				<?php
-					foreach($callsDay as $view){
-						echo '<tr><td>'.$view->endpoint.'</td><td>'.$view->calls.'</td></tr>';
-					}
+					//foreach($callsDay as $view){
+						//echo '<tr><td>'.$view->endpoint.'</td><td>'.$view->calls.'</td></tr>';
+					//}
 				?>
 				</tbody>
 			</table>
@@ -120,9 +120,9 @@
 				</thead>
 				<tbody>
 				<?php
-					foreach($callsMonth as $view){
-						echo '<tr><td>'.$view->endpoint.'</td><td>'.$view->calls.'</td></tr>';
-					}
+					//foreach($callsMonth as $view){
+						//echo '<tr><td>'.$view->endpoint.'</td><td>'.$view->calls.'</td></tr>';
+					//}
 				?>
 				</tbody>
 			</table>
@@ -138,14 +138,14 @@
 				</thead>
 				<tbody>
 				<?php
-					foreach($callsYear as $view){
-						echo '<tr><td>'.$view->endpoint.'</td><td>'.$view->calls.'</td></tr>';
-					}
+					//foreach($callsYear as $view){
+						//echo '<tr><td>'.$view->endpoint.'</td><td>'.$view->calls.'</td></tr>';
+					//}
 				?>
 				</tbody>
 			</table>
 		</div>
-	</div>
+	</div>-->
   </main>
   </div> 
   <script>
