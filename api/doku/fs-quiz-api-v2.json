@@ -253,6 +253,25 @@
                 }
             }
         },
+        "/event/all": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get all Quizzes sorted by events",
+                "security": [],
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/eventAll"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/not_found"
+                    }
+                }
+            }
+        },
         "/events": {
             "get": {
                 "tags": [
@@ -1535,6 +1554,55 @@
                     "events"
                 ]
             },
+            "EventListAll": {
+                "type": "object",
+                "properties": {
+                    "events": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/EventAll"
+                        },
+                        "description": "all events with all quizzes"
+                    }
+                },
+                "required": [
+                    "events"
+                ]
+            },
+            "EventAll": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "short_name": {
+                        "type": "string"
+                    },
+                    "event_name": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "type": "string"
+                    },
+                    "website": {
+                        "type": "string",
+                        "format": "uri"
+                    },
+                    "quizzes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/QuizShort"
+                        }
+                    }
+                },
+                "required": [
+                    "id",
+                    "short_name",
+                    "event_name",
+                    "country",
+                    "website"
+                ]
+            },
             "ImageList": {
                 "type": "object",
                 "properties": {
@@ -1993,6 +2061,21 @@
                     }
                 }
             },
+            "eventAll": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/EventListAll"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/eventAll"
+                            }
+                        }
+                    }
+                }
+            },
             "image": {
                 "description": "Successful query",
                 "content": {
@@ -2323,6 +2406,47 @@
                             "event_name": "Formula Student Switzerland",
                             "country": "Switzerland",
                             "website": "https://formulastudent.ch/"
+                        }
+                    ]
+                }
+            },
+            "eventAll":{
+                "value":{
+                    "events": [
+                        {
+                            "id": 1,
+                            "short_name": "FSN",
+                            "event_name": "Formula Student Netherlands",
+                            "country": "Netherlands",
+                            "website": "https://formula-student.nl/",
+                            "quizzes": [
+                                {
+                                  "quiz_id": 58,
+                                  "event_id": 1,
+                                  "year": 2023,
+                                  "class": "ev",
+                                  "information": null,
+                                  "date": "2023-01-27",
+                                  "status": "complete"
+                                }
+                            ]
+                        },{
+                            "id": 2,
+                            "short_name": "FSCH",
+                            "event_name": "Formula Student Switzerland",
+                            "country": "Switzerland",
+                            "website": "https://formulastudent.ch/",
+                            "quizzes": [
+                                {
+                                  "quiz_id": 55,
+                                  "event_id": 2,
+                                  "year": 2023,
+                                  "class": "ev",
+                                  "information": null,
+                                  "date": "2023-01-27",
+                                  "status": "complete"
+                                }
+                            ]
                         }
                     ]
                 }

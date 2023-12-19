@@ -19,6 +19,10 @@ switch ($addition) {
         $quary = new QuizHandle($pdo);
         $data['quizzes'] = $quary->getByEvents($event_id);
         break;
+    case 'all':
+        $quary = new EventHandle($pdo);
+        $data['events'] = $quary->getListEventsAll();
+        break;
 }
 if(isset($data) && $data != null){
 

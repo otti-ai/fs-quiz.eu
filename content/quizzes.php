@@ -9,17 +9,17 @@
     <hr class="col-3 col-md-2">
 
 <?php
-	$jsonEvent = json_decode(file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event'));
+	$jsonEvent = json_decode(file_get_contents('http://api.fs-quiz.eu/2/event/all'));
 	$events = $jsonEvent->events;
 	$htmlArrayEV = array();
 	$htmlArrayCV = array();
 	$htmlArrayDV = array();
 	foreach($events as $event){
-		$jsonQuizzes = json_decode(file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event/'. $event->id .'/quizzes'));
+		$jsonQuizzes = $event->quizzes;
 		$quizzesEV = array();
 		$quizzesCV = array();
 		$quizzesDV = array();
-		foreach($jsonQuizzes->quizzes as $q){
+		foreach($jsonQuizzes as $q){
 			if($q->status != 'unpublished'){
 				if($q->class == 'ev'){
 					array_push($quizzesEV, $q);

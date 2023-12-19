@@ -1,3 +1,6 @@
+<?php
+$v = isset($_GET["v"]) ? $_GET["v"] : 1;
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -42,7 +45,7 @@
     <header class="p-3 bg-dark text-white">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"> <img src="https://fs-quiz.eu/img/icons/favicon/favicon-96x96.png"" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz - API</a>
+          <a class="navbar-brand" href="#"> <img src="https://fs-quiz.eu/img/icons/favicon/favicon-96x96.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz - API</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -56,8 +59,8 @@
               </li>
               <li class="nav-item">
                 <select class="form-select form-select-sm" id="version" onchange="selectVersion()">
-                  <option <?php echo(($_GET['v'] == 2) ? 'selected' : '') ?> value="2" disabel>v2</option>
-                  <option <?php echo(($_GET['v'] != 2) ? 'selected' : '') ?> value="1">v1</option>  
+                  <option <?php echo(($v == 2) ? 'selected' : '') ?> value="2" disabled>2</option>
+                  <option <?php echo(($v != 2) ? 'selected' : '') ?> value="1">1</option>  
                 </select>
               </li>
 
@@ -74,7 +77,7 @@
         router="hash"
         layout="sidebar"
         hideSchemas="true"
-        apiDescriptionURL="<?php echo(($_GET['v'] != 2) ? './fs-quiz-api-v1.json' : './fs-quiz-api-v2.json') ?>"
+        apiDescriptionURL="<?php echo(($v != 2) ? './fs-quiz-api-v1.json' : './fs-quiz-api-v2.json') ?>"
       />
     </div>
 

@@ -46,7 +46,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 	<header class="p-3 bg-dark text-white">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid col-lg-8">
-				<a href='/home' class="navbar-brand" >FS-Quiz</a>
+				<a class="navbar-brand" href="./home"><img src="/img/icons/favicon/favicon-96x96.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz</a>
 				<a class="navbar-brand" id="count"></a>
 			</div>
 		</nav>
@@ -155,6 +155,9 @@ var jsondata = <?php echo json_encode($data); ?>;
   <div class="row justify-content-md-center">
     <div class="col-md-auto">
       <a href="../contact" class="text-muted" style="text-decoration: none;">Contact</a>
+    </div>
+	<div class="col-md-auto">
+      <a href="/statistics" class="text-muted" style="text-decoration: none;">Statistics</a>
     </div>
     <div class="col-md-auto">
       <a href="../legal-notice" class="text-muted" style="text-decoration: none;">Legal notice</a>

@@ -53,7 +53,7 @@
 	<header class="p-3 bg-dark text-white">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid col-lg-8">
-				<a class="navbar-brand" href="./home">FS-Quiz</a>
+				<a class="navbar-brand" href="./home"><img src="/img/icons/favicon/favicon-96x96.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -65,8 +65,8 @@
 							</li>
 						<?php endforeach ?>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="nav-item"><a target="_blank" href="https://github.com/otti-ai/fs-quiz.eu"><img src="/img/icons/github.svg" alt="Github Logo" width="25" height="25" style="filter: invert(1);" class="d-inline-block align-text-center"></a></li>
+					<ul class="nav  navbar-nav navbar-right align-items-center">
+						<li class="nav-item"><a class="navbar-brand" target="_blank" href="https://github.com/otti-ai/fs-quiz.eu" style="vertical-align: super;"><img src="https://fs-quiz.eu/img/icons/github.svg" alt="Github Logo" width="30" height="30" style="filter: invert(1);" class="d-inline-block ms-2"></a></li>
 					</ul>
 				</div>
 			</div>

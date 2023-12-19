@@ -11,6 +11,7 @@ class EventModel {
 
 class EventHandle {
     private $pdo;
+    private $status = array('','complete', 'missing_questions', 'missing_correct_answer', 'incomplete', 'unpublished');
 
     public function __construct($pdo){
         $this->pdo = $pdo;
@@ -34,6 +35,29 @@ class EventHandle {
         foreach($response as $row) {
             $events[] = $row;
         }
+        return $events;
+    }
+
+    public function getListEventsAll(){
+        $db = new DB_Orginal($this->pdo);
+        $db->setTable('fs-events');
+        $events = array();
+        $responseEvents = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'EventModel');
+        foreach($responseEvents as $row) {
+            $row->quizzes = array();
+            $events[] = $row;
+        }
+
+        $db->setTable('fs-quizzes');
+        $db->setOrderBy('date');
+        $quizzes = array();
+        $responseQuizzes = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'QuizModel');
+
+        foreach($responseQuizzes as $row) {
+            $row->status = $this->status[($row->status)];
+            array_push($events[$row->event_id - 1]->quizzes, $row);
+        }
+        
         return $events;
     }
 }

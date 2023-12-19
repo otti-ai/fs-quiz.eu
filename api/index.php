@@ -98,6 +98,12 @@ Route::add('/2/event/([0-9]*)/quizzes', function($event_id) {
     $addition = 'quizzes';
 	require('2/get/event/get.php');
 }, 'get');
+//events/all
+Route::add('/2/event/all', function() {
+    $addition = 'all';
+	require('2/get/event/get.php');
+}, 'get');
+
 
 
 //questions
