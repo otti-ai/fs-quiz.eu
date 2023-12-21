@@ -46,7 +46,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 	<header class="p-3 bg-dark text-white">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid col-lg-8">
-				<a class="navbar-brand" href="./home"><img src="/img/icons/favicon/favicon-96x96.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz</a>
+				<a class="navbar-brand" href="../home"><img src="../img/icons/favicon/favicon-96x96.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz</a>
 				<a class="navbar-brand" id="count"></a>
 			</div>
 		</nav>
