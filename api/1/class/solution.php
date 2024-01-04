@@ -51,7 +51,10 @@ class SolutionHandle {
         $db->addWhere('fs-solution','solution_id',$id);
         $solution = $db->get_Data()->fetchObject('SolutionModel');
         $imageH = new ImageHandle($this->pdo);
-        $solution->images = $imageH->getByAllSolutionID($id);
+        if($solution) {
+            $img = $imageH->getByAllSolutionID($id);
+            $solution->images = $img;
+        }
         return $solution;
     }
     public function getList(){

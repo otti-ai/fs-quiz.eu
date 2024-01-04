@@ -1,5 +1,5 @@
 <?php
-$v = isset($_GET["v"]) ? $_GET["v"] : 1;
+$v = isset($api_version) ? $api_version : 1;
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,7 +24,7 @@ $v = isset($_GET["v"]) ? $_GET["v"] : 1;
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="https://fs-quiz.eu/img/icons/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <base href="">
+    <base href="https://api.fs-quiz.eu/doku/">
     <title>FS-Quiz API Documentation</title>
     <!-- Embed elements Elements via Web Component -->
     <script src="./web-components.min.js"></script>
@@ -32,7 +32,7 @@ $v = isset($_GET["v"]) ? $_GET["v"] : 1;
     <script type="text/JavaScript">  
       function selectVersion() {
         var v = document.getElementById("version").value;
-        location.replace('https://api.fs-quiz.eu/doku/doku.php?v='+v);
+        location.replace('https://api.fs-quiz.eu/'+v+'/info');
       }
     </script>
     <link rel="stylesheet" href="./customStyle.css">

@@ -37,6 +37,8 @@ class ImageHandle {
         $db->setTable('fs-images');
 		$db->setInnerJoin('fs-question-img','img_id','img_id');
 		$db->addSelects('fs-images',array('img_id','path'));
+        $start_id = isset($_GET["start_id"]) ? $_GET["start_id"] : 1;
+		$db->setLimitTo($start_id,25);
 		$images = array();
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'ImageModel');
         foreach($response as $row) {
@@ -50,6 +52,8 @@ class ImageHandle {
         $db->setTable('fs-images');
 		$db->setInnerJoin('fs-solution-img','img_id','img_id');
 		$db->addSelects('fs-images',array('img_id','path'));
+        $start_id = isset($_GET["start_id"]) ? $_GET["start_id"] : 1;
+		$db->setLimitTo($start_id,25);
 		$images = array();
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'ImageModel');
         foreach($response as $row) {

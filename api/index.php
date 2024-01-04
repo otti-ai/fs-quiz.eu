@@ -6,14 +6,26 @@ include('Route.php');
 Route::add('/',function(){
     $titel = 'FS-Quiz - API';
 	$pagename = 'api';
-	require('1/info.php');
+	require('doku/doku.php');
 });
 Route::add('/api',function(){
     $titel = 'FS-Quiz - API';
 	$pagename = 'api';
-	require('1/info.php');
+	require('doku/doku.php');
 });
 
+Route::add('/1/info',function(){
+    $titel = 'FS-Quiz - API';
+	$pagename = 'api';
+    $api_version = 1;
+	require('doku/doku.php');
+});
+Route::add('/2/info',function(){
+    $titel = 'FS-Quiz - API';
+	$pagename = 'api';
+    $api_version = 2;
+	require('doku/doku.php');
+});
 Route::pathNotFound(function($path) {
 	http_response_code(404);
 });

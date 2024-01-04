@@ -22,10 +22,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<base href="https://fs-quiz.eu/">         <!--  https://fs-quiz.eu/ -->
+	<base href="">         <!--  https://fs-quiz.eu/ -->
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	<script src="js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+	<script src="../js/bootstrap.min.js"></script>
 
 	
     <title>FS-Quiz - Testquiz 2024</title>
@@ -74,68 +74,84 @@
                     <button type="button" class="btn btn-info" onclick="rangliste()" >Rangliste</button>
                     <button type="button" class="btn btn-info" onclick="" disabled>Korrektur</button>
                 </div>
-                <div id="" class="card-footer text-muted">
-                    Runde endet in 2 Tage
+                <div  class="card-footer text-muted"></div>
+            </div>
+        </div>
+        <!-- Start -->
+        <div style="display:block; width: 100%; max-width: 600px;" id="quizground">
+            <div id="bodyStart" class="card text-center">
+                <div class="card-body" id="loginBody">
+                    <h5 class="card-title">FS-Quiz Testquiz 2024</h5>
+                    <p class="text-start">
+                        This is the section of the test quiz. The test quiz will take place on the <strong>14 of January 
+                        at 3pm CET</strong>. The quiz consists of new questions that are in the style of typical registration 
+                        questions. The quiz will be about <strong>90 minutes long</strong> and the level of difficulty will be in the 
+                        direction of FSG. The questions have to be answered one after the other in a given time. The 
+                        number of correct answers is more important than the total time. The ranking and the correct 
+                        answers will be published one hour after the quiz. <br>
+                        To participate in the quiz you have to register your team first. 
+                        This is possible until shortly before the quiz. 
+                    </p>
+                    <hr>
+                    <button type="button" class="btn btn-primary" onclick="" >Log in</button>
+                    <button type="button" class="btn btn-primary" onclick="" >Sign up</button>
                 </div>
+                <div id="time" class="card-footer text-muted"></div>
             </div>
         </div>
         <!-- Login -->
-        <div style="display:none;" id="myDiv">
+        <div style="display:none; width: 100%; max-width: 400px;" id="loginBody">
             <div id="bodyStart" class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Login</h5>
+                    <h5 class="card-title">Sign in</h5>
                     <form>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
                             <label for="floatingInput">Email address</label>
                         </div>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
                             <label for="floatingPassword">Password</label>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-2">Login</button>
-                      </form>
+                        <button type="submit" class="btn btn-primary mt-2">Sign in</button>
+                    </form>
                 </div>
-                <div id="" class="card-footer text-muted">
-                    Runde endet in 2 Tage
-                </div>
+                <div id="" class="card-footer text-muted">Don't have an account? <a href="#">Sign up</a></div>
             </div>
         </div>
         <!-- Registration -->
-        <div style="display:block;" id="myDiv">
+        <div style="display:none; width: 100%; max-width: 400px;" id="registrationBody">
             <div id="bodyStart" class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Registration</h5>
+                    <h5 class="card-title">Sign up</h5>
                     <form>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Team FS-Quiz">
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Team FS-Quiz" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
                             <label for="floatingInput">Teamname</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
                             <label for="floatingInput">Email address</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
                             <label for="floatingPassword">Password</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPasswordcon" placeholder="Password">
+                        <div class="form-floating mb-3" style="margin-bottom: -1px">
+                            <input type="password" class="form-control" id="floatingPasswordcon" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
                             <label for="floatingPasswordcon">Confirm Password </label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                      </form>
+                        <button type="submit" class="btn btn-primary">Sign up</button>
+                    </form>
                 </div>
-                <div id="time" class="card-footer text-muted">
-                    Runde endet in 2 Tage
-                </div>
+                <div id="" class="card-footer text-muted">Do you have an account? <a href="#">Sign in</a></div>
             </div>
         </div>
     </div>
  <script> 
     //countdown
     var countToEnd = new Date("Jan 21, 2024 12:00:00").getTime();
-    var countToStart = new Date("Jan 15, 2024 20:00:00").getTime();
+    var countToStart = new Date("Jan 15, 2024 15:00:00").getTime();
     
     var x = setInterval(function() {
         var now = new Date().getTime();

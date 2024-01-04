@@ -322,7 +322,7 @@
                 }
             }
         },
-        "/{api_key}/events": {
+        "/{api_key}/event": {
             "get": {
                 "tags": [
                     "Events"
