@@ -21,15 +21,17 @@
 	<hr class="col-3 col-md-2">
 
 	<h2>Dates</h2>
-  <h3>26th January:</h3>
-	<?php require('./php/eventgraph2.php'); ?>
-  <h3>FS-Quiz testquiz in the middle of January</h3>
+	  <ul class="icon-list">
+  		<li>26th January:</li>
+			<?php require('./php/eventgraph2.php'); ?>
+  		<li>FS-Quiz testquiz in the middle of January</li>
+	  </ul>
 	<hr class="col-3 col-md-2">
 
     <div class="row g-5">
       <div class="col-md-6">
         <h2>Registration</h2>
-        <p>Information about the registration procedure (old)</p>
+        <p>Information about the registration procedure</p>
         <ul class="icon-list">
           <?php
             foreach($docs as $doc){
@@ -49,6 +51,7 @@
             }
           ?>
           <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
+		  <li><a target="_blank" href="https://www.formulastudent.pt/registration-quiz">FS Portugal</a></li>
         </ul>
       </div>
 
@@ -58,20 +61,19 @@
         <ul class="icon-list">
           <?php
             foreach($docs as $doc){
-              if($doc->type == "Registration"){
-                break;
+              if($doc->type != "Registration"){
+                echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
+				if($doc->event_id>0){
+					foreach($events as $event){
+					  if($event->id == $doc->event_id){
+						echo str_replace('Formula Student', 'FS', $event->event_name);
+					  }
+					}
+				}else{
+					echo 'FS';
+				}
+				echo ' '.$doc->type.' '.$doc->year.' (v'.$doc->version.')'.'</a></li>';
               }
-              echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
-              if($doc->event_id>0){
-                foreach($events as $event){
-                  if($event->id == $doc->event_id){
-                    echo str_replace('Formula Student', 'FS', $event->event_name);
-                  }
-                }
-              }else{
-                echo 'FS';
-              }
-              echo ' '.$doc->type.' '.$doc->year.' (v'.$doc->version.')'.'</a></li>';
             }
           ?>
         </ul>
