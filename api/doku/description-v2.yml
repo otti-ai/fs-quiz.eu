@@ -6,12 +6,11 @@ introduction: |
   To use this API, in contrast to V1, **no API key is required**. Please try to **avoid unnecessary queries** 
   and use the queries carefull to keep the load on the server as low as possible. If you have any 
   questions or suggestions, please contact me at *api@fs-quiz.eu*.
-
   
   # Images
   The API gives the path to each image. To call up an image, the path is appended to *img.fs-quiz.eu*. 
   A fully functional image URL looks like this: *https://img.fs-quiz.eu/57_1.jpg*
-  
+
   # Documents
   The current and former documents of the rules and events are stored in the database. In addition to 
   the year and version, each document is also assigned to a type. These are:
@@ -24,3 +23,9 @@ introduction: |
   Similar to the images, the API gives the path to each document. To access a document, the path is 
   appended to *doc.fs-quiz.eu*. A fully functional document URL looks like this: 
   *https://doc.fs-quiz.eu/FS-Rules_2023_v1.1.pdf*
+
+  # What's new
+  - A quiz can now be part of several events
+  - No API key necessary
+  - Statistics now accessible
+  - More query parameters and endpoints

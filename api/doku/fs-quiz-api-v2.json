@@ -4,7 +4,7 @@
         "title": "FS-Quiz API v2",
         "version": "2.0.0",
         "description": {
-            "$ref": "description-v2.yml#/introduction"
+            "$ref": "https://api.fs-quiz.eu/doku/description-v2.yml#/introduction"
         },
         "contact": {
             "name": "Yannik Ottens",
@@ -241,6 +241,35 @@
                             "maximum": 1000000
                         },
                         "description": "ID of the event"
+                    },{
+                        "name": "year",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 0,
+                            "maximum": 1000000
+                        },
+                        "description": "Year for the query (optional)"
+                    },{
+                        "name": "class",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["ev", "cv", "dv"]
+                        },
+                        "description": "Class for the query (optional)"
+                    },{
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["complete", "missing_questions", "missing_solution", "planned", "unpublished"]
+                        },
+                        "description": "Status for the query (optional)"
                     }
                 ],
                 "responses": {
@@ -272,7 +301,7 @@
                 }
             }
         },
-        "/events": {
+        "/event": {
             "get": {
                 "tags": [
                     "Events"
@@ -1651,7 +1680,10 @@
                         "enum": ["complete", "missing_questions", "missing_correct_answer", "incomplete", "unpublished"]
                     },
                     "event": {
-                        "$ref": "#/components/schemas/Event"
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Event"
+                        }
                     },
                     "questions": {
                         "type": "array",
@@ -1714,7 +1746,10 @@
                         "enum": ["complete", "missing_questions", "missing_correct_answer", "incomplete", "unpublished"]
                     },
                     "event": {
-                        "$ref": "#/components/schemas/Event"
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Event"
+                        }
                     },
                     "documents": {
                         "type": "array",
@@ -1766,12 +1801,6 @@
                     },
                     "status": {
                         "type": "string"
-                    },
-                    "event_id": {
-                        "type": "integer",
-                        "format": "int32",
-                        "minimum": 0,
-                        "maximum": 1000000
                     }
                 },
                 "required": [
@@ -1780,8 +1809,7 @@
                     "class",
                     "date",
                     "information",
-                    "status",
-                    "event_id"
+                    "status"
                 ]
             },
             "QuizList": {
@@ -2654,13 +2682,15 @@
                     "information": null,
                     "date": "2019-02-01",
                     "status": "complete",
-                    "event": {
-                        "id": 1,
-                        "short_name": "FSN",
-                        "event_name": "Formula Student Netherlands",
-                        "country": "Netherlands",
-                        "website": "https://formula-student.nl/"
-                    },
+                    "event": [
+                        {
+                            "id": 1,
+                            "short_name": "FSN",
+                            "event_name": "Formula Student Netherlands",
+                            "country": "Netherlands",
+                            "website": "https://formula-student.nl/"
+                        }
+                    ],
                     "questions": [
                         {
                             "text": "What will Young's Modulus be for a 20 mm square bar and with a length of 600mm when it lengthens by 0.5 mm under a load of 45 kN?    ",
@@ -2780,9 +2810,11 @@
                     "information": null,
                     "date": "2019-02-01",
                     "status": "complete",
-                    "event": {
-                        "$ref": "#/components/examples/event"
-                    },
+                    "event": [
+                        {
+                            "$ref": "#/components/examples/event"
+                        }
+                    ],
                     "documents": [
                         {
                             "$ref": "#/components/examples/documents"
@@ -2796,7 +2828,6 @@
                     "quizzes": [
                         {
                             "quiz_id": 1,
-                            "event_id": 1,
                             "year": "2019",
                             "class": "ev",
                             "information": null,
@@ -2804,7 +2835,6 @@
                             "status": "complete"
                         },{
                             "quiz_id": 2,
-                            "event_id": 1,
                             "year": "2019",
                             "class": "cv",
                             "information": null,

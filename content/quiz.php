@@ -1,8 +1,13 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
-$jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/quiz/'. $quiz_id);
+$jsonData = file_get_contents('http://api.fs-quiz.eu/2/quiz/'. $quiz_id);
 $data = json_decode(nl2br($jsonData));
-$eventName = str_replace('Formula Student', 'FS', $data->event->event_name);
+$eventName = 'FS ';
+foreach ($data->event as $row) {
+    $eventName .= str_replace('Formula Student ', '', $row->event_name) . '/';
+}
+$eventName = substr($eventName,0,-1);
+
 require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 ?>
 
@@ -27,7 +32,6 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 	<link rel="icon" type="image/png" sizes="32x32" href="../img/icons/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="../img/icons/favicon/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="../img/icons/favicon/favicon-16x16.png">
-	<link rel="manifest" href="../img/icons/favicon/manifest.json">
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="../img/icons/favicon/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
@@ -55,7 +59,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 <div class="col-lg-8 mx-auto p-3 py-md-5">
   <main>
 	<div id="divStart" style="display: block;">
-		<h1><?php echo $eventName; ?> Registration Quiz <?php echo $data->year; ?></h1>
+		<h1><?php echo $eventName ?> Registration Quiz <?php echo $data->year; ?></h1>
 		<div class="row g-5">
 		<div class="col-md-6">
 			<h3>Information</h3>

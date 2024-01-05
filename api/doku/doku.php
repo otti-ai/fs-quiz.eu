@@ -1,5 +1,7 @@
 <?php
 $v = isset($api_version) ? $api_version : 1;
+require($_SERVER['DOCUMENT_ROOT']. '/2/orginal_db.php');
+require($_SERVER['DOCUMENT_ROOT']. '/2/statistic.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +47,7 @@ $v = isset($api_version) ? $api_version : 1;
     <header class="p-3 bg-dark text-white">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"> <img src="https://fs-quiz.eu/img/icons/favicon/favicon-96x96.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz - API</a>
+          <a class="navbar-brand" href="https://api.fs-quiz.eu/"> <img src="https://fs-quiz.eu/img/icons/favicon/favicon-96x96.png" alt="" width="30" height="30" class="d-inline-block align-text-top me-2">FS-Quiz - API</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

@@ -3,7 +3,6 @@
 class QuizModel {
 	//Definition der Eigenschaften
 	public $quiz_id;
-	public $event_id;
 	public $year;
     public $class;
     public $information;
@@ -34,6 +33,7 @@ class QuizHandle {
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'QuizModel');
         foreach($response as $row) {
             $row->status = $this->status[($row->status)];
+            unset($row->event_id);
             $quizzes[] = $row;
         }
         return $quizzes;
@@ -47,7 +47,7 @@ class QuizHandle {
         if($quiz) {
             $quiz->status = $this->status[($quiz->status)];
             $event = new EventHandle($this->pdo);
-            $g = $event->getByID($quiz->event_id);
+            $g = $event->getEventsByQuizID($quiz->quiz_id);
             $quiz->event = $g;
             $questionH = new QuestionHandle($this->pdo);
             $quiz->questions = $questionH->getListByQuizIDFull($id);
@@ -70,8 +70,8 @@ class QuizHandle {
         if($quiz) {
             $quiz->status = $this->status[($quiz->status)];
             $event = new EventHandle($this->pdo);
-            $g = $event->getByID($quiz->event_id);
-            $quiz->event = $g; 
+            $g = $event->getEventsByQuizID($quiz->quiz_id);
+            $quiz->event = $g;
             $docH = new DocumentHandle($this->pdo);
             $d = $docH->getListByQuizID($id);
             $quiz->documents = $d;
@@ -87,8 +87,9 @@ class QuizHandle {
 
     public function getByEvents($event_id){
         $db = new DB_Orginal($this->pdo);
-        $db->setTable('fs-quizzes');
-        $db->addWhere('fs-quizzes','event_id',$event_id);
+        $db->setTable('fs-quiz-event');
+        $db->addWhere('fs-quiz-event','event_id',$event_id);
+        $db->setInnerJoin('fs-quizzes','quiz_id','quiz_id');
         $start_id = isset($_GET["start_id"]) ? $_GET["start_id"] : 1;
 		$db->setLimitTo($start_id,25);
         //optional
@@ -99,6 +100,8 @@ class QuizHandle {
         $quizzes = array();
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'QuizModel');
         foreach($response as $row) {
+            unset($row->id);
+            //unset($row->event_id);
             $row->status = $this->status[($row->status)];
             $quizzes[] = $row;
         }

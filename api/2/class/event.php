@@ -38,6 +38,21 @@ class EventHandle {
         return $events;
     }
 
+    public function getEventsByQuizID($id){
+        $db = new DB_Orginal($this->pdo);
+        $db->setTable('fs-quiz-event');
+        $db->addWhere('fs-quiz-event','quiz_id',$id);
+        $db->setInnerJoin('fs-events','event_id','id');
+        $events = array();
+        $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'EventModel');
+        foreach($response as $row) {
+            unset($row->id);
+            unset($row->quiz_id);
+            $events[] = $row;
+        }
+        return $events;
+    }
+
     public function getListEventsAll(){
         $db = new DB_Orginal($this->pdo);
         $db->setTable('fs-events');
@@ -48,7 +63,10 @@ class EventHandle {
             $events[] = $row;
         }
 
-        $db->setTable('fs-quizzes');
+        $db->setTable('fs-quiz-event');
+        $db->setInnerJoin('fs-quizzes','quiz_id','quiz_id');
+        $db->addSelects('fs-quiz-event',array('quiz_id','event_id'));
+        $db->addSelects('fs-quizzes',array('year','class','information','date','status'));
         $db->setOrderBy('date');
         $quizzes = array();
         $responseQuizzes = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'QuizModel');

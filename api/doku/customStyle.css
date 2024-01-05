@@ -24,3 +24,6 @@
 .sl-flex.sl-items-center.sl-h-md.sl-pr-4.sl-pl-8.sl-bg-canvas-100{
     background-color: rgb(248,249,250);
 }
+h1{
+    margin-bottom: 0px!important;
+}

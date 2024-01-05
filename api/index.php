@@ -81,7 +81,11 @@ Route::add('/2/quiz/([0-9]*)/documents', function($quiz_id) {
     $addition = 'documents';
 	require('2/get/quiz/get.php');
 }, 'get');
-
+//quizzes/1/events
+Route::add('/2/quiz/([0-9]*)/events', function($quiz_id) {
+    $addition = 'quizID';
+	require('2/get/event/get.php');
+}, 'get');
 
 //events
 Route::add('/1/([0-9a-zA-Z]*)/event', function($api_key) {
