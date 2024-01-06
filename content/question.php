@@ -1,6 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
-$jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/question/'. $question_id);
+$jsonData = file_get_contents('http://api.fs-quiz.eu/2/question/'. $question_id);
 $data = json_decode(nl2br($jsonData));
 require('header.php'); 
 ?>

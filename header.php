@@ -5,6 +5,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+  	<base href="/">         <!--  https://fs-quiz.eu/ -->
 	<!-- ICONS-->
 	<link rel="apple-touch-icon" sizes="57x57" href="img/icons/favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="img/icons/favicon/apple-icon-60x60.png">
@@ -26,7 +27,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<base href="/">         <!--  https://fs-quiz.eu/ -->
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<script src="js/bootstrap.min.js"></script>

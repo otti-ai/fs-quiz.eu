@@ -1,5 +1,4 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
 $jsonData = file_get_contents('http://api.fs-quiz.eu/2/quiz/'. $quiz_id);
 $data = json_decode(nl2br($jsonData));
 $eventName = 'FS ';

@@ -1,12 +1,10 @@
 <?php 
 	require('./header.php');
 
-  $jsonEvent = json_decode(file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event'));
-	$events = $jsonEvent->events;
-  $jsondoc = json_decode(file_get_contents('https://api.fs-quiz.eu/1/'.$api.'/document?year=2024'));
+  $jsondoc = json_decode(file_get_contents('https://api.fs-quiz.eu/2/document?year=2024'));
 	$docs = $jsondoc->documents;
   usort($docs, function($a, $b) {
-    return $a->event_id < $b->event_id ? -1 : 1;
+    return count($a->event) < count($b->event) ? -1 : 1;
   });
 ?>
 <div class="col-lg-8 mx-auto p-3">
@@ -36,11 +34,15 @@
           <?php
             foreach($docs as $doc){
               if($doc->type == "Registration"){
+                $first = true;
                 echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
-                if($doc->event_id>0){
-                  foreach($events as $event){
-                    if($event->id == $doc->event_id){
+                if(count($doc->event)>0){
+                  foreach($doc->event as $event){
+                    if($first){
                       echo str_replace('Formula Student', 'FS', $event->event_name);
+                      $first = false;
+                    }else{
+                      echo str_replace('Formula Student', ' &', $event->event_name);
                     }
                   }
                 }else{
@@ -62,17 +64,21 @@
           <?php
             foreach($docs as $doc){
               if($doc->type != "Registration"){
+                $first = true;
                 echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
-				if($doc->event_id>0){
-					foreach($events as $event){
-					  if($event->id == $doc->event_id){
-						echo str_replace('Formula Student', 'FS', $event->event_name);
-					  }
-					}
-				}else{
-					echo 'FS';
-				}
-				echo ' '.$doc->type.' '.$doc->year.' (v'.$doc->version.')'.'</a></li>';
+                if(count($doc->event)>0){
+                  foreach($doc->event as $event){
+                    if($first){
+                      echo str_replace('Formula Student', 'FS', $event->event_name);
+                      $first = false;
+                    }else{
+                      echo str_replace('Formula Student', ' &', $event->event_name);
+                    }
+                  }
+                }else{
+                  echo 'FS';
+                }
+                echo ' '.$doc->type.' '.$doc->year.' (v'.$doc->version.')'.'</a></li>';
               }
             }
           ?>
