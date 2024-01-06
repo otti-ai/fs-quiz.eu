@@ -7,7 +7,6 @@ class DocumentModel {
     public $path;
     public $year;
     public $version;
-    public $event_id;
 }
 class DocumentHandle {
     private $pdo;
@@ -18,7 +17,7 @@ class DocumentHandle {
 
     public function getListByQuizID($id){
         $db = new DB_Orginal($this->pdo);
-        $sql = "SELECT `fs-documents`.`doc_id` as `doc_id`, `fs-documents`.`type` as `type`, `fs-documents`.`path` as `path`, `fs-documents`.`year` as `year`, `fs-documents`.`version` as `version`, `fs-documents`.`event_id` as `event_id` FROM `fs-quizzes`, `fs-documents` WHERE `fs-documents`.`year` = `fs-quizzes`.`year` AND `fs-quizzes`.`quiz_id` = ? AND (`fs-quizzes`.`event_id` = `fs-documents`.`event_id` OR `fs-documents`.`event_id` = 0);";
+        $sql = "SELECT DISTINCT `fs-documents`.`doc_id` as `doc_id`, `fs-documents`.`type` as `type`, `fs-documents`.`path` as `path`, `fs-documents`.`year` as `year`, `fs-documents`.`version` as `version` FROM (`fs-quizzes` INNER JOIN `fs-quiz-event` ON `fs-quiz-event`.`quiz_id` = `fs-quizzes`.`quiz_id`) LEFT JOIN (`fs-documents-events` LEFT JOIN `fs-documents` ON `fs-documents-events`.`doc_id` = `fs-documents`.`doc_id`) ON (`fs-documents-events`.`event_id` = `fs-quiz-event`.`event_id` OR `fs-documents-events`.`event_id` = 0) AND `fs-documents`.`year` = `fs-quizzes`.`year` WHERE `fs-quizzes`.`quiz_id` = ?;";
 		$documents = array();
         $response = $db->direct_sql($sql,array($id))->fetchAll(PDO::FETCH_CLASS, 'DocumentModel');
         foreach($response as $row) {
@@ -31,6 +30,9 @@ class DocumentHandle {
         $db->setTable('fs-documents');
         $db->addWhere('fs-documents','doc_id',$id);
         $doc = $db->get_Data()->fetchObject('DocumentModel');
+        unset($doc->event_id);
+        $eventsH = new EventHandle($this->pdo);
+        $doc->event = $eventsH->getEventsByDocID($doc->doc_id);
         return $doc;
     }
     public function getList(){
@@ -45,6 +47,8 @@ class DocumentHandle {
 		$documents = array();
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'DocumentModel');
         foreach($response as $row) {
+            $eventsH = new EventHandle($this->pdo);
+            $row->event = $eventsH->getEventsByDocID($row->doc_id);
             $documents[] = $row;
         }
         return $documents;

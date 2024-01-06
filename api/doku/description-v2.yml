@@ -25,7 +25,7 @@ introduction: |
   *https://doc.fs-quiz.eu/FS-Rules_2023_v1.1.pdf*
 
   # What's new
-  - A quiz can now be part of several events
+  - Quizzes and documents can now be part of several events
   - No API key necessary
   - Statistics now accessible
   - More query parameters and endpoints

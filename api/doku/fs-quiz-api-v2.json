@@ -1033,7 +1033,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "$ref": "#/components/responses/documents"
+                        "$ref": "#/components/responses/documentsShort"
                     },
                     "404": {
                         "$ref": "#/components/responses/not_found"
@@ -1239,11 +1239,11 @@
                     "version": {
                         "type": "string"
                     },
-                    "event_id": {
-                        "type": "integer",
-                        "format": "int32",
-                        "minimum": 0,
-                        "maximum": 1000000
+                    "event": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Event"
+                        }
                     }
                 },
                 "required": [
@@ -1253,6 +1253,40 @@
                     "year",
                     "version",
                     "event_id"
+                ]
+            },
+            "DocumentShort": {
+                "type": "object",
+                "properties": {
+                    "doc_id": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 0,
+                        "maximum": 1000000
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["Rulebook", "Hybrid Rules", "Additional Rules", "Handbook", "Registration", "Additional Documents"]
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "year": {
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": 2000,
+                        "maximum": 2030
+                    },
+                    "version": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "doc_id",
+                    "type",
+                    "path",
+                    "year",
+                    "version"
                 ]
             },
             "Event": {
@@ -1567,6 +1601,22 @@
                     "documents"
                 ]
             },
+            "DocumentListShort": {
+                "type": "object",
+                "properties": {
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentShort"
+                        },
+                        "maxItems": 25,
+                        "description": "limit to 25"
+                    }
+                },
+                "required": [
+                    "documents"
+                ]
+            },
             "EventList": {
                 "type": "object",
                 "properties": {
@@ -1694,7 +1744,7 @@
                     "documents": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Document"
+                            "$ref": "#/components/schemas/DocumentShort"
                         }
                     },
                     "last_qualifier": {
@@ -1754,7 +1804,7 @@
                     "documents": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Document"
+                            "$ref": "#/components/schemas/DocumentShort"
                         }
                     },
                     "last_qualifier": {
@@ -2054,6 +2104,21 @@
                         "examples": {
                             "default-response": {
                                 "$ref": "#/components/examples/documents"
+                            }
+                        }
+                    }
+                }
+            },
+            "documentsShort": {
+                "description": "Successful query",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/DocumentListShort"
+                        },
+                        "examples": {
+                            "default-response": {
+                                "$ref": "#/components/examples/documentsShort"
                             }
                         }
                     }
@@ -2386,7 +2451,15 @@
                     "path": "FSG23_Competition_Handbook_v1.0.pdf",
                     "year": 2023,
                     "version": "1.0",
-                    "event_id": 7
+                    "event": [
+                        {
+                            "id": 1,
+                            "short_name": "FSN",
+                            "event_name": "Formula Student Netherlands",
+                            "country": "Netherlands",
+                            "website": "https://formula-student.nl/"
+                        }
+                    ]
                 }
             },
             "documents":{
@@ -2398,14 +2471,43 @@
                             "path": "FSG23_Competition_Handbook_v1.0.pdf",
                             "year": 2023,
                             "version": "1.0",
-                            "event_id": 7
+                            "event": [
+                                {
+                                    "id": 1,
+                                    "short_name": "FSN",
+                                    "event_name": "Formula Student Netherlands",
+                                    "country": "Netherlands",
+                                    "website": "https://formula-student.nl/"
+                                }
+                            ]
                         },{
                             "doc_id": 5,
                             "type": "Rulebook",
                             "path": "FS-Rules_2022_v1.0.pdf",
                             "year": 2022,
                             "version": "1.0",
-                            "event_id": 0
+                            "event": [
+                                
+                            ] 
+                        }
+                    ]
+                }
+            },
+            "documentsShort":{
+                "value":{
+                    "documents": [
+                        {
+                            "doc_id": 3,
+                            "type": "Handbook",
+                            "path": "FSG23_Competition_Handbook_v1.0.pdf",
+                            "year": 2023,
+                            "version": "1.0"
+                        },{
+                            "doc_id": 5,
+                            "type": "Rulebook",
+                            "path": "FS-Rules_2022_v1.0.pdf",
+                            "year": 2022,
+                            "version": "1.0"
                         }
                     ]
                 }
@@ -2788,15 +2890,13 @@
                             "type": "Handbook",
                             "path": "FSG23_Competition_Handbook_v1.0.pdf",
                             "year": 2023,
-                            "version": "1.0",
-                            "event_id": 7
+                            "version": "1.0"
                         },{
                             "doc_id": 5,
                             "type": "Rulebook",
                             "path": "FS-Rules_2022_v1.0.pdf",
                             "year": 2022,
-                            "version": "1.0",
-                            "event_id": 0
+                            "version": "1.0"
                         }
                     ],
                     "last_qualifier": null
@@ -2812,12 +2912,26 @@
                     "status": "complete",
                     "event": [
                         {
-                            "$ref": "#/components/examples/event"
+                            "id": 1,
+                            "short_name": "FSN",
+                            "event_name": "Formula Student Netherlands",
+                            "country": "Netherlands",
+                            "website": "https://formula-student.nl/"
                         }
                     ],
                     "documents": [
                         {
-                            "$ref": "#/components/examples/documents"
+                            "doc_id": 3,
+                            "type": "Handbook",
+                            "path": "FSG23_Competition_Handbook_v1.0.pdf",
+                            "year": 2023,
+                            "version": "1.0"
+                        },{
+                            "doc_id": 5,
+                            "type": "Rulebook",
+                            "path": "FS-Rules_2022_v1.0.pdf",
+                            "year": 2022,
+                            "version": "1.0"
                         }
                     ],
                     "last_qualifier": null

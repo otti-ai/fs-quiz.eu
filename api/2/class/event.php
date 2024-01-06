@@ -53,6 +53,21 @@ class EventHandle {
         return $events;
     }
 
+    public function getEventsByDocID($id){
+        $db = new DB_Orginal($this->pdo);
+        $db->setTable('fs-documents-events');
+        $db->addWhere('fs-documents-events','doc_id',$id);
+        $db->setInnerJoin('fs-events','event_id','id');
+        $events = array();
+        $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'EventModel');
+        foreach($response as $row) {
+            unset($row->doc_id);
+            unset($row->event_id);
+            $events[] = $row;
+        }
+        return $events;
+    }
+
     public function getListEventsAll(){
         $db = new DB_Orginal($this->pdo);
         $db->setTable('fs-events');

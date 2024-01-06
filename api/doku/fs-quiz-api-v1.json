@@ -4,7 +4,7 @@
         "title": "FS-Quiz API v1",
         "version": "1.1.2",
         "description": {
-            "$ref": "description-v1.yml#/introduction"
+            "$ref": "https://api.fs-quiz.eu/doku/description-v1.yml#/introduction"
         },
         "contact": {
             "name": "Yannik Ottens",
