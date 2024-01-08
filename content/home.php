@@ -20,9 +20,11 @@
 
 	<h2>Dates</h2>
 	  <ul class="icon-list">
+		<li>FS Alpe Adria Quiz on 20th January 10.00 CET</li>
   		<li>26th January:</li>
 			<?php require('./php/eventgraph2.php'); ?>
-  		<li>FS-Quiz testquiz in the middle of January</li>
+		<li>FS Switzerland testquiz on 12th January 9.00 CET</li>
+		<li>FS-Quiz testquiz on 20th January</li>
 	  </ul>
 	<hr class="col-3 col-md-2">
 
@@ -78,7 +80,11 @@
                 }else{
                   echo 'FS';
                 }
-                echo ' '.$doc->type.' '.$doc->year.' (v'.$doc->version.')'.'</a></li>';
+				if($doc->version == 'online'){
+					 echo ' '.$doc->type.' '.$doc->year.' (' .$doc->version.')'.'</a></li>';
+				}else{
+					 echo ' '.$doc->type.' '.$doc->year.' (v' .$doc->version.')'.'</a></li>';
+				}
               }
             }
           ?>
