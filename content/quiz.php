@@ -1,4 +1,5 @@
 <?php
+require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
 $jsonData = file_get_contents('http://api.fs-quiz.eu/2/quiz/'. $quiz_id);
 $data = json_decode(nl2br($jsonData));
 $eventName = 'FS ';
@@ -69,6 +70,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 			<p id="Infoinfo" style="margin-bottom: 0;">Date: <?php echo (is_null($data->date)) ? '-' : date_format(date_create($data->date), 'jS F Y') ; ?></p>
 			<p id="Infoinfo" style="margin-bottom: 0;">Infomation: <?php echo (is_null($data->information)) ? '-' : str_replace("\\n", "<br>",$data->information); ?></p>
 		</div>
+		<?php if($data->status != 'unpublished'){ ?>
 		<div class="col-md-6">
 			<h3>Settings</h3>
 			<div class="form-floating">
@@ -76,7 +78,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 						<option value="0" selected>Single question</option>
 						<option value="1">All questions</option>
 					</select>
-					<label for="categorySelect">Modus</label>
+		0			<label for="categorySelect">Modus</label>
 			</div>
 			<div class="form-check form-switch">
 				<input onclick="settings();" class="form-check-input" type="checkbox" id="settingTiming" checked>
@@ -112,6 +114,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 				<label class="form-check-label" for="settingSubmit">Multiple submission</label>
 			</div>
 		</div>
+		<?php } ?>
 		</div>
 		<div class="row g-5">
 		<div class="col-md-6">
@@ -119,12 +122,14 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 			<ul id="doc" class="icon-list">
 			</ul>
 		</div>
+		<?php if($data->status != 'unpublished'){ ?>
 		<div class="col-md-6">
 			<hr class="col-3 col-md-2">
 			<div class="mb-5">
 				<a onclick="start()"  class="btn btn-primary btn-lg px-4">Start</a>
 			</div>
 		</div>
+		<?php } ?>
 		</div>
 	</div>
 	<div id="divResult" style="display: none;">

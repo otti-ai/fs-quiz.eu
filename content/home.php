@@ -20,11 +20,9 @@
 
 	<h2>Dates</h2>
 	  <ul class="icon-list">
-		<li>FS Alpe Adria Quiz on 20th January 10.00 CET</li>
-  		<li>26th January:</li>
-			<?php require('./php/eventgraph2.php'); ?>
 		<li>FS Switzerland testquiz on 12th January 9.00 CET</li>
-		<li>FS-Quiz testquiz on 20th January</li>
+			<?php require('./php/eventgraph.php'); ?>
+		<li>FS Spain quiz TBA</li>
 	  </ul>
 	<hr class="col-3 col-md-2">
 
@@ -56,6 +54,13 @@
           ?>
           <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
 		  <li><a target="_blank" href="https://www.formulastudent.pt/registration-quiz">FS Portugal</a></li>
+        </ul>
+		<h2>Registration dates:</h2>
+		 <p>Start of registrations on a first come, first served system</p>
+		<ul class="icon-list">
+          <li>19th January 9:00 CET <a target="_blank" href="https://www.formulastudent.ro/">FS Romania</a></li>
+		  <li>30th January 10:00 CET <a target="_blank" href="https://fstudent.ru/main/en">FS Russia</a></li>
+		  <li>1st February 9:00 CET <a target="_blank" href="https://www.formula-ata.it/">FS Italy</a></li>
         </ul>
       </div>
 

@@ -2,13 +2,11 @@
 
     <div class="container">
         <div class="row justify-content-start">
-          <div class="col-4">
-            <h4>20th January:</h4>
+          <div class="col-5 p-0">
+            <h5>20th January</h5>
           </div>
-          <div class="col-1">
-          </div>
-          <div class="col-7">
-            <h4>25th January:</h4>
+          <div class="col-7 p-0">
+            <h5>25th January</h5>
           </div>
         </div>
     </div>
@@ -48,7 +46,7 @@
                     <div class="p-0" style="background-color: black;width: 100%;height: 2px;"></div>
                 </div>
             </div>
-            <div class="col text-center p-0 ms-auto mt-auto mb-0 d-none d-sm-none d-md-block">
+            <div class="col text-center p-0 ms-auto mt-auto mb-0">
 
             </div>
             <div class="col text-center p-0 ms-auto mt-auto mb-0">
@@ -60,7 +58,7 @@
                     <div class="p-0" style="background-color: black;width: 100%;height: 2px;"></div>
                 </div>
             </div>
-            <div class="col text-center p-0 ms-auto mt-auto mb-0">
+            <div class="col text-center p-0 ms-auto mt-auto mb-0 d-none d-sm-none d-md-block">
                 <p class="mb-0 mt-3">13:00</p>
                 <div class="p-0" style="background-color: black;width: 2px;height: 1vw; margin-left: auto; margin-right: auto;"></div>
                 <div class="d-flex">
@@ -106,7 +104,7 @@
         </div>
       </div>
       <div id='' style='display:block;' class="row justify-content-md-center text-center">
-        <h4 class='m-0 p-0 mb-1' id=''>26th January:</h4>
+        <h5 class='m-0 p-0 mb-1' id=''>26th January</h5>
     </div>
     <div class="container" style="margin-left: auto; margin-right: auto;">
         <div class="row align-items-bottom justify-content-md-center flex-nowrap align-bottom">
@@ -200,10 +198,10 @@
                 </div>
             </div>
             <div class="col text-center p-0 ms-auto mt-auto mb-0">
-                <div data-bs-toggle="tooltip" data-bs-placement="top" title="FS Austria & France">
+                <a href="/quiz/69" target="_blank"><div data-bs-toggle="tooltip" data-bs-placement="top" title="FS Austria & France">
                     <img style="max-width:50%;max-height:75px;transform: translateX(-0%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/austria.png">
                     <img style="max-width:50%;max-height:75px;transform: translateX(-0%) rotate(-45deg);" src="https://fs-quiz.eu/img/events/france.png">
-                </div>
+                </div></a>
 
                 <p class="mb-0 mt-3">19:00</p>
                 <div class="p-0" style="background-color: black;width: 2px;height: 1vw; margin-left: auto; margin-right: auto;"></div>
@@ -216,7 +214,7 @@
         </div>
       </div>
       <div id='' style='display:block;' class="row justify-content-md-center text-center">
-        <h4 class='mt-4 p-0' id='timer'></h4>
+        <h5 class='mt-4 p-0' id='timer'></h5>
       </div>
       <p class='mt-1 p-0 text-end text-muted' id='timezone'>Timezone: CET</p>
 <script>
@@ -246,3 +244,4 @@ var x = setInterval(function() {
 
 }, 1000);
 </script>
+	</div>

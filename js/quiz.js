@@ -39,10 +39,10 @@ function loadFullQuiz(){
 	skipSetting = document.getElementById("settingSkip");
 	timeEndSetting = document.getElementById("settingAutoNextDiv");
 	submitSetting = document.getElementById("settingSubmit");
-	modusSwitch();
-	loadInformation();
-	getQuiz();
 	loaddocuments();
+	loadInformation();
+	modusSwitch();
+	getQuiz();
 }
 
 function calculateDuration(){
