@@ -1,5 +1,5 @@
 <?php
-$v = isset($api_version) ? $api_version : 1;
+$v = isset($api_version) ? $api_version : 2;
 require($_SERVER['DOCUMENT_ROOT']. '/2/orginal_db.php');
 require($_SERVER['DOCUMENT_ROOT']. '/2/statistic.php');
 ?>
@@ -61,7 +61,7 @@ require($_SERVER['DOCUMENT_ROOT']. '/2/statistic.php');
               </li>
               <li class="nav-item">
                 <select class="form-select form-select-sm" id="version" onchange="selectVersion()">
-                  <option <?php echo(($v == 2) ? 'selected' : '') ?> value="2" disabled>2</option>
+                  <option <?php echo(($v == 2) ? 'selected' : '') ?> value="2">2</option>
                   <option <?php echo(($v != 2) ? 'selected' : '') ?> value="1">1</option>  
                 </select>
               </li>
