@@ -13,8 +13,8 @@
         <img alt="available questions" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=questions&label=questions"/></a>
     <a href="https://fs-quiz.eu/quizzes" alt="All questions">
         <img alt="last update" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=last_change&label=last%20update"/></a>
-    <a href="https://fs-quiz.eu/" alt="Website">
-        <img alt="avg daily views" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=avg_daily_views&label=avg%20daily%20views"/></a>
+    <!--<a href="https://fs-quiz.eu/" alt="Website">
+        <img alt="avg daily views" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=avg_daily_views&label=avg%20daily%20views"/></a>-->
 </p>
 
 # General
