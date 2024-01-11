@@ -21,6 +21,7 @@
 	<h2>Dates</h2>
 	  <ul class="icon-list">
 		<li>FS Switzerland testquiz on 12th January 9.00 CET</li>
+		<li>FS Czech Republic testquiz on 19th January 15.00 CET</li>
 			<?php require('./php/eventgraph.php'); ?>
 		<li>FS Spain quiz TBA</li>
 	  </ul>
@@ -72,7 +73,11 @@
             foreach($docs as $doc){
               if($doc->type != "Registration"){
                 $first = true;
-                echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
+                if($doc->version == 'online'){
+                  echo '<li><a target="_blank" href="'.$doc->path.'">';
+                }else{
+                  echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
+                }
                 if(count($doc->event)>0){
                   foreach($doc->event as $event){
                     if($first){
@@ -85,11 +90,11 @@
                 }else{
                   echo 'FS';
                 }
-				if($doc->version == 'online'){
-					 echo ' '.$doc->type.' '.$doc->year.' (' .$doc->version.')'.'</a></li>';
-				}else{
-					 echo ' '.$doc->type.' '.$doc->year.' (v' .$doc->version.')'.'</a></li>';
-				}
+                if($doc->version == 'online'){
+                  echo ' '.$doc->type.' '.$doc->year.' (' .$doc->version.')'.'</a></li>';
+                }else{
+                  echo ' '.$doc->type.' '.$doc->year.' (v' .$doc->version.')'.'</a></li>';
+                }
               }
             }
           ?>

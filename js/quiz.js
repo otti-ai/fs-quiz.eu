@@ -385,7 +385,11 @@ function getQuiz(){//types anedern; bilder
 function loaddocuments(){
 	var documents = jsondata.documents;
 	documents.forEach(function(item){
-		document.getElementById("doc").innerHTML += "<li><a href='https://doc.fs-quiz.eu/"+item.path+"' target='_blank'/>"+item.path.substring(0,item.path.length-4)+"</li>";
+		if(item.version == "online"){
+			document.getElementById("doc").innerHTML += "<li><a href='"+item.path+"' target='_blank'/>"+jsondata.event[0].short_name+"_"+item.type+"_"+jsondata.year+"(online)</li>";
+		}else{
+			document.getElementById("doc").innerHTML += "<li><a href='https://doc.fs-quiz.eu/"+item.path+"' target='_blank'/>"+item.path.substring(0,item.path.length-4)+"</li>";
+		}
 	});
 }
 
