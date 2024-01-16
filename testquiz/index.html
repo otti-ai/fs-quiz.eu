@@ -15,17 +15,16 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="img/icons/favicon/favicon-96x96.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon/favicon-16x16.png">
-	<link rel="manifest" href="img/icons/favicon/manifest.json">
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="img/icons/favicon/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<base href="">         <!--  https://fs-quiz.eu/ -->
+	<base href="https://fs-quiz.eu/">         <!--  https://fs-quiz.eu/ -->
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-	<script src="../js/bootstrap.min.js"></script>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+	<script src="./js/bootstrap.min.js"></script>
 
 	
     <title>FS-Quiz - Testquiz 2024</title>
@@ -56,7 +55,7 @@
 
     <div class="container container-md d-flex align-items-center justify-content-center" style="height: 80vh;">
         <!-- Loading -->
-        <div style="display:none;" id="loader" class="spinner-border" role="status">
+        <div style="display:display;" id="loader" class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
         <!-- Orginal -->
@@ -78,9 +77,9 @@
             </div>
         </div>
         <!-- Start -->
-        <div style="display:block; width: 100%; max-width: 600px;" id="quizground">
+        <div style="display:none; width: 100%; max-width: 600px;" id="infoBody">
             <div id="bodyStart" class="card text-center">
-                <div class="card-body" id="loginBody">
+                <div class="card-body">
                     <h5 class="card-title">FS-Quiz Testquiz 2024</h5>
                     <p class="text-start">
                         This is the section of the test quiz. The test quiz will take place on the <strong>14 of January 
@@ -93,8 +92,8 @@
                         This is possible until shortly before the quiz. 
                     </p>
                     <hr>
-                    <button type="button" class="btn btn-primary" onclick="" >Log in</button>
-                    <button type="button" class="btn btn-primary" onclick="" >Sign up</button>
+                    <button onclick="openLogin()" type="button" class="btn btn-primary">Log in</button>
+                    <button onclick="openRegistration()" type="button" class="btn btn-primary" >Sign up</button>
                 </div>
                 <div id="time" class="card-footer text-muted"></div>
             </div>
@@ -106,8 +105,8 @@
                     <h5 class="card-title">Sign in</h5>
                     <form>
                         <div class="form-floating" style="margin-bottom: -1px">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
-                            <label for="floatingInput">Email address</label>
+                            <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+                            <label for="floatingEmail">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
@@ -116,7 +115,7 @@
                         <button type="submit" class="btn btn-primary mt-2">Sign in</button>
                     </form>
                 </div>
-                <div id="" class="card-footer text-muted">Don't have an account? <a href="#">Sign up</a></div>
+                <div id="" class="card-footer text-muted">Don't have an account? <a onclick="openRegistration()" href="#">Sign up</a></div>
             </div>
         </div>
         <!-- Registration -->
@@ -126,95 +125,131 @@
                     <h5 class="card-title">Sign up</h5>
                     <form>
                         <div class="form-floating" style="margin-bottom: -1px">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Team FS-Quiz" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
-                            <label for="floatingInput">Teamname</label>
+                            <input type="text" class="form-control" id="floatingNameReg" placeholder="Team FS-Quiz" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+                            <label for="floatingNameReg">Teamname</label>
                         </div>
                         <div class="form-floating" style="margin-bottom: -1px">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
-                            <label for="floatingInput">Email address</label>
+                            <input type="email" class="form-control" id="floatingEmailReg" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
+                            <label for="floatingEmailReg">Email address</label>
                         </div>
                         <div class="form-floating" style="margin-bottom: -1px">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
-                            <label for="floatingPassword">Password</label>
+                            <input type="password" class="form-control" id="floatingPasswordReg" placeholder="Password" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
+                            <label for="floatingPasswordReg">Password</label>
                         </div>
                         <div class="form-floating mb-3" style="margin-bottom: -1px">
-                            <input type="password" class="form-control" id="floatingPasswordcon" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
-                            <label for="floatingPasswordcon">Confirm Password </label>
+                            <input type="password" class="form-control" id="floatingPasswordconReg" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
+                            <label for="floatingPasswordconReg">Confirm Password </label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign up</button>
+                        <button onclick="registrations()" type="submit" class="btn btn-primary">Sign up</button>
                     </form>
                 </div>
-                <div id="" class="card-footer text-muted">Do you have an account? <a href="#">Sign in</a></div>
+                <div id="" class="card-footer text-muted">Do you have an account? <a onclick="openLogin()" href="#">Sign in</a></div>
             </div>
         </div>
     </div>
  <script> 
-    //countdown
-    var countToEnd = new Date("Jan 21, 2024 12:00:00").getTime();
-    var countToStart = new Date("Jan 15, 2024 15:00:00").getTime();
-    
-    var x = setInterval(function() {
-        var now = new Date().getTime();
-        var distanceStart = countToStart - now;
-        var distanceEnde = countToEnd - now;
-        var time;
-        var text;
-    
-        if (distanceStart < 0) {
-            //quiz gestartet
-            time = distanceEnde;
-            if (distanceEnde > 0){
-                //quiz laeuft
-                text = "endet"
-            }else{
-                //quiz ende
+	getStatus();
+    //bodys
+    var regBody = document.getElementById("registrationBody");
+    var loginBody = document.getElementById("loginBody");
+    var infoBody = document.getElementById("infoBody");
+    var loader = document.getElementById("loader");
 
-                text = "beendet"
-                clearInterval(x);
-            }
+    function openLogin(){
+        infoBody.style.display = "none";
+        regBody.style.display = "none";
+        loginBody.style.display = "block";
+    }
+
+    function openRegistration(){
+        infoBody.style.display = "none";
+        loginBody.style.display = "none";
+        regBody.style.display = "block";
+    }
+
+
+
+    //is login
+    var loginID;
+
+
+    var timeDisplay = document.getElementById("time");
+    var counter;
+
+    
+    function isLogin(){
+        if(loginID){
+
         }else{
-            //quiz nicht gestartet
-            time = distanceStart;
-            text = "startet"
+            
         }
+    }
+
+    async function getStatus() {
+        let result = await fetch("https://testquiz.fs-quiz.eu/quiz.php");
+        let text = await result.text();
+        let json = JSON.parse(text);
+        if(json.status == "wait"){
+            loader.style.display = "none";
+            infoBody.style.display = "block";
+        }
+        counter = setInterval(timeCounter(json.end), 1000);
+    }
+
+    async function registrations() {
+        loader.style.display = "block";
+        regBody.style.display = "none";
+        let regist = await fetch("https://testquiz.fs-quiz.eu/registration.php", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            //make sure to serialize your JSON body
+            body: JSON.stringify({
+                teamname: "hi",
+                email: "ddd@ddd",
+                passwort: "ddddddd"
+            })
+        })
+        let text = await result.text();
+        if(text == "ok"){
+            loader.style.display = "none";
+            infoBody.style.display = "block";
+        }
+    }
+
+
+    //countdown
+    //var countToEnd = new Date("Jan 21, 2024 12:00:00").getTime();
+    //var countToStart = new Date("Jan 20, 2024 13:00:00").getTime();
+    
+    function timeCounter(time){
+        var now = new Date().getTime();
+        var distanceTime = time*1000 - now;
+    
+        if (distanceTime < 0) {
+            //quiz gestartet
+            clearInterval(counter);
+        } 
     
         // Time
-        var days = Math.floor(time / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((time % (1000 * 60)) / 1000);
+        var days = Math.floor(distanceTime / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distanceTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distanceTime % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distanceTime % (1000 * 60)) / 1000);
     
         // Display 
         if(days>0){
-            document.getElementById("time").innerHTML = "Quiz starts in "+days+" days";
+            timeDisplay.innerHTML = "Quiz starts in "+days+" days";
             if(days<2){
-                document.getElementById("time").innerHTML = "Quiz starts in one day";
+                timeDisplay.innerHTML = "Quiz starts in one day";
             }
         }else{
-            if(hours>0){
-                document.getElementById("time").innerHTML = "Quiz starts in "+hours+" hours";
-                if(hours<2){
-                    document.getElementById("time").innerHTML = "Quiz starts in one hour";
-                }
-            }else{
-                if(minutes>0){
-                    document.getElementById("time").innerHTML = "Quiz starts in "+minutes+" minutes";
-                    if(minuten<2){
-                        document.getElementById("time").innerHTML = "Quiz starts in one minute";
-                    }
-                }else{
-                    if(seconds>0){
-                        document.getElementById("time").innerHTML = "Quiz starts in "+seconds+" seconds";
-                        if(seconds<2){
-                            document.getElementById("time").innerHTML = "Quiz starts in one second";
-                        }
-                    }else{
-                        document.getElementById("time").innerHTML = "";
-                    }
-                }
-            }
+            timeDisplay.innerHTML = "Quiz starts in " +hours+"h "+minutes+"m "+seconds+"s";
         }
-    }, 1000);
+    }
+
     
     </script>
     <footer class="footer mt-auto bg-light">
