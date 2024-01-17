@@ -77,26 +77,34 @@
             </div>
         </div>
         <!-- Start -->
-        <div style="display:none; width: 100%; max-width: 600px;" id="infoBody">
+        <div style="display:none; width: 100%; max-width: 800px;" id="infoBody">
+            <img src="../cat.jpg">
             <div id="bodyStart" class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">FS-Quiz Testquiz 2024</h5>
-                    <p class="text-start">
-                        This is the section of the test quiz. The test quiz will take place on the <strong>20th of January at 13:00 CET</strong>. 
-                        The quiz will consist of new questions in the style of typical registration questions. The questions must be 
-                        answered one after the other in a given time. The number of correct answers is more important than the total 
-                        time. The ranking list and the correct answers will be published shortly after the quiz.<br>
-                        To take part in the quiz, <strong>you must first register your team</strong>. This is possible until shortly before the quiz.<br>
-                        In case of problems: info@fs-quiz.eu
-                    </p>
-                    <hr>
-                    <div id="notLoginContainer">
-                        <button onclick="openLogin()" type="button" class="btn btn-primary">Log in</button>
-                        <button onclick="openRegistration()" type="button" class="btn btn-primary" >Sign up</button>
+                <div class="row g-0">
+                    <div class="col-md-4 d-none d-sm-none d-md-block">
+                        <img style="object-fit: cover; height: 100%;" src="https://quiz.fs-quiz.eu/fred.png" class="img-fluid rounded-start" alt="FSG Fred">
                     </div>
-                    <div id="loginContainer">
-                        <h4>You are successfully logged in!</h4>
-                        <p>Waiting for quiz start</p>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">FS-Quiz Testquiz 2024</h5>
+                            <p class="text-start">
+                                This is the section of the test quiz. The test quiz will take place on the <strong>20th of January at 13:00 CET</strong>. 
+                                The quiz will consist of new questions in the style of typical registration questions. The questions must be 
+                                answered one after the other in a given time. The number of correct answers is more important than the total 
+                                time. The ranking list and the correct answers will be published shortly after the quiz.<br>
+                                To take part in the quiz, <strong>you must first register your team</strong>. This is possible until shortly before the quiz.<br>
+                                In case of problems: info@fs-quiz.eu
+                            </p>
+                            <hr>
+                            <div id="notLoginContainer">
+                                <button onclick="openLogin()" type="button" class="btn btn-primary">Log in</button>
+                                <button onclick="openRegistration()" type="button" class="btn btn-primary" >Sign up</button>
+                            </div>
+                            <div id="loginContainer">
+                                <h4>You are successfully logged in!</h4>
+                                <p>Waiting for quiz start</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="time" class="card-footer text-muted"></div>
