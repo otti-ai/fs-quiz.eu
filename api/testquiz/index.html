@@ -254,7 +254,7 @@
         let email = document.getElementById("floatingEmailReg").value;
         let pass = document.getElementById("floatingPasswordReg").value;
         let pass2 = document.getElementById("floatingPasswordconReg").value;
-        if(teamname == "" || email == "" || pass == "" || pass2 == "" || pass != pass2){ return;}
+        if(teamname == "" || email == "" || pass == "" || pass2 == ""){ return;}
         if(pass != pass2){
             document.getElementById("error-reg").innerHTML = "Password not the same";
             return;
