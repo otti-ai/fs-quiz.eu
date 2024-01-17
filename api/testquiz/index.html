@@ -102,6 +102,21 @@
                 <div id="time" class="card-footer text-muted"></div>
             </div>
         </div>
+        <!-- Successfull registration -->
+        <div style="display:none; width: 100%; max-width: 600px;" id="regSuccesBody">
+            <div id="bodyStart" class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Successfull</h5>
+                    <p class="text-start">
+                        Your team is now registered for the test quiz.<br>
+                        To answer the quiz you have to log in before the quiz starts
+                    </p>
+                    <hr>
+                    <button onclick="openStart()" type="button" class="btn btn-primary">Back</button>
+                </div>
+                <div id="time" class="card-footer text-muted"></div>
+            </div>
+        </div>
         <!-- Login -->
         <div style="display:none; width: 100%; max-width: 400px;" id="loginBody">
             <div id="bodyStart" class="card text-center">
@@ -159,6 +174,7 @@
     var regBody = document.getElementById("registrationBody");
     var loginBody = document.getElementById("loginBody");
     var infoBody = document.getElementById("infoBody");
+    var regSuccesBody = document.getElementById("regSuccesBody");
     var loader = document.getElementById("loader");
 
     function openLogin(){
@@ -173,6 +189,10 @@
         regBody.style.display = "block";
     }
 
+    function openStart(){
+        regSuccesBody.style.display = "none";
+        infoBody.style.display = "block";
+    }
 
 
     //is login
@@ -242,7 +262,7 @@
         let text = await regist.text();
         if(text == "ok"){
             loader.style.display = "none";
-            infoBody.style.display = "block";
+            regSuccesBody.style.display = "block";
         }
         if(text == "error"){
             loader.style.display = "none";
