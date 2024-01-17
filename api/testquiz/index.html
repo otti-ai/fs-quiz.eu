@@ -86,7 +86,8 @@
                         The quiz will consist of new questions in the style of typical registration questions. The questions must be 
                         answered one after the other in a given time. The number of correct answers is more important than the total 
                         time. The ranking list and the correct answers will be published shortly after the quiz.<br>
-                        To take part in the quiz, <strong>you must first register your team</strong>. This is possible until shortly before the quiz.
+                        To take part in the quiz, <strong>you must first register your team</strong>. This is possible until shortly before the quiz.<br>
+                        In case of problems: info@fs-quiz.eu
                     </p>
                     <hr>
                     <div id="notLoginContainer">
@@ -144,6 +145,7 @@
                             <input required type="password" class="form-control" id="floatingPasswordconReg" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
                             <label for="floatingPasswordconReg">Confirm Password</label>
                         </div>
+                        <p id="error-reg" class="text-danger text-start"></p>
                         <button onclick="registrations()" type="submit" class="btn btn-primary">Sign up</button>
                     </form>
                 </div>
@@ -241,6 +243,11 @@
         if(text == "ok"){
             loader.style.display = "none";
             infoBody.style.display = "block";
+        }
+        if(text == "error"){
+            loader.style.display = "none";
+            regBody.style.display = "block";
+            document.getElementById("error-reg").innerHTML = "Invalid";
         }
         isLogin();
     }
