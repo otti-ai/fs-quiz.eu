@@ -1,6 +1,6 @@
 <?php
 $result = "error";
-require($_SERVER['DOCUMENT_ROOT']. '/datenbank.php');
+require($_SERVER['DOCUMENT_ROOT']. '/testquiz/datenbank.php');
 $passwort = $_GET['passwort'];
 $statement = $pdo->prepare("SELECT * FROM `fs-testquiz-user` WHERE `email` = ?");
 $statement->execute(array($_GET["email"]));
