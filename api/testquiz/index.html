@@ -193,7 +193,7 @@
     }
 
     async function getStatus() {
-        let result = await fetch("https://quiz.fs-quiz.eu/testquiz/quiz.php");
+        let result = await fetch("https://quiz.fs-quiz.eu/quiz.php");
         let text = await result.text();
         let json = JSON.parse(text);
         if(json.status == "wait"){
@@ -213,7 +213,7 @@
 
         loginBody.style.display = "none";
         loader.style.display = "block";
-        let regist = await fetch("https://quiz.fs-quiz.eu/testquiz/login.php?email="+email+"&passwort="+pass);
+        let regist = await fetch("https://quiz.fs-quiz.eu/login.php?email="+email+"&passwort="+pass);
         let text = await regist.text();
         if(text == "error"){
             loader.style.display = "none";
@@ -236,7 +236,7 @@
 
         loader.style.display = "block";
         regBody.style.display = "none";
-        let regist = await fetch("https://quiz.fs-quiz.eu/testquiz/registration.php?teamname="+teamname+"&email="+email+"&passwort="+pass);
+        let regist = await fetch("https://quiz.fs-quiz.eu/registration.php?teamname="+teamname+"&email="+email+"&passwort="+pass);
         let text = await regist.text();
         if(text == "ok"){
             loader.style.display = "none";
