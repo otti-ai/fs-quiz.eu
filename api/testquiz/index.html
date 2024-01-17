@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<!-- ICONS-->
+	<link rel="apple-touch-icon" sizes="57x57" href="img/icons/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="img/icons/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/icons/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="img/icons/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/icons/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="img/icons/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="img/icons/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="img/icons/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/icons/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="img/icons/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="img/icons/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon/favicon-16x16.png">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="img/icons/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="https://fs-quiz.eu/">         <!--  https://fs-quiz.eu/ -->
+    <!-- Bootstrap -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+	<script src="./js/bootstrap.min.js"></script>
+
+	
+    <title>FS-Quiz - Testquiz 2024</title>
+  </head>
+  <body class="d-flex flex-column min-vh-100"> 
+
+ 
+
+  <!-- Navigation -->
+	<header class="p-3 bg-dark text-white">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid col-lg-8">
+				<a class="navbar-brand" href="#">FS-Quiz</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="nav-item"><a target="_blank" href="https://github.com/otti-ai/fs-quiz.eu"><img src="/img/icons/github.svg" alt="Github Logo" width="25" height="25" style="filter: invert(1);" class="d-inline-block align-text-center"></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+    <div class="container container-md d-flex align-items-center justify-content-center" style="height: 80vh;">
+        <!-- Loading -->
+        <div style="display:display;" id="loader" class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <!-- Orginal -->
+        <div style="display:none;" id="myDiv">
+            <div id="bodyStart" class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title"><b style="font-family:'Bremergy'; letter-spacing: 1px;">Bremergy</b> Quiz 2023</h5>
+                    <p id="spruchAnfang" class="card-text">Hi, hier muss ein Spruch hin</p>
+                    <div class="d-grid gap-2 mb-3">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="startQuiz()" id="start">Start</button>
+                    </div>
+                    <hr>
+                    <button type="button" class="btn btn-info" onclick="score()" >Statistik</button>
+                    <button type="button" class="btn btn-info" onclick="multi()" >Multi</button>
+                    <button type="button" class="btn btn-info" onclick="rangliste()" >Rangliste</button>
+                    <button type="button" class="btn btn-info" onclick="" disabled>Korrektur</button>
+                </div>
+                <div  class="card-footer text-muted"></div>
+            </div>
+        </div>
+        <!-- Start -->
+        <div style="display:none; width: 100%; max-width: 600px;" id="infoBody">
+            <div id="bodyStart" class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">FS-Quiz Testquiz 2024</h5>
+                    <p class="text-start">
+                        This is the section of the test quiz. The test quiz will take place on the <strong>20th of January at 13:00 CET</strong>. 
+                        The quiz will consist of new questions in the style of typical registration questions. The questions must be 
+                        answered one after the other in a given time. The number of correct answers is more important than the total 
+                        time. The ranking list and the correct answers will be published shortly after the quiz.<br>
+                        To take part in the quiz, <strong>you must first register your team</strong>. This is possible until shortly before the quiz.
+                    </p>
+                    <hr>
+                    <div id="notLoginContainer">
+                        <button onclick="openLogin()" type="button" class="btn btn-primary">Log in</button>
+                        <button onclick="openRegistration()" type="button" class="btn btn-primary" >Sign up</button>
+                    </div>
+                    <div id="loginContainer">
+                        <h4>You are successfully logged in!</h4>
+                        <p>Waiting for quiz start</p>
+                    </div>
+                </div>
+                <div id="time" class="card-footer text-muted"></div>
+            </div>
+        </div>
+        <!-- Login -->
+        <div style="display:none; width: 100%; max-width: 400px;" id="loginBody">
+            <div id="bodyStart" class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Log in</h5>
+                    <form onsubmit="return false">
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input required type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+                            <label for="floatingEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input required type="password" class="form-control" id="floatingPassword" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                        <p id="error-login" class="text-danger text-start"></p>
+                        <button onclick="logins()" type="submit" class="btn btn-primary mt-2">Log in</button>
+                    </form>
+                </div>
+                <div id="" class="card-footer text-muted">Don't have an account? <a onclick="openRegistration(); return false;" href="#">Sign up</a></div>
+            </div>
+        </div>
+        <!-- Registration -->
+        <div style="display:none; width: 100%; max-width: 400px;" id="registrationBody">
+            <div id="bodyStart" class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Sign up</h5>
+                    <form onsubmit="return false">
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input required type="text" class="form-control" id="floatingNameReg" placeholder="Team FS-Quiz" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+                            <label for="floatingNameReg">Teamname</label>
+                        </div>
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input required type="email" class="form-control" id="floatingEmailReg" placeholder="name@example.com" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
+                            <label for="floatingEmailReg">Email address</label>
+                        </div>
+                        <div class="form-floating" style="margin-bottom: -1px">
+                            <input required type="password" class="form-control" id="floatingPasswordReg" placeholder="Password" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-top-left-radius: 0;">
+                            <label for="floatingPasswordReg">Password</label>
+                        </div>
+                        <div class="form-floating mb-3" style="margin-bottom: -1px">
+                            <input required type="password" class="form-control" id="floatingPasswordconReg" placeholder="Password" style="border-top-right-radius: 0; border-top-left-radius: 0;">
+                            <label for="floatingPasswordconReg">Confirm Password</label>
+                        </div>
+                        <button onclick="registrations()" type="submit" class="btn btn-primary">Sign up</button>
+                    </form>
+                </div>
+                <div id="" class="card-footer text-muted">Do you have an account? <a onclick="openLogin(); return false;" href="#">Log in</a></div>
+            </div>
+        </div>
+    </div>
+ <script> 
+	getStatus();
+    //bodys
+    var regBody = document.getElementById("registrationBody");
+    var loginBody = document.getElementById("loginBody");
+    var infoBody = document.getElementById("infoBody");
+    var loader = document.getElementById("loader");
+
+    function openLogin(){
+        infoBody.style.display = "none";
+        regBody.style.display = "none";
+        loginBody.style.display = "block";
+    }
+
+    function openRegistration(){
+        infoBody.style.display = "none";
+        loginBody.style.display = "none";
+        regBody.style.display = "block";
+    }
+
+
+
+    //is login
+    var loginToken;
+
+
+    var timeDisplay = document.getElementById("time");
+    var counteInterval;
+    var endtime;
+
+    
+    function isLogin(){
+        if(loginToken){
+            document.getElementById("notLoginContainer").style.display = "none";
+            document.getElementById("loginContainer").style.display = "block";
+        }else{
+            document.getElementById("notLoginContainer").style.display = "block";
+            document.getElementById("loginContainer").style.display = "none";
+        }
+    }
+
+    async function getStatus() {
+        let result = await fetch("https://testquiz.fs-quiz.eu/quiz.php");
+        let text = await result.text();
+        let json = JSON.parse(text);
+        if(json.status == "wait"){
+            loader.style.display = "none";
+            infoBody.style.display = "block";
+            isLogin();
+        }
+        endtime = json.end;
+        timeCounter();
+        counteInterval = setInterval(timeCounter, 1000);
+    }
+
+    async function logins() {
+        let email = document.getElementById("floatingEmail").value;
+        let pass = document.getElementById("floatingPassword").value;
+        if(email == "" || pass == ""){ return;}
+
+        loginBody.style.display = "none";
+        loader.style.display = "block";
+        let regist = await fetch("https://testquiz.fs-quiz.eu/login.php?email="+email+"&passwort="+pass);
+        let text = await regist.text();
+        if(text == "error"){
+            loader.style.display = "none";
+            loginBody.style.display = "block";
+            document.getElementById("error-login").innerHTML = "Invalid";
+        }else{
+            loader.style.display = "none";
+            infoBody.style.display = "block";
+            loginToken = text;
+        }
+        isLogin();
+    }
+
+    async function registrations() {
+        let teamname = document.getElementById("floatingNameReg").value;
+        let email = document.getElementById("floatingEmailReg").value;
+        let pass = document.getElementById("floatingPasswordReg").value;
+        let pass2 = document.getElementById("floatingPasswordconReg").value;
+        if(teamname == "" || email == "" || pass == "" || pass2 == "" || pass != pass2){ return;}
+
+        loader.style.display = "block";
+        regBody.style.display = "none";
+        let regist = await fetch("https://testquiz.fs-quiz.eu/registration.php?teamname="+teamname+"&email="+email+"&passwort="+pass);
+        let text = await regist.text();
+        if(text == "ok"){
+            loader.style.display = "none";
+            infoBody.style.display = "block";
+        }
+        isLogin();
+    }
+
+
+    //countdown
+    //var countToEnd = new Date("Jan 21, 2024 12:00:00").getTime();
+    //var countToStart = new Date("Jan 20, 2024 13:00:00").getTime();
+    
+    function timeCounter(){
+        var now = new Date().getTime();
+        var distanceTime = endtime*1000 - now;
+    
+        // Time
+        var days = Math.floor(distanceTime / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distanceTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distanceTime % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distanceTime % (1000 * 60)) / 1000);
+    
+        // Display 
+        if(days>0){
+            timeDisplay.innerHTML = "Quiz starts in "+days+"d " +hours+"h "+minutes+"m "+seconds+"s";
+        }else{
+            timeDisplay.innerHTML = "Quiz starts in " +hours+"h "+minutes+"m "+seconds+"s";
+        }
+    }
+
+    
+    </script>
+    <footer class="footer mt-auto bg-light">
+        <div class="col-lg-8 mx-auto p-3 text-dark">
+        
+        <div class="row justify-content-md-center">
+        <div class="col-md-auto text-muted">
+            <a>Created by Yannik Ottens · © 2023</a>
+          </div>
+        </div>
+        </div>
+      </footer>
+       </body>
+      </html>
