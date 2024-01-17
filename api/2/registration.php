@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 require($_SERVER['DOCUMENT_ROOT']. '/orginal_db.php');
 $token = random_bytes(8);
 $statement = $pdo->prepare("INSERT INTO `fs-testquiz-user` (`token`, `teamname`, `email`, `passwort`) VALUES (?, ?, ?, ?)");
