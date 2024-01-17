@@ -6,5 +6,3 @@ $statement = $pdo->prepare("INSERT INTO `fs-testquiz-user` (`token`, `teamname`,
 $statement->execute(array($token, $_GET["teamname"], $_GET["email"], $passwort_hash));
 echo "ok";
 ?>
-
-$pdo = new PDO("mysql:host=192.168.111.2252C3306; dbname=fs-quiz", 'quiz', '86~?4KB/i++|');
