@@ -57,7 +57,10 @@
 			});
 			$htmlText .= '<ul class="icon-list">';
 			foreach($quizzesCV as $quiz){
-				$htmlText .= '<li><a href="/quiz/'.$quiz->quiz_id.'">'.$quiz->year.'</a>';
+				$htmlText .= '<li><a href="/quiz/'.$quiz->quiz_id.'">'.$quiz->year;
+				if(str_contains($quiz->information,'Retake')){$htmlText .= ' V2';}
+				if(str_contains($quiz->information,'Testquiz')){$htmlText .= ' Test';}
+				$htmlText .= "</a>";
 				if($quiz->status == "missing_correct_answer"){$htmlText .= "*";}
 				if($quiz->status == "incomplete"){$htmlText .= "**";}
 				$htmlText .= '</li>';
