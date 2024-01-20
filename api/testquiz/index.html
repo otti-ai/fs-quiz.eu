@@ -53,9 +53,9 @@
 		</nav>
 	</header>
 
-    <div class="container container-md d-flex align-items-center justify-content-center" style="height: 80vh;">
+    <div class="container container-md d-flex align-items-center justify-content-center p-3" style="min-height: 80vh;">
         <!-- Loading -->
-        <div style="display:display;" id="loader" class="spinner-border" role="status">
+        <div style="display:block;" id="loader" class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
         <!-- Orginal -->
@@ -103,6 +103,7 @@
                             <div id="loginContainer">
                                 <h4>You are successfully logged in!</h4>
                                 <p>Waiting for quiz start</p>
+                                <p>Quiz will starts automatically.<br><strong>Do not reload the page!</strong></p>
                             </div>
                         </div>
                     </div>
@@ -122,7 +123,6 @@
                     <hr>
                     <button onclick="openStart()" type="button" class="btn btn-primary">Back</button>
                 </div>
-                <div id="time" class="card-footer text-muted"></div>
             </div>
         </div>
         <!-- Login -->
@@ -175,20 +175,98 @@
                 <div id="" class="card-footer text-muted">Do you have an account? <a onclick="openLogin(); return false;" href="#">Log in</a></div>
             </div>
         </div>
+        <!-- Quiz Body -->
+        <div style="display:none; width: 100%; max-width: 900px;" id="quizbody">
+            <div id="bodyStart" class="card text-center">
+                <div class="card-body">
+                    <h5 id="questionTitle" class="card-title"></h5>
+                    <p id="questionText" class="text-start">
+                    </p>
+                    <hr>
+                    <div id="questionAnswers">
+                    </div>
+                </div>
+                <div id="time2" class="card-footer text-muted"></div>
+            </div>
+        </div>
     </div>
  <script> 
-	getStatus();
+	setup();
     //bodys
     var regBody = document.getElementById("registrationBody");
     var loginBody = document.getElementById("loginBody");
     var infoBody = document.getElementById("infoBody");
     var regSuccesBody = document.getElementById("regSuccesBody");
     var loader = document.getElementById("loader");
+    var quizbody = document.getElementById("quizbody");
+
+    var questionTitle = document.getElementById("questionTitle");
+    var questionText = document.getElementById("questionText");
+    var questionAnswers = document.getElementById("questionAnswers");
+
+    var resultSend = true;
+    var reload;
+    var loginToken;
+    var questionId;
+
+    var timeDisplay = document.getElementById("time");
+    var timeDisplayQuiz = document.getElementById("time2");
+    var counteInterval;
+    var endtime;
+    var quizstart = 1705752000;
+    var isQuizStart = false;
+    var isTimeOver = false;
+    
 
     function openLogin(){
         infoBody.style.display = "none";
         regBody.style.display = "none";
         loginBody.style.display = "block";
+    }
+
+    async function openRanking(){
+        quizbody.style.display = "none";
+        infoBody.style.display = "none";
+        loader.style.display = "block";
+        let response =  await fetch("https://quiz.fs-quiz.eu/ranking.php");//https://quiz.fs-quiz.eu
+        let text = await response.text();
+        quizbody.style.display = "block";
+        loader.style.display = "none";
+        questionAnswers.innerHTML = '';
+        questionTitle.innerHTML = 'Ranking';
+        questionText.innerHTML = text;
+        timeDisplayQuiz.innerHTML = "Ranking";
+    }
+
+    async function sendAnswer(answer){
+        loader.style.display = "block";
+        quizbody.style.display = "none";
+        let respons = await fetch("https://quiz.fs-quiz.eu/setAnswer.php?id="+loginToken+"&question="+questionId+"&result="+answer.trim());//https://quiz.fs-quiz.eu
+        let text = await respons.text();
+        switch(text) {
+            case "error":
+                //antwort bereits gesetzt
+                break;
+            case "ok":
+                loader.style.display = "none";
+                quizbody.style.display = "block";
+                console.log(answer);
+                resultSend = true;
+                setCookie('resultSend','true');
+                showWaitForNextQuestion();
+                if(isTimeOver){
+                    getStatus();
+                }
+                break;
+            default:
+                //andere fehler
+        }
+    }
+
+    function showWaitForNextQuestion(){
+        questionAnswers.innerHTML = '';
+        questionTitle.innerHTML = 'Waiting for the next question';
+        questionText.innerHTML = 'The next question will be loaded automatically.<br><strong>Do not reload the page!</strong>';
     }
 
     function openRegistration(){
@@ -202,16 +280,6 @@
         infoBody.style.display = "block";
     }
 
-
-    //is login
-    var loginToken;
-
-
-    var timeDisplay = document.getElementById("time");
-    var counteInterval;
-    var endtime;
-
-    
     function isLogin(){
         if(loginToken){
             document.getElementById("notLoginContainer").style.display = "none";
@@ -222,18 +290,82 @@
         }
     }
 
+    function setup(){
+        endtime = quizstart;
+        loginToken = getCookie('loginToken');
+        if(getCookie('resultSend') === 'true'){
+            resultSend = true;
+            reload = true;
+            console.log('Reload set');
+        }else{
+            resultSend = false;
+            reload = false;
+        }
+        getStatus();
+    }
+
     async function getStatus() {
-        let result = await fetch("https://quiz.fs-quiz.eu/quiz.php");
+        let result = await fetch("https://quiz.fs-quiz.eu/quiz.php"); //https://quiz.fs-quiz.eu
         let text = await result.text();
         let json = JSON.parse(text);
-        if(json.status == "wait"){
+        if(loginToken){
+            switch(json.status) {
+                case "wait":
+                    endtime = json.end;
+                    loader.style.display = "none";
+                    infoBody.style.display = "block";
+                    isLogin();
+                    timeCounter();
+                    counteInterval = setInterval(timeCounter, 1000);
+                    break;
+                case "end":
+                    getTeamResult();
+                    break;
+                default:
+                    endtime = json.end;
+                    isQuizStart = true;
+                    resultSend = false;
+                    isTimeOver = false;
+                    setCookie('resultSend','false');
+                    questionTitle.innerHTML = 'Question ' + json.status;
+                    questionId = json.status;
+                    questionText.innerHTML = json.question;
+                    questionAnswers.innerHTML = json.answers;
+                    infoBody.style.display = "none";
+                    loader.style.display = "none";
+                    quizbody.style.display = "block";
+                    if(reload){
+                        resultSend = true;
+                        showWaitForNextQuestion();
+                        console.log('Reload to');
+                        setCookie('resultSend','true');
+                        reload = false;
+                    }
+                    timeCounter();
+                    counteInterval = setInterval(timeCounter, 1000);
+            }
+        }else{
             loader.style.display = "none";
             infoBody.style.display = "block";
             isLogin();
+            timeCounter();
+            counteInterval = setInterval(timeCounter, 1000);
         }
-        endtime = json.end;
-        timeCounter();
-        counteInterval = setInterval(timeCounter, 1000);
+    }
+
+    async function getTeamResult() {
+        quizbody.style.display = "none";
+        infoBody.style.display = "none";
+        loader.style.display = "block";
+        clearInterval(counteInterval);
+        let response =  await fetch("https://quiz.fs-quiz.eu/result.php?token="+loginToken);//https://quiz.fs-quiz.eu
+        let text = await response.text();
+        quizbody.style.display = "block";
+        loader.style.display = "none";
+        questionAnswers.innerHTML = '';
+        questionTitle.innerHTML = 'Result';
+        questionText.innerHTML = text;
+        timeDisplayQuiz.innerHTML = '<a onclick="openRanking(); return false;" href="#">Open Ranking</a>';
     }
 
     async function logins() {
@@ -243,18 +375,20 @@
 
         loginBody.style.display = "none";
         loader.style.display = "block";
-        let regist = await fetch("https://quiz.fs-quiz.eu/login.php?email="+email+"&passwort="+pass);
+        let regist = await fetch("https://quiz.fs-quiz.eu/login.php?email="+email+"&passwort="+pass);//https://quiz.fs-quiz.eu
         let text = await regist.text();
         if(text == "error"){
             loader.style.display = "none";
             loginBody.style.display = "block";
+            infoBody.style.display = "none";
             document.getElementById("error-login").innerHTML = "Invalid";
         }else{
             loader.style.display = "none";
             infoBody.style.display = "block";
             loginToken = text;
+            setCookie('loginToken',text);
         }
-        isLogin();
+        getStatus();
     }
 
     async function registrations() {
@@ -270,7 +404,7 @@
 
         loader.style.display = "block";
         regBody.style.display = "none";
-        let regist = await fetch("https://quiz.fs-quiz.eu/registration.php?teamname="+teamname+"&email="+email+"&passwort="+pass);
+        let regist = await fetch("https://quiz.fs-quiz.eu/registration.php?teamname="+teamname+"&email="+email+"&passwort="+pass); //https://quiz.fs-quiz.eu
         let text = await regist.text();
         if(text == "ok"){
             loader.style.display = "none";
@@ -284,30 +418,91 @@
         isLogin();
     }
 
-
-    //countdown
-    //var countToEnd = new Date("Jan 21, 2024 12:00:00").getTime();
-    //var countToStart = new Date("Jan 20, 2024 13:00:00").getTime();
-    
-    function timeCounter(){
-        var now = new Date().getTime();
-        var distanceTime = endtime*1000 - now;
-    
-        // Time
-        var days = Math.floor(distanceTime / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distanceTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distanceTime % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distanceTime % (1000 * 60)) / 1000);
-    
-        // Display 
-        if(days>0){
-            timeDisplay.innerHTML = "Quiz starts in "+days+"d " +hours+"h "+minutes+"m "+seconds+"s";
+    function guestionTimeOver(){
+        if(isTimeOver){return;}
+        isTimeOver = true;
+        if(!resultSend && isQuizStart){
+            sendAnswer('');
+            console.log('time over');
         }else{
-            timeDisplay.innerHTML = "Quiz starts in " +hours+"h "+minutes+"m "+seconds+"s";
+            getStatus();
         }
     }
 
-    
+    function timeCounter(){
+        if(isTimeOver){return;}
+        var now = new Date().getTime();
+        var distanceTime = quizstart*1000 - now;
+        if(loginToken){
+            distanceTime = endtime*1000 - now;
+        }
+        
+        // Time up
+        if(distanceTime<=0 && loginToken){
+            clearInterval(counteInterval);
+            guestionTimeOver();
+        }
+
+        // Time
+        var timeString = timeToSting(distanceTime);
+
+        // Display 
+        if(distanceTime<60){
+            timeDisplayQuiz.style.color = "red";
+            timeDisplay.style.color = "red";
+        }else{
+            timeDisplayQuiz.style.color = "black";
+        }
+        if(distanceTime>0){
+            timeDisplay.innerHTML = "Quiz starts in: "+timeString;
+            timeDisplayQuiz.innerHTML = "Next question in: "+timeString;
+        }else{
+            timeDisplayQuiz.innerHTML = "Next question available";
+            timeDisplay.innerHTML = "Quiz has started";
+        }
+    }
+
+    function timeToSting(timeInSec) {
+        var timeString = '';
+        var days = Math.floor(timeInSec / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeInSec % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeInSec % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeInSec % (1000 * 60)) / 1000);
+
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+
+        if (days > 0) {timeString += days+'d ';}
+        if (hours != "00" || days > 0) {timeString += hours+'h ';}
+        
+        return timeString+minutes+'m '+seconds+'s';
+    }
+
+    //cookie
+    function setCookie(cname, cvalue) {
+        const d = new Date();
+        d.setTime(d.getTime() + (6*60*60*1000)); // 6 hours
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
     </script>
     <footer class="footer mt-auto bg-light">
         <div class="col-lg-8 mx-auto p-3 text-dark">
