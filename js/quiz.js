@@ -27,7 +27,8 @@ var result= {
 	"question": "",
 	"yAnswer": "",
 	"answer": "",
-	"currect": ""
+	"currect": "",
+	"solution": ""
 };
 var countLoad = 0;
 
@@ -219,7 +220,7 @@ function showResult(){
 	document.getElementById("divResult").innerHTML = html;
 }
 
-function htmlResultPart(i,correct,question,yAnswer,answer, id){
+function htmlResultPart(i,correct,yAnswer){
 	var html = '<div class="accordion-item">';
 	html += '<h2 class="accordion-header" id="panelTitel'+i+'"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panel'+i+'" aria-expanded="false" aria-controls="panel'+i+'">';
 	if(correct){
@@ -227,34 +228,109 @@ function htmlResultPart(i,correct,question,yAnswer,answer, id){
 	}else{
 		html += (i+1)+'/'+maxQuestions+': failed';
 	}
-	html += '</button></h2><div id="panel'+i+'" class="accordion-collapse collapse" aria-labelledby="panelTitel'+i+'"><div class="accordion-body"><p style="color:gray;margin:0px;" class"small fw-light">ID: '+id+'</p>';
-	html += question;
-	html += '<p style="margin-bottom: 0; margin-left: 2rem;" class="';
-	if(correct){
-		html += 'text-success';
-	}else{
-		html += 'text-danger';
+	html += '</button></h2><div id="panel'+i+'" class="accordion-collapse collapse" aria-labelledby="panelTitel'+i+'"><div class="accordion-body"><p style="color:gray;margin:0px;" class"small fw-light">ID: '+jsondata.questions[i].question_id+'</p>';
+	html += jsondata.questions[i].text.replace(/\\n/g,"<br />");
+	jsondata.questions[i].images.forEach(img => {
+		html += "<br><img class='img-fluid' src='https://img.fs-quiz.eu/"+img.path+"'>"
+	});
+	html += '<hr class="col-3 col-md-2">';
+	switch (jsondata.questions[i].type) {
+		case 'multi-choice':
+			answers = jsondata.questions[i].answers;
+			var c = 0;
+			answers.forEach(function(ans){
+				html += '<div class="form-check"><input disabled class="form-check-input';
+				if(ans.is_correct){
+					html += ' border-success';
+					if(yAnswer[c]){
+						html += ' bg-success';
+					}
+				}else if(yAnswer[c]){
+					html += ' border-danger bg-danger';
+				}
+
+				html += '" type="checkbox" name="answer'+i+'" id="answer'+i+'"';
+				if(yAnswer[c]){
+					html += ' checked';
+				}
+				c++;
+				html += '><label style="opacity: 1;" id="ansText" class="form-check-label ';
+				if(ans.is_correct){
+					html += 'text-success fw-bold';
+				}
+				html += '">'+ans.answer_text+'</label></div>';
+			});
+			  break;
+		case 'single-choice':
+			answers = jsondata.questions[i].answers;
+			answers.forEach(function(ans){
+				var givenAnswer = (ans.answer_text == yAnswer);
+				html += '<div class="form-check"><input class="form-check-input';
+				if(ans.is_correct){
+					html += ' border-success';
+					if(givenAnswer){
+						html += ' bg-success';
+					}
+				}else if(givenAnswer){
+					html += ' border-danger bg-danger';
+				}
+				html += '" type="radio" name="answer'+i+'" id="answer'+i+'"';
+				if(givenAnswer){
+					html += ' checked';
+				}
+				html += ' disabled><label style="opacity: 1;" id="ansText" class="form-check-label ';
+				if(ans.is_correct){
+					html += 'text-success fw-bold';
+				}
+				html += '">'+ans.answer_text+'</label></div>';
+			});
+			  break;
+		default:
+			answers = jsondata.questions[i].answers;
+			html += '<input disabled type="text" class="form-control" id="numberInput'+i+'" placeholder="'+yAnswer+'"';
+			if(!correct){
+				html += 'style="border-color: red"';
+			}
+			html += '>';
+			if(!correct){
+				if(answers){
+					html += '<br><p>Correct: ';
+					html += answers.map(c => c.answer_text).join(' or ');
+					html += '</p>';
+				}else{
+					html += '<br><p>Correct answer not available</p>';
+				}
+			}
+			break;
 	}
-	html += '">You:<br>'+yAnswer+'</p><p style="margin-left: 2rem;">Correct:<br>'+answer+'</p></div></div></div>';
+	html += '<hr class="col-3 col-md-2">';
+	var solutions = jsondata.questions[i].solution;
+	if(solutions.length > 0){
+		html += '<p class="text-muted" style="margin-left: 2rem; font-size: smaller;">Solution:<br>';
+		solutions.forEach(element => {
+			if(element.text){
+				html += element.text.replace(/\\n/g,"<br />").replace("null","");
+			}
+			element.images.forEach(img => {
+				html += "<br><img class='img-fluid' src='https://img.fs-quiz.eu/"+img.path+"'>"
+			});
+		});
+		html += '</p>';
+	}
+	html += '</div></div></div>';
 	return html;
 }
 
 function checkAnswers(){
 	countTrue = 0;
 	for(var i = 0; i< maxQuestions; i++){
-		var question = document.getElementById('questText'+i).innerHTML;
-		var id = document.getElementById('quest'+i).getAttribute('data-id');
 		var yAnswer = "";
-		var answer = "";
-		var typ = document.getElementById('quest'+i).getAttribute('data-typ');
+		var typ = jsondata.questions[i].type;
 		var options = document.getElementsByName("answer"+i);
 		var result = false;
 		switch(typ) {
 			case "single-choice":
 				options.forEach(function(item){
-					if(item.value == "true"){
-						answer = item.getAttribute('data-ans');
-					}
 					if(item.checked == true){
 						yAnswer = item.getAttribute('data-ans');
 						if(item.value == "true"){
@@ -265,16 +341,15 @@ function checkAnswers(){
 				break;
 			case "multi-choice":
 				result = true;
+				yAnswer = [];
 				options.forEach(function(item){
-					if(item.value == "true"){
-						answer += item.getAttribute('data-ans')+"<br>";
-					}
 					if(item.checked == true){
-						yAnswer += item.getAttribute('data-ans')+"<br>";
+						yAnswer.push(true);
 						if(item.value=="false"){
 							result = false;
 						}
 					}else{
+						yAnswer.push(false);
 						if(item.value=="true"){
 							result = false;
 						}
@@ -283,18 +358,17 @@ function checkAnswers(){
 				break;
 			case "input":
 				yAnswer = document.getElementById('numberInput'+i).value;
-				answer += document.getElementById('numberInput'+i).getAttribute('data-answer');
-				if(document.getElementById('numberInput'+i).value == document.getElementById('numberInput'+i).getAttribute('data-answer')){
-					result = true;
-				}else{
-					result = false;
-				}
+				result = false;
+				jsondata.questions[i].answers.forEach(ans => {
+					if(yAnswer == ans.answer_text){
+						result = true;
+					}
+				});
 				break;
 			case "input-range":
 				yAnswer = document.getElementById('numberInput'+i).value;
-				answer += document.getElementById('numberInput'+i).getAttribute('data-answer');
-				var ans = document.getElementById('numberInput'+i).getAttribute('data-answer').split('-');
-				if(document.getElementById('numberInput'+i).value >= ans[0] && document.getElementById('numberInput'+i).value <= ans[1] ){
+				var ans = jsondata.questions[i].answers[0].split('-');
+				if(yAnswer >= ans[0] && yAnswer <= ans[1] ){
 					result = true;
 				}else{
 					result = false;
@@ -303,7 +377,7 @@ function checkAnswers(){
 		if(result){
 			countTrue++;
 		}
-		htmlResult += htmlResultPart(i,result,question,yAnswer,answer, id);
+		htmlResult += htmlResultPart(i,result,yAnswer);
 		document.getElementById("resultCount").innerHTML = "Correct answers: " + countTrue + "/" + maxQuestions;
 		document.getElementById('divResult').style.display = "block";
 	}
@@ -336,7 +410,7 @@ function getQuiz(){//types anedern; bilder
 	  });
 	question.forEach(function(item){
 		//question
-		html += '<div class="question" data-id="'+item.question_id+'" data-time="'+item.time+'" data-typ="'+item.type+'" id="quest'+i+'" style="display: none;"><p style="color:gray;margin:0px;" class"small fw-light">ID: '+item.question_id+'</p><h4 style="display: none;" id="questTitel'+i+'">Question: '+(i+1)+'</h4><div id="questText'+i+'">';
+		html += '<div class="question" data-id="'+item.question_id+'" data-time="'+item.time+'" id="quest'+i+'" style="display: none;"><p style="color:gray;margin:0px;" class="small fw-light">ID: '+item.question_id+'</p><h4 style="display: none;" id="questTitel'+i+'">Question: '+(i+1)+'</h4><div id="questText'+i+'">';
 		html += '<p>'+item.text.replace(/\\n/g,"<br />")+'</p>';
 		var images = item.images
 		if(images.length>0){
@@ -391,25 +465,4 @@ function loaddocuments(){
 			document.getElementById("doc").innerHTML += "<li><a href='https://doc.fs-quiz.eu/"+item.path+"' target='_blank'/>"+item.path.substring(0,item.path.length-4)+"</li>";
 		}
 	});
-}
-
-function setSolution(){ //todo
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() { 
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-			var r = "";
-			solution = "";
-			var r = xmlHttp.responseText;
-			var array = r.split(';');
-			array.forEach(function(item){
-				s = item.split('@');
-				if(s[0].includes("text")){
-					solution += "<p>"+s[1]+"</p><br>";
-				}else if(s[0].includes("bild")){
-					solution +=  "<img class='img-fluid' src='/img/solution/"+s[1]+"'>";
-				}
-			});
-		}
-	xmlHttp.open( "GET", "/php/getSolution.php?id="+questionID, true );
-	xmlHttp.send( null );
 }
