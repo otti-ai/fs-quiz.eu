@@ -1,5 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+require('times.php');
+
 
 class Result{
     public $status;
@@ -9,11 +11,6 @@ class Result{
     public $end;
 }
 
-
-$question1 = new DateTime('2024-01-20 13:00:00');
-$question2 = new DateTime('2024-01-20 13:05:00');
-$question3 = new DateTime('2024-01-20 13:10:00');
-
 $now = new DateTime('now');
 $result = new Result();
 $result->status = "wait";
@@ -21,17 +18,69 @@ $result->end = $question1->getTimestamp();
 
 if ($now > $question1) {
     $result->status = "1";
-    $result->type = "single";
-    $result->question = "1+1=?";
-    $result->answers = array("1","2","3","4");
+    $result->question = 'You wanted to use a CAN bus (CAN 2.0A) to transmit the original Schokolade! - Spongebob Squarepants feat. 9MK2 Remix from YouTube (<a target="_blank" href="https://www.youtube.com/watch?v=WuQOfiD7gNg">link to YouTube</a>). Your CAN bus has a data rate of 500 kbit/s. The song is available at a constant quality of 128 kbit/s. Specify how many frames you need in total to be able to transmit the complete song via the CAN bus and how long this will take.<br>Assume the best case and round the time to seconds.<br>Answer format: count, time<br>Example: 1234, 12';
+    $result->answers = '<input type="text" class="form-control" id="answer1" placeholder="Enter answer"><hr><button onclick="sendAnswer(document.getElementById(`answer1`).value)" type="button" class="btn btn-primary">Submit</button>';
     $result->end = $question2->getTimestamp();
 }
 if ($now > $question2) {
     $result->status = "2";
-    $result->type = "single";
-    $result->question = "Hi";
-    $result->answers = array("Moin","No","Hallo hallo");
+    $result->question = 'A wedge of weight mg with the opening angle a is loaded as sketched by a vertical force P on the upper side. All contacts are frictionless and the following relationship applies between the horizontal and vertical components of the virtual displacement of the wedge (see dotted lines):<br><img src="https://img.fs-quiz.eu/testquiz/adafwfr3fe33r3fa.jpg"><br>How large must the horizontal force F be to keep the wedge in balance?<br><img src="https://img.fs-quiz.eu/testquiz/wadfdaf3safafa2.jpg">';
+    $result->answers = '<div class="text-start"><div class="form-check"><input value="A" class="form-check-input" type="radio" name="answer2" id="answer2_1"><label class="form-check-label" for="answer2_1">A</label></div><div class="form-check"><input value="B" class="form-check-input" type="radio" name="answer2" id="answer2_2"><label class="form-check-label" for="answer2_2">B</label></div><div class="form-check"><input value="C" class="form-check-input" type="radio" name="answer2" id="answer2_3"><label class="form-check-label" for="answer2_3">C</label></div><div class="form-check"><input value="D" class="form-check-input" type="radio" name="answer2" id="answer2_4"><label class="form-check-label" for="answer2_4">D</label></div></div><hr><button onclick="sendAnswer(document.querySelector(`input[name = \'answer2\']:checked`) ? document.querySelector(`input[name = \'answer2\']:checked`).value : \'\')" type="button" class="btn btn-primary">Submit</button>';
     $result->end = $question3->getTimestamp();
+}
+if ($now > $question3) {
+    $result->status = "3";
+    $result->question = 'You want to break through the separation of always the same music at the events on the camping site and are therefore planning to take an organ with you. As the purchase of an organ is beyond your budget and you still have old exhaust pipes available anyway, you decide to build them yourself.<br>Since you want to build a deeper sounding organ, you close one side of each organ pipe.<br>Calculate the length at which you have to cut off the exhaust pipe for a note with a frequency of 880 Hz at the first overtone.<br>c = 343 m/s<br><br>Round to four decimal places.<br>Answer example: 1.2345';
+    $result->answers = '<input type="text" class="form-control" id="answer3" placeholder="Enter answer"><hr><button onclick="sendAnswer(document.getElementById(`answer3`).value)" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $question4->getTimestamp();
+}
+if ($now > $question4) {
+    $result->status = "4";
+    $result->question = 'The FSG Alpaca Fred an the FSA Cats Werner, Snowball, Rex, Purrlovia, Kat, Samantha are invited to an aftershow party in a bar on the last day of FSA 2024.<br>You are the party planner and designated to assign places and party hats for the 7 participants given these rules:<br>Order from left to right. Left is the the closest spot to the beer keg while right is right next to the window.<br>Werner and Rex are brothers. They want everybody to know it by wearing the same colored party hat. No one else should have their color.<br>Rex is Purrlovias father. They don\'t like to sit next to each other.<br>On Wednesdays it\'s Bean Burrito Day. Because of that Kat prefers to stay at least 2 seats away from Fred on Wednesdays and Thursdays.<br>Fred has a crush on Samantha but is too shy to sit next to her.<br>Samantha refuses to sit next to Kat, unless its Tuesday.<br>When its full moon then Werner wants to sit right next to the window, otherwise he prefers sitting 3 or less seats away from the beer keg.<br>Purrlovia refuses to war the color red.<br>If its Friday Fred refuses to wear green.<br><img src="https://img.fs-quiz.eu/testquiz/LlamaCatHats2.png" height="200px"><br>Which of the following seat and party hat orders are feasible:';
+    $result->answers = '<div class="text-start"><div class="form-check"><input name="answer4" class="form-check-input" type="checkbox" value="A" id="answer4_1"><label class="form-check-label" for="answer4_1">A: Snowball (purple) - Rex (yellow) - Kat (orange) - Purrlovia (red) - Samantha (orange) - Fred (lime) - Werner (yellow)</label></div><div class="form-check"><input name="answer4" class="form-check-input" type="checkbox" value="B" id="answer4_2"><label class="form-check-label" for="answer4_2">B: Fred (green) - Werner (red) - Samantha (green) - Snowball (blue) - Rex (red) - Kat (blue) - Purrlovia (blue)</label></div><div class="form-check"><input name="answer4" class="form-check-input" type="checkbox" value="C" id="answer4_2"><label class="form-check-label" for="answer4_2">C: Purrlovia (blue) - Werner (red) - Samantha (red) - Fred (red) - Rex (green) - Snowball (yellow) - Kat (yellow)</label></div><div class="form-check"><input name="answer4" class="form-check-input" type="checkbox" value="D" id="answer4_2"><label class="form-check-label" for="answer4_2">D: Werner (green) - Purrlovia (red) - Kat (blue) - Rex (green) - Fred (green) - Samantha (blue) - Snowball (red)</label></div><div class="form-check"><input name="answer4" class="form-check-input" type="checkbox" value="E" id="answer4_2"><label class="form-check-label" for="answer4_2">E: Kat (blue) - Purrlovia (green) - Werner (yellow) - Samantha (purple) - Rex (yellow) - Fred (green) - Snowball (red)</label></div><div class="form-check"><input name="answer4" class="form-check-input" type="checkbox" value="F" id="answer4_2"><label class="form-check-label" for="answer4_2">F: Rex (red) - Werner (red) - Kat (yellow) - Snowball (blue) - Purrlovia (blue) - Samantha (yellow) - Fred (green)</label></div></div><hr><button onclick="sendAnswer(Array.from(document.querySelectorAll(`input[name = \'answer4\']:checked`)).map(c => c.value).join(\', \'))" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $question5->getTimestamp();
+}
+if ($now > $question5) {
+    $result->status = "5";
+    $result->question = 'Which Statement about the EDR is true?';
+    $result->answers = '<div class="text-start"><div class="form-check"><input value="A" class="form-check-input" type="radio" name="answer5" id="answer5_1"><label class="form-check-label" for="answer5_1">A: Any portions of the EDR that exceed five pages of content and/or three pages of drawings will not be evaluated</label></div><div class="form-check"><input value="B" class="form-check-input" type="radio" name="answer5" id="answer5_2"><label class="form-check-label" for="answer5_2">B: Any portions of the EDR that exceed ten pages of content and/or five pages of drawings will not be evaluated</label></div><div class="form-check"><input value="C" class="form-check-input" type="radio" name="answer5" id="answer5_3"><label class="form-check-label" for="answer5_3">C: Any portions of the EDR that exceed three pages of content and/or five pages of drawings will not be evaluated</label></div><div class="form-check"><input value="D" class="form-check-input" type="radio" name="answer5" id="answer5_4"><label class="form-check-label" for="answer5_4">D: The portion of the drawings in the EDR is unlimited</label></div></div><hr><button onclick="sendAnswer(document.querySelector(`input[name = \'answer5\']:checked`) ? document.querySelector(`input[name = \'answer5\']:checked`).value : \'\')" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $question6->getTimestamp();
+}
+if ($now > $question6) {
+    $result->status = "6";
+    $result->question = 'For All TS wiring that runs outside of TS enclosures, which of the following is not true?';
+    $result->answers = '<div class="text-start"><div class="form-check"><input value="A" class="form-check-input" type="radio" name="answer6" id="answer6_1"><label class="form-check-label" for="answer6_1">A: Been closed in separate orange non-conductive conduit or use an orange shielded cable. The conduit must be securely anchored to the vehicle, but not to wire, at least at each end.</label></div><div class="form-check"><input value="B" class="form-check-input" type="radio" name="answer6" id="answer6_2"><label class="form-check-label" for="answer6_2">B: Be securely anchored at least at each end so that it can withstand a force of 200N without straining the cable end crimp.</label></div><div class="form-check"><input value="C" class="form-check-input" type="radio" name="answer6" id="answer6_3"><label class="form-check-label" for="answer6_3">C: Be securely anchored at one end so that it can withstand a force of 200N without straining the cable end crimp.</label></div><div class="form-check"><input value="D" class="form-check-input" type="radio" name="answer6" id="answer6_4"><label class="form-check-label" for="answer6_4">D: Body work is not sufficient to meet this enclosure requirement.</label></div></div><hr><button onclick="sendAnswer(document.querySelector(`input[name = \'answer6\']:checked`) ? document.querySelector(`input[name = \'answer6\']:checked`).value : \'\')" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $question7->getTimestamp();
+}
+if ($now > $question7) {
+    $result->status = "7";
+    $result->question = 'Which of the following is incorrect for the firewall?';
+    $result->answers = '<div class="text-start"><div class="form-check"><input value="A" class="form-check-input" type="radio" name="answer7" id="answer7_1"><label class="form-check-label" for="answer7_1">A: Multiple panels may be used to form the firewall but must overlap atleast 5mm and be sealed at the joints.</label></div><div class="form-check"><input value="B" class="form-check-input" type="radio" name="answer7" id="answer7_2"><label class="form-check-label" for="answer7_2">B: Sealing material may be considered vital to the structural integrity of the firewall.</label></div><div class="form-check"><input value="C" class="form-check-input" type="radio" name="answer7" id="answer7_3"><label class="form-check-label" for="answer7_3">C: Pass-throughs for wiring, cables, etc. are permitted if grommets are used to seal the passthrough.</label></div><div class="form-check"><input value="D" class="form-check-input" type="radio" name="answer7" id="answer7_4"><label class="form-check-label" for="answer7_4">D: Any firewall must seal completely against the passage of fluids, especially at the sides and the floor of the cockpit.</label></div></div><hr><button onclick="sendAnswer(document.querySelector(`input[name = \'answer7\']:checked`) ? document.querySelector(`input[name = \'answer7\']:checked`).value : \'\')" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $question8->getTimestamp();
+}
+if ($now > $question8) {
+    $result->status = "8";
+    $result->question = 'Calculate the current I₃ in the DC network using the superposition principle.<br><img src="https://img.fs-quiz.eu/testquiz/sefsgsdgsdg.jpg"><br>Round the solution to one decimal place.';
+    $result->answers = '<input type="text" class="form-control" id="answer8" placeholder="Enter answer"><hr><button onclick="sendAnswer(document.getElementById(`answer8`).value)" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $question9->getTimestamp();
+}
+if ($now > $question9) {
+    $result->status = "9";
+    $result->question = 'At your university there is a district heating network which is operated by a gas turbine. As an extension to your workshop is imminent, you want to know whether the output of the gas turbine is sufficient. How it works: In the gas turbine, air is compressed adiabatically and reversibly (1 → 2), then heated isobarically (2 → 3) and expanded adiabatically and reversibly (3 → 4). In the subsequent heat exchanger, isobaric cooling of the air from T4 to T5 causes a water mass flow of boiling liquid (6) to evaporate isobarically just completely (7). The flow diagram is shown in the following figure as well as further details.<br><img src="https://img.fs-quiz.eu/testquiz/sfdfcvsdgfsedfs.jpg"><br>Assumptions:<br>- Air can be regarded as an ideal gas.<br>- Water is a real substance.<br>- It is a stationary flow process.<br>- All components are adiabatic to the outside.<br>- Differences in kinetic and potential energies can be neglected.<br>What is the efficiency of the gas turbine in percent (total of the components compressor, heat supply and expander)?<br><br>Round to two decimal places. Example: 12.34';
+    $result->answers = '<input type="text" class="form-control" id="answer9" placeholder="Enter answer"><hr><button onclick="sendAnswer(document.getElementById(`answer9`).value)" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $question10->getTimestamp();
+}
+if ($now > $question10) {
+    $result->status = "10";
+    $result->question = 'Which statements are true?';
+    $result->answers = '<div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="A" id="answer10_1"><label class="form-check-label" for="answer10_1" >A: The maximumd driver egress time for a driver to exit the vehicle from a fully seated position is 10 seconds.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="B" id="answer10_2"><label class="form-check-label" for="answer10_2" >B: The minimum sleeve lenght for sleeved joints is 40mm.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="C" id="answer10_3"><label class="form-check-label" for="answer10_3" >C: The minimum tread depth for wet tires is 2.1 mm.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="D" id="answer10_4"><label class="form-check-label" for="answer10_4" >D: The requirements for a power device used to move or remove air from under the vehicle are as following: less than 50 mm x 50 mm x 100 mm.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="E" id="answer10_5"><label class="form-check-label" for="answer10_5" >E: The catch-cans can be mounted under the driver seat.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="F" id="answer10_6"><label class="form-check-label" for="answer10_6" >F: A single line LEDs brake light can have the length of 150 mm.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="G" id="answer10_7"><label class="form-check-label" for="answer10_7" >G: The Brake System Plausibility Device (BSPD) must open the shutdown circuit when hard braking occurs whilst for more than 500 ms.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="H" id="answer10_8"><label class="form-check-label" for="answer10_8" >H: Your team will receive 5 penalty points, which will be deducted from the teams cost score if the submitted CRD does not match the uploaded version.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="I" id="answer10_9"><label class="form-check-label" for="answer10_9" >I: In the case of not being able to run the presentation in the assigned time, the BBP is rated with zero points.</label></div><div class="text-start"><div class="form-check"><input name="answer10" class="form-check-input" type="checkbox" value="J" id="answer10_10"><label class="form-check-label" for="answer10_10" >J: The precharging circuit must be charged to at least 90 % of the TS voltage, supplied by the isolating circuit and the entire precharging current must flow through this relay.</label></div><hr><button onclick="sendAnswer(Array.from(document.querySelectorAll(`input[name = \'answer10\']:checked`)).map(c => c.value).join(\', \'))" type="button" class="btn btn-primary">Submit</button>';
+    $result->end = $endTime->getTimestamp();
+}
+if ($now > $endTime) {
+    $result->status = "end";
+    $result->question = '';
+    $result->answers = '';
+    $result->end = 0;
 }
 echo json_encode($result);
 ?>

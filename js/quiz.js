@@ -306,10 +306,10 @@ function htmlResultPart(i,correct,yAnswer){
 	html += '<hr class="col-3 col-md-2">';
 	var solutions = jsondata.questions[i].solution;
 	if(solutions.length > 0){
-		html += '<p class="text-muted" style="margin-left: 2rem; font-size: smaller;">Solution:<br>';
+		html += '<p class="text-muted" style="margin-left: 2rem; font-size: smaller;">Solution:';
 		solutions.forEach(element => {
 			if(element.text){
-				html += element.text.replace(/\\n/g,"<br />").replace("null","");
+				html += "<br>"+element.text.replace(/\\n/g,"<br />").replace("null","");
 			}
 			element.images.forEach(img => {
 				html += "<br><img class='img-fluid' src='https://img.fs-quiz.eu/"+img.path+"'>"

@@ -21,7 +21,7 @@ class SolutionHandle {
         $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'SolutionModel');
         foreach($response as $row) {
             $imageH = new ImageHandle($this->pdo);
-            $row->images = $imageH->getByAllSolutionByQuestionID($id);
+            $row->images = $imageH->getByAllSolutionID($row->solution_id);
             $solutions[] = $row;
         }
         return $solutions;

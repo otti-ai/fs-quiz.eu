@@ -1,5 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT']. '/testquiz/datenbank.php');
+include('datenbank.php');
 $token = bin2hex(random_bytes(8));
 $result = "error";
 $passwort_hash = password_hash($_GET["passwort"], PASSWORD_DEFAULT);
