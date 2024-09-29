@@ -13,7 +13,7 @@
 	$viewsDay = $jsonViewsDay->most_views;
 	$jsonViewsMonth = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/'.$datem.'/views'));
 	$viewsMonth = $jsonViewsMonth->most_views;
-	$jsonViewsYear = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/2023/views'));
+	$jsonViewsYear = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/2024/views'));
 	$viewsYear = $jsonViewsYear->most_views;
 
 	//$jsonCallsDay = json_decode(file_get_contents('https://api.fs-quiz.eu/2/statistic/'.$date.'/calls'));
@@ -70,7 +70,7 @@
 			</table>
 		</div>
 		<div class="col-sm-4">
-			<h5 class="text-center">2023</h5>
+			<h5 class="text-center">2024</h5>
 			<table class="table table-striped table-bordered caption-top">
 				<thead>
 					<tr>
