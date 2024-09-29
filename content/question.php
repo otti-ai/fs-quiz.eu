@@ -95,7 +95,7 @@ function renderQuestion(){
 			break;
 	}
 	html += '<hr class="col-3 col-md-2"></div>';
-	document.getElementById("questionBody").innerHTML = html.replace(new RegExp('\r?\n','g'), '<br />');
+	document.getElementById("questionBody").innerHTML = html.replace(/\\n/g,"<br />");
 }
 
 function checkAnswers(){
@@ -183,7 +183,7 @@ function renderSolution(){
 		html += "<hr><h3>Solution:</h3>";
 		solutions.forEach(function(item){
 			if(item.text){
-				html += '<p>'+item.text.replace(new RegExp('\r?\n','g'), '<br />')+'</p>';
+				html += '<p>' + item.text.replace(/\\n/g,"<br />"); + '</p>';
 			}
 			var images = item.images;
 			images.forEach(function(img){

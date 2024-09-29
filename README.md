@@ -42,17 +42,11 @@ Tables are also saved as an image to prevent incompatibilities with the public A
 ## API
 This project provides not only the website but also an API for the data in the database. This API is openly accessible and completely free, but requires an API key. More information about this in the API documentation under [Getting Started](https://api.fs-quiz.eu/#Getting).
 
-The source code for the API can be found at [/api/1](/api/1). The 1 here stands for version 1. All changes within a version should be backward compatible. If this cannot be guaranteed a new version will be created.
+The source code for the API can be found at [/api/1](/api/2). The 2 here stands for version 2. All changes within a version should be backward compatible. If this cannot be guaranteed a new version will be created.
 
 The API documentation can be found under [api.fs-quiz.eu](https://api.fs-quiz.eu).
 
 ## Future
 Here is a listing of planned changes on my part:
-- API V2 without registration/api-key
 - Extension of the settings for a quiz start
-- Real test quiz in the middle of January (2-3 weeks before the official quizzes)
 - ~~Release and integration of my rule search tool from Team [Bremergy](https://bremergy.de/). Solves dependencies of rules and respects event specific rules.~~ [outsourced](https://github.com/otti-ai/fs-rule-tool)
-
-## Known unfixed bugs
-- When multiple answers to a question with a single correct solution are correct (accepted after protest) only one is displayed
-- Characters for new line in solution texts are not applied.
