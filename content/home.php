@@ -1,7 +1,7 @@
 <?php 
 	require('./header.php');
 
-  $jsondoc = json_decode(file_get_contents('https://api.fs-quiz.eu/2/document?year=2024'));
+  $jsondoc = json_decode(file_get_contents('https://api.fs-quiz.eu/2/document?year=2025'));
 	$docs = $jsondoc->documents;
   usort($docs, function($a, $b) {
     return count($a->event) < count($b->event) ? -1 : 1;
@@ -18,18 +18,16 @@
 
 	<hr class="col-3 col-md-2">
 
-	<h2>Dates</h2>
+	<!--<h2>Dates</h2>
 	  <ul class="icon-list">
-		<li>FS Switzerland testquiz on 12th January 9.00 CET</li>
-		<li>FS Czech Republic testquiz on 19th January 15.00 CET</li>
+		  <li>FS-Quiz textquiz <a target="_blank" href="https://quiz.fs-quiz.eu/">information & result</a></li>
 			<?php require('./php/eventgraph.php'); ?>
-		<li>FS Spain quiz TBA</li>
 	  </ul>
-	<hr class="col-3 col-md-2">
+	<hr class="col-3 col-md-2">-->
 
     <div class="row g-5">
       <div class="col-md-6">
-        <h2>Registration</h2>
+        <h2>Registration (old)</h2>
         <p>Information about the registration procedure</p>
         <ul class="icon-list">
           <?php
@@ -56,13 +54,13 @@
           <li><a target="_blank" href="https://www.formula-ata.it/how-to-register">SAE Italy</a></li>
 		  <li><a target="_blank" href="https://www.formulastudent.pt/registration-quiz">FS Portugal</a></li>
         </ul>
-		<h2>Registration dates:</h2>
+		<!--<h2>Registration dates:</h2>
 		 <p>Start of registrations on a first come, first served system</p>
 		<ul class="icon-list">
           <li>19th January 9:00 CET <a target="_blank" href="https://www.formulastudent.ro/">FS Romania</a></li>
 		  <li>30th January 10:00 CET <a target="_blank" href="https://fstudent.ru/main/en">FS Russia</a></li>
-		  <li>1st February 9:00 CET <a target="_blank" href="https://www.formula-ata.it/">FS Italy</a></li>
-        </ul>
+		  <li>5th February 10:00 CET <a target="_blank" href="https://www.formula-ata.it/">FS Italy</a></li>
+        </ul>-->
       </div>
 
       <div class="col-md-6">
@@ -78,7 +76,7 @@
                 }else{
                   echo '<li><a target="_blank" href="https://doc.fs-quiz.eu/'.$doc->path.'">';
                 }
-                if(count($doc->event)>0){
+                if(count($doc->event)>0 && $doc->type != "Hydrogen Rules" && $doc->type != "EV Hydrogen Concept Challenge" && $doc->type != "CV Hydrogen Concept Challenge"){
                   foreach($doc->event as $event){
                     if($first){
                       echo str_replace('Formula Student', 'FS', $event->event_name);
