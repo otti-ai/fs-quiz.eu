@@ -1,19 +1,13 @@
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/header.php');
-	$jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/question/all');
-	$data = json_decode($jsonData);
-	$jsonEvents = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event');
+	$jsonEvents = file_get_contents('https://api.fs-quiz.eu/2/event');
 	$eventList = json_decode($jsonEvents);
 	$name = "";
 	$event = isset($event) ? $event : '';
 	$year = isset($year) ? $year : '';
 	$type = isset($type) ? $type : '';
-	$questYear = 0;
-	foreach($data->questions as $quest){
-		if($quest->year > $questYear){$questYear = $quest->year;}
-	}
 ?>
-<script src="/js/search.js" type="text/javascript"></script>
+<script src="/js/search.js?v1.2" type="text/javascript"></script>
 <link href="/css/all.css" rel="stylesheet">
 <div class="container-fluid col-lg-8 mx-auto p-3 py-md-5">
   <main>
@@ -22,13 +16,13 @@
 		<div id="filter" class="row row-cols-auto">
 			<div class="col mb-2">
 				<div class="form-floating">
-					<input oninput="searchQuestions()" id="textSearch" type="text" class="form-control" id="floatingInput" >
+					<input oninput="searchQuestions2()" id="textSearch" type="text" class="form-control" id="floatingInput" >
   					<label for="floatingInput">Text</label>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="searchQuestions()" class="form-select" id="eventSelect" aria-label="eventSelect">
+					<select onchange="searchQuestions2()" class="form-select" id="eventSelect" aria-label="eventSelect">
 						<option <?php if ($event == "") {echo 'selected';} ?> value="0">Any</option>
 						<?php
 						foreach($eventList->events as $e){
@@ -43,10 +37,10 @@
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="searchQuestions()" class="form-select" id="yearSelect" aria-label="yearSelect">
+					<select onchange="searchQuestions2()" class="form-select" id="yearSelect" aria-label="yearSelect">
 						<option <?php if ($year == "") {echo 'selected';} ?> value="0">Any</option>
 						<?php
-						for($i = $questYear;$i >= 2011;$i--){
+						for($i = date("Y");$i >= 2011;$i--){
 							echo '<option ';
 							if ($year == $i) {echo 'selected';}
 							echo ' value="'.$i.'">'.$i.'</option>';
@@ -58,7 +52,7 @@
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="searchQuestions()" class="form-select" id="classSelect" aria-label="classSelect">
+					<select onchange="searchQuestions2()" class="form-select" id="classSelect" aria-label="classSelect">
 						<option value="q" selected>Any</option>
 						<option value="ev">EV</option>
 						<option value="cv">CV</option>
@@ -69,7 +63,7 @@
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="searchQuestions()" class="form-select" id="typSelect" aria-label="typSelect">
+					<select onchange="searchQuestions2()" class="form-select" id="typSelect" aria-label="typSelect">
 						<option selected>Any</option>
 						<option value="math">Math</option>
 						<option value="rule">Rule</option>
@@ -80,7 +74,7 @@
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="searchQuestions()" class="form-select" id="categorySelect" aria-label="categorySelect">
+					<select onchange="searchQuestions2()" class="form-select" id="categorySelect" aria-label="categorySelect">
 						<option selected>Any</option>
 						<option value="electronic">Electronic</option>
 						<option value="mechanical">Mechanical</option>
@@ -90,7 +84,7 @@
 			</div>
 			<div class="col">
 				<div class="form-floating">
-					<select onchange="searchQuestions()" class="form-select" id="disSelect" aria-label="disSelect">
+					<select onchange="searchQuestions2()" class="form-select" id="disSelect" aria-label="disSelect">
 						<option selected>Any</option>
 						<option value="dynamic">Dynamic</option>
 						<option value="static">Static</option>
@@ -99,12 +93,23 @@
 				</div>
 			</div>
 			<div class="col">
+				<div class="form-floating">
+					<select onchange="searchQuestions2()" class="form-select" id="answerSelect" aria-label="answerSelect">
+						<option selected>Any</option>
+						<option value="single">Single Choice</option>
+						<option value="multi">Multiple Choice</option>
+						<option value="input">Value Input</option>
+					</select>
+					<label for="answerSelect">Answer type</label>
+				</div>
+			</div>
+			<div class="col">
 				<div class="form-check">
-  					<input onchange="searchQuestions()" class="form-check-input" type="checkbox" value="" id="imgSelect">
+  					<input onchange="searchQuestions2()" class="form-check-input" type="checkbox" value="" id="imgSelect">
   					<label class="form-check-label" for="imgSelect">only with image</label>
 				</div>
 				<div class="form-check">
-  					<input onchange="searchQuestions()" class="form-check-input" type="checkbox" value="" id="solutionSelect">
+  					<input onchange="searchQuestions2()" class="form-check-input" type="checkbox" value="" id="solutionSelect">
   					<label class="form-check-label" for="solutionSelect">explanation available</label>
 				</div>
 			</div>
@@ -131,7 +136,10 @@
 					</tr>
 				</thead>
 				<tbody id="doc">
-			
+					<tr><td class='text-center' colspan='5'>
+						<div class="spinner-border" role="status">
+							<span class="visually-hidden">Loading...</span>
+						</div></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -140,9 +148,9 @@
 
   </div> 
 <script>
-var jsondata = <?php echo json_encode($data); ?>;
-
-searchQuestions();
+document.addEventListener('DOMContentLoaded', function() {
+	loadQuestions();
+}, false);
 </script>
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/footer.php');

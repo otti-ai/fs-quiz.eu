@@ -55,13 +55,9 @@ class DocumentHandle {
     }
     public function getListAll(){
         $db = new DB_Orginal($this->pdo);
-        $db->setTable('fs-documents');
-        $start_id = isset($_GET["start_id"]) ? $_GET["start_id"] : 1;
-        //optional
-        isset($_GET["year"]) ?  $db->addWhere('fs-documents','year',$_GET["year"]):0;
-        isset($_GET["event_id"]) ?  $db->addWhere('fs-documents','event_id',$_GET["event_id"]):0;
+        $sql = "SELECT `fs-documents`.`doc_id` AS `doc_id`, `fs-documents`.`type` AS `type`, `fs-documents`.`path` AS `path`, `fs-documents`.`year` AS `year`, `fs-documents`.`version` AS `version`, GROUP_CONCAT(`fs-documents-events`.`event_id` SEPARATOR ',') AS `event_ids` FROM `fs-documents-events` INNER JOIN `fs-documents` ON `fs-documents`.`doc_id` = `fs-documents-events`.`doc_id` GROUP BY `fs-documents`.`doc_id` ORDER BY `fs-documents`.`doc_id` DESC;";
 		$documents = array();
-        $response = $db->get_Data()->fetchAll(PDO::FETCH_CLASS, 'DocumentModel');
+        $response = $db->direct_sql($sql,array())->fetchAll(PDO::FETCH_CLASS, 'DocumentModel');
         foreach($response as $row) {
             $documents[] = $row;
         }

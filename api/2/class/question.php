@@ -36,7 +36,40 @@ class QuestionHandle {
 
     public function getListAll(){
         $db = new DB_Orginal($this->pdo);
-        $sql = 'SELECT `fs-questions`.`text` as `text`, `fs-questions`.`id` as `question_id`, `fs-questions`.`type` as `type`, `fs-events`.`event_name` as `event_name`, `fs-events`.`id` as `event_id`, `fs-quizzes`.`year` as `year`, `fs-quizzes`.`class` as `class`, `fs-question-category`.`mechanical` as `mechanical`, `fs-question-category`.`electronic` as `electronic`, `fs-question-category`.`scoring` as `scoring`, `fs-question-category`.`static` as `static`, `fs-question-category`.`dynamic` as `dynamic`, `fs-question-category`.`rule` as `rule`, `fs-question-category`.`math` as `math` FROM ((( `fs-quiz-question` LEFT JOIN `fs-questions` ON `fs-quiz-question`.`question_id` = `fs-questions`.`id` ) LEFT JOIN `fs-question-category` ON `fs-questions`.`id` = `fs-question-category`.`question_id`) INNER JOIN `fs-quizzes` ON `fs-quizzes`.`quiz_id` = `fs-quiz-question`.`quiz_id`) INNER JOIN `fs-events` ON `fs-events`.`id` = `fs-quizzes`.`event_id`;';
+        $sql = "
+SELECT 
+    `fs-questions`.`text` AS `text`,
+    `fs-questions`.`id` AS `question_id`,
+    `fs-questions`.`type` AS `type`,
+    GROUP_CONCAT(DISTINCT `fs-quizzes`.`year` ORDER BY `fs-quizzes`.`year` ASC SEPARATOR ', ') AS `year`,
+    GROUP_CONCAT(DISTINCT `fs-events`.`id` ORDER BY `fs-events`.`id` ASC SEPARATOR ', ') AS `event_id`,
+    GROUP_CONCAT(DISTINCT `fs-quizzes`.`class` ORDER BY `fs-quizzes`.`class` ASC SEPARATOR ', ') AS `class`,
+    `fs-question-category`.`mechanical` AS `mechanical`,
+    `fs-question-category`.`electronic` AS `electronic`,
+    `fs-question-category`.`scoring` AS `scoring`,
+    `fs-question-category`.`static` AS `static`,
+    `fs-question-category`.`dynamic` AS `dynamic`,
+    `fs-question-category`.`rule` AS `rule`,
+    `fs-question-category`.`math` AS `math`
+FROM 
+    ((( `fs-quiz-question` 
+    LEFT JOIN `fs-questions` ON `fs-quiz-question`.`question_id` = `fs-questions`.`id` ) 
+    LEFT JOIN `fs-question-category` ON `fs-questions`.`id` = `fs-question-category`.`question_id`)
+    INNER JOIN `fs-quizzes` ON `fs-quizzes`.`quiz_id` = `fs-quiz-question`.`quiz_id`)
+    INNER JOIN `fs-events` ON `fs-events`.`id` = `fs-quizzes`.`event_id`
+GROUP BY 
+    `fs-questions`.`id`, 
+    `fs-questions`.`text`, 
+    `fs-questions`.`type`, 
+    `fs-question-category`.`mechanical`, 
+    `fs-question-category`.`electronic`, 
+    `fs-question-category`.`scoring`, 
+    `fs-question-category`.`static`, 
+    `fs-question-category`.`dynamic`, 
+    `fs-question-category`.`rule`, 
+    `fs-question-category`.`math`;
+";
+
         $response = $db->direct_sql($sql,array())->fetchAll(PDO::FETCH_CLASS, 'QuestionModel');
         foreach($response as $row) {
             $imageH = new ImageHandle($this->pdo);

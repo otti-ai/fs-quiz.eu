@@ -53,7 +53,7 @@ Route::add('/quizzes',function(){
 Route::add('/quizzesNew',function(){
     $titel = 'FS-Quiz - Quizzes';
 	$pagename = 'quizzes';
-	require('content/quizzesNew.php');
+	require('content/search/question2.php');
 });
 Route::add('/search',function(){
     $titel = 'FS-Quiz - Search';

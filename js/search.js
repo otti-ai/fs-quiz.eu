@@ -1,5 +1,19 @@
-function searchQuestions(){
-	var questions = jsondata.questions;
+var allquestionArray = [];
+
+async function loadQuestions(){
+	var result = await fetch("https://api.fs-quiz.eu/2/question/all");
+	var text = await result.text();
+	var json = JSON.parse(text);
+
+	json.questions.forEach(function(item){
+		allquestionArray.push(item);
+	});
+
+	searchQuestions2();
+}
+
+function searchQuestions2(){
+	var questions = allquestionArray;
 	var questionArray = [];
 	questions.forEach(function(item){
 		questionArray.push(item);
@@ -9,35 +23,39 @@ function searchQuestions(){
 	var typSelect = document.getElementById("typSelect").value;
 	var categorySelect = document.getElementById("categorySelect").value;
 	var disSelect = document.getElementById("disSelect").value;
+	var answerSelect = document.getElementById("answerSelect").value;
 	var imgSelect = document.getElementById("imgSelect");
 	var solutionSelect = document.getElementById("solutionSelect");
 	var yearSelect = document.getElementById("yearSelect").value;
 	var eventSelect = document.getElementById("eventSelect").value;
 	var textSearch = document.getElementById("textSearch").value;
 	//filter todo
-	if(eventclass == "ev" || eventclass == "cv" || eventclass == "dv"){
-		questionArray = questionArray.filter(item => item.class == eventclass);
+	if(eventclass.includes("ev") || eventclass.includes("cv") || eventclass.includes("dv")){
+		questionArray = questionArray.filter(item => item.class.includes(eventclass));
 	}
-	if(typSelect == "math"){
+	if(typSelect.includes("math")){
 		questionArray = questionArray.filter(item => item.math == true);
 	}
-	if(typSelect == "rule"){
+	if(typSelect.includes("rule")){
 		questionArray = questionArray.filter(item => item.rule == true);
 	}
-	if(typSelect == "scoring"){
+	if(typSelect.includes("scoring")){
 		questionArray = questionArray.filter(item => item.scoring == true);
 	}
-	if(categorySelect == "electronic"){
+	if(categorySelect.includes("electronic")){
 		questionArray = questionArray.filter(item => item.electronic == true);
 	}
-	if(categorySelect == "mechanical"){
+	if(categorySelect.includes("mechanical")){
 		questionArray = questionArray.filter(item => item.mechanical == true);
 	}
-	if(disSelect == "dynamic"){
+	if(disSelect.includes("dynamic")){
 		questionArray = questionArray.filter(item => item.dynamic == true);
 	}
-	if(disSelect == "static"){
+	if(disSelect.includes("static")){
 		questionArray = questionArray.filter(item => item.static == true);
+	}
+	if(answerSelect.includes("single") || answerSelect.includes("multi") || answerSelect.includes("input")){
+		questionArray = questionArray.filter(item => item.type.includes(answerSelect));
 	}
 	if(imgSelect.checked){
 		questionArray = questionArray.filter(item => item.images.length > 0);
@@ -49,7 +67,7 @@ function searchQuestions(){
 		questionArray = questionArray.filter(item => item.year == yearSelect);
 	}
 	if(eventSelect>0){
-		questionArray = questionArray.filter(item => item.event_id == eventSelect);
+		questionArray = questionArray.filter(item => item.event_id.includes(eventSelect));
 	}
 	if(textSearch){
 		questionArray = questionArray.filter(item => item.text.toUpperCase().replace(/\\n/g," ").includes(textSearch.toUpperCase()));
@@ -64,6 +82,7 @@ function searchQuestions(){
 			if(item.text.length>50){}
 			html +='<td>'+item.text.replace(/\\n/g," ").slice(0,50);
 			if(item.text.length>50){ html += '...';}
+			if(document.getElementById("imgSelect").checked){ html += '<img class="mx-auto d-block img-fluid" src="https://img.fs-quiz.eu/'+ item.images[0].path +'">'}
 			html += '</td><td><a target="_blank" href="https://fs-quiz.eu/question/'+item.question_id+'" class="btn btn-primary btn-sm">Show</a></td>';
 			document.getElementById("count").innerHTML = "Found: "+questionArray.length;
 		});
@@ -72,6 +91,21 @@ function searchQuestions(){
 		document.getElementById("count").innerHTML = "Found: 0";
 	}
 	document.getElementById("doc").innerHTML = html;
+}
+
+
+var allDocumentsArray = [];
+
+async function loadDocuments(){
+	var result = await fetch("https://api.fs-quiz.eu/2/document/all");
+	var text = await result.text();
+	var json = JSON.parse(text);
+
+	json.documents.forEach(function(item){
+		allDocumentsArray.push(item);
+	});
+
+	documents();
 }
 
 //documents
@@ -108,7 +142,7 @@ function documents(){
 }
 
 function searchDocuments(){
-	var docs = jsondata.documents;
+	var docs = allDocumentsArray;
 	var docArray = [];
 	docs.forEach(function(item){
 		docArray.push(item);
@@ -116,9 +150,9 @@ function searchDocuments(){
 	//event
 	if(event>0){
 		if(year>0){
-			docArray = docArray.filter(item => item.event_id == event || item.event_id == 0);
+			docArray = docArray.filter(item => item.event_ids.includes(event) || item.event_ids == 0);
 		}else{
-			docArray = docArray.filter(item => item.event_id == event);
+			docArray = docArray.filter(item => item.event_ids.includes(event));
 		}
 	}
 	//year
@@ -134,9 +168,13 @@ function searchDocuments(){
 	if(docArray.length>0){
 		docArray.forEach(function(item){
 			html += "<tr><td>"+item.year+"</td><td>"
-			if(item.event_id>0){
-				var ev = eventData.events[item.event_id-1];
-				html += ev.event_name.replace('Formula Student', 'FS').replace('Formula', '');
+			if(item.event_ids != 0){
+				var eventIdsArray = item.event_ids.split(',');
+				eventIdsArray.forEach(event_ids => {
+					var ev = eventData.events[event_ids-1];
+					html += ev.short_name + ", ";
+				});
+				html = html.slice(0, -2); 
 			}else{
 				html += 'Any';
 			}

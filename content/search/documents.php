@@ -1,19 +1,17 @@
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/header.php');
-	$jsonData = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/document/all');
-	$jsonEvents = file_get_contents('http://api.fs-quiz.eu/1/'.$api.'/event');
-	$data = json_decode($jsonData);
+	$jsonEvents = file_get_contents('https://api.fs-quiz.eu/2/event');
 	$eventList = json_decode($jsonEvents);
 	$name = "";
 	$event = isset($event) ? $event : '';
 	$year = isset($year) ? $year : '';
 	$type = isset($type) ? $type : '';
-	$docYear = 0;
-	foreach($data->documents as $doc){
-		if($doc->year > $docYear){$docYear = $doc->year;}
-	}
+
+	$currentDate = new DateTime();
+	$currentDate->modify('+3 months');
+	$docYear = $currentDate->format('Y');
 ?>
-<script src="/js/search.js" type="text/javascript"></script>
+<script src="/js/search.js?v1.2" type="text/javascript"></script>
 <link href="/css/all.css" rel="stylesheet">
 <div class="container-fluid col-lg-8 mx-auto p-3 py-md-5">
   <main>
@@ -87,7 +85,10 @@
 					</tr>
 				</thead>
 				<tbody id="doc">
-			
+					<tr><td class='text-center' colspan='5'>
+						<div class="spinner-border" role="status">
+							<span class="visually-hidden">Loading...</span>
+					</div></td></tr>
 				</tbody>
 			</table>
 		</div>
@@ -96,13 +97,13 @@
 
   </div> 
  <script>
-var jsondata = <?php echo json_encode($data); ?>;
 var eventData = <?php echo json_encode($eventList); ?>;
 var event = "<?php echo $event; ?>";
 var year = "<?php echo $year; ?>";
 var type = '';
-
-documents();
+document.addEventListener('DOMContentLoaded', function() {
+	loadDocuments();
+}, false);
   </script>
 <?php 
 	require($_SERVER['DOCUMENT_ROOT']. '/footer.php');
