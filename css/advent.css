@@ -1,0 +1,131 @@
+.adventText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    font-size: 5rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.38);
+}
+
+.adventDiv{
+    width: 160px;
+    height: 160px;
+}
+
+.adventFrame{
+    width: 150px;
+    height: 150px;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.12);
+    background-color: #ebe7e7;
+}
+
+.adventClose{
+    color: rgba(255, 255, 255, 0.3); 
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 20%);
+}
+
+.adventDoor{
+    width: 150px;
+    height: 150px;
+    background: url(https://img.fs-quiz.eu/advent/advent.jpg);
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.12);
+    transform-origin: left;
+    transition: all 0.5s ease-in-out;
+    transition: 0.5s 180s;
+    z-index: 1;
+}
+
+.adventBox{
+    position: absolute;
+    padding: 0;
+    width: 150px;
+    height: 150px;
+}
+
+.adventBox:hover .adventDoor {
+    transform: perspective(1200px) translateZ(0px) translateX(0px) translateY(0px) rotateY(-105deg);
+    transition: 0.5s;
+}
+
+.adventItemFrame{
+    background-color: rgb(110, 110, 110);
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+.adventButton{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.adventIcon{
+    height: 100px;
+    width: 100px;
+}
+
+.adventBox:hover .adventIcon{
+    animation: shake 1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes shake {
+	0% 		{ transform: rotate(0deg); }
+	20% 	{ transform: rotate(-20deg); }
+	40% 	{ transform: rotate(20deg); }
+	60% 	{ transform: rotate(-10deg); }
+	80% 	{ transform: rotate(10deg); }
+	100% 	{ transform: rotate(0deg); }
+}
+
+.celebrate-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.celebrate-btn:hover {
+    background-color: #C71729;
+}
+
+.celebrate-btn:active {
+    transform: scale(0.98);
+}
+
+.btn-label {
+	position: relative;
+	left: -12px;
+	display: inline-block;
+	padding: 6px 12px;
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 3px 0 0 3px;
+}
+
+.btn-labeled {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.btn {
+	margin-bottom: 10px;
+}

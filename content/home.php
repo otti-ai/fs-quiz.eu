@@ -14,6 +14,7 @@
 
     <div class="mb-2">
       <a href="/quizzes" class="btn btn-primary btn-lg px-4">Old quizzes</a>
+	  <a href="/advent" class="btn btn-danger btn-lg px-4" style="background: url(/img/advent/advent.jpg);">Advent Calendar</a>
     </div>
 
 	<hr class="col-3 col-md-2">

@@ -60,6 +60,11 @@ Route::add('/search',function(){
 	$pagename = 'search';
 	require('content/search.php');
 });
+Route::add('/advent',function(){
+    $titel = 'FS-Quiz - Advent Calendar';
+	$pagename = 'advent';
+	require('content/advent.php');
+});
 Route::add('/about',function(){
     $titel = 'FS-Quiz - About';
 	$pagename = 'about';
