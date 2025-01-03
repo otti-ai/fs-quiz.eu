@@ -367,7 +367,7 @@ function checkAnswers(){
 				break;
 			case "input-range":
 				yAnswer = document.getElementById('numberInput'+i).value;
-				var ans = jsondata.questions[i].answers[0].split('-');
+				var ans = jsondata.questions[i].answers[0].answer_text.split('-');
 				if(yAnswer >= ans[0] && yAnswer <= ans[1] ){
 					result = true;
 				}else{

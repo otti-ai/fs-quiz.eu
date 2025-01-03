@@ -41,8 +41,8 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 	<script src="../js/bootstrap.min.js"></script>
 	
 	<!-- Quiz -->
-	<script src="../js/quiz.js?<%=DateTime.Now.Ticks.ToString()%>"></script>
-	<script src="../js/time.js?<%=DateTime.Now.Ticks.ToString()%>"></script>
+	<script src="../js/quiz.js?v=<?php echo time(); ?>"></script>
+	<script src="../js/time.js?v=v=<?php echo time(); ?>"></script>
 	
     <title>FS-Quiz - Play</title>
   </head>
