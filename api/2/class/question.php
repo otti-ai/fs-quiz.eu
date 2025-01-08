@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class QuestionModel {
 	//Definition der Eigenschaften
     public $text;

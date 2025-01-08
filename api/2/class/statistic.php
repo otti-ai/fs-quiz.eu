@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class StatisticModel {
 	//Definition der Eigenschaften
 	public $date;

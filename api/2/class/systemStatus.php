@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class SystemStatusModel {
 	//Definition der Eigenschaften
 	public $quizzes;

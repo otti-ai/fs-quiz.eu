@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class SolutionModel {
 	//Definition der Eigenschaften
 	public $solution_id;

@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class QuizModel {
 	//Definition der Eigenschaften
 	public $quiz_id;

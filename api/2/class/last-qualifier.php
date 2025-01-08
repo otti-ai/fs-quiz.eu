@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class LastQualifierModel {
 	//Definition der Eigenschaften
 	public $last_qualifier_id;

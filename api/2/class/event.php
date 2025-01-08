@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class EventModel {
 	//Definition der Eigenschaften
 	public $id;

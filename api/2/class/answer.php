@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class AnswerModel {
 	//Definition der Eigenschaften
 	public $answer_id;

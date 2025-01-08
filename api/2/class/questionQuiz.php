@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class QuestionQuizModel {
 	//Definition der Eigenschaften
     public $position_index;

@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class ImageModel {
 	//Definition der Eigenschaften
 	public $img_id;

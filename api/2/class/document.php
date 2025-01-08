@@ -1,5 +1,6 @@
 <?php
 //Definition der Klasse
+#[\AllowDynamicProperties]
 class DocumentModel {
 	//Definition der Eigenschaften
 	public $doc_id;
