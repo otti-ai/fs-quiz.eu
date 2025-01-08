@@ -1,3 +1,4 @@
-User-Agent: *
-Allow: /
-
+User-agent: *
+Disallow: /doc/
+Disallow: /php/
+Disallow: /icons/
