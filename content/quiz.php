@@ -1,5 +1,5 @@
 <?php
-require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
+require($_SERVER['DOCUMENT_ROOT']. '/api/2/orginal_db.php');
 $jsonData = file_get_contents('http://api.fs-quiz.eu/2/quiz/'. $quiz_id);
 $data = json_decode(nl2br($jsonData));
 $eventName = 'FS ';
@@ -118,7 +118,9 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 		</div>
 		<div class="row g-5">
 		<div class="col-md-6">
-			<h3>Documents</h3>
+			<h3>Documents <a class="btn btn-outline-primary btn-sm" onclick="copy()" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
+</svg></a></h3>
 			<ul id="doc" class="icon-list">
 			</ul>
 		</div>
@@ -157,6 +159,14 @@ require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 </div> 
 <script>
 var jsondata = <?php echo json_encode($data); ?>;
+
+function copy() {
+  // Get the text field
+  var copyText = 'https://fs-quiz.eu/search/documents/'+jsondata.event[0].event_id+'/'+jsondata.year+'/';
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText);
+}
 </script>
 <footer class="footer mt-auto bg-light">
   <div class="col-lg-8 mx-auto p-3 text-dark">
