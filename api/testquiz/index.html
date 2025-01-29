@@ -27,7 +27,7 @@
 	<script src="./js/bootstrap.min.js"></script>
 
 	
-    <title>FS-Quiz - Testquiz 2024</title>
+    <title>FS-Quiz - Testquiz 2025</title>
   </head>
   <body class="d-flex flex-column min-vh-100"> 
 
@@ -58,24 +58,7 @@
         <div style="display:block;" id="loader" class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <!-- Orginal -->
-        <div style="display:none;" id="myDiv">
-            <div id="bodyStart" class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title"><b style="font-family:'Bremergy'; letter-spacing: 1px;">Bremergy</b> Quiz 2023</h5>
-                    <p id="spruchAnfang" class="card-text">Hi, hier muss ein Spruch hin</p>
-                    <div class="d-grid gap-2 mb-3">
-                        <button type="button" class="btn btn-primary btn-lg" onclick="startQuiz()" id="start">Start</button>
-                    </div>
-                    <hr>
-                    <button type="button" class="btn btn-info" onclick="score()" >Statistik</button>
-                    <button type="button" class="btn btn-info" onclick="multi()" >Multi</button>
-                    <button type="button" class="btn btn-info" onclick="rangliste()" >Rangliste</button>
-                    <button type="button" class="btn btn-info" onclick="" disabled>Korrektur</button>
-                </div>
-                <div  class="card-footer text-muted"></div>
-            </div>
-        </div>
+
         <!-- Start -->
         <div style="display:none; width: 100%; max-width: 800px;" id="infoBody">
             <img class="d-none d-sm-block" style="position: relative; height: 60px; top: -40px; z-index: 100; margin-bottom: -60px; float: right;" src="https://quiz.fs-quiz.eu/cat.png">
@@ -86,13 +69,15 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">FS-Quiz Testquiz 2024</h5>
+                            <h5 class="card-title">FS-Quiz Testquiz 2025</h5>
                             <p class="text-start">
-                                This is the section of the test quiz. The test quiz will take place on the <strong>20th of January at 13:00 CET</strong>. 
+                                Since last year's test quiz was so well received, there will be another one this year. The test quiz will
+                                take place on the <strong>24th of January at 16:00 CET</strong>. <br><br>
                                 The quiz will consist of new questions in the style of typical registration questions. The questions must be 
                                 answered one after the other in a given time. The number of correct answers is more important than the total 
-                                time. The ranking list and the correct answers will be published shortly after the quiz.<br>
-                                To take part in the quiz, <strong>you must first register your team</strong>. This is possible until shortly before the quiz.<br>
+                                time. The ranking list and the correct answers will be published shortly after the quiz.<br> The quiz will take about <strong>45 minutes</strong>.<br><br>
+                                To take part in the quiz, <strong>you must first register your team</strong>. This is possible until shortly before the quiz.<br><br>
+
                                 In case of problems: info@fs-quiz.eu
                             </p>
                             <hr>
@@ -103,7 +88,7 @@
                             <div id="loginContainer">
                                 <h4>You are successfully logged in!</h4>
                                 <p>Waiting for quiz start</p>
-                                <p>Quiz will starts automatically.<br><strong>Do not reload the page!</strong></p>
+                                <p>Quiz will starts automatically.<br><strong>You do not need to reload the page!</strong></p>
                             </div>
                         </div>
                     </div>
@@ -118,7 +103,7 @@
                     <h5 class="card-title">Successfull</h5>
                     <p class="text-start">
                         Your team is now registered for the test quiz.<br>
-                        To answer the quiz you have to log in before the quiz starts
+                        lease make sure to log in before the quiz begins to access and answer the questions.
                     </p>
                     <hr>
                     <button onclick="openStart()" type="button" class="btn btn-primary">Back</button>
@@ -213,7 +198,7 @@
     var timeDisplayQuiz = document.getElementById("time2");
     var counteInterval;
     var endtime;
-    var quizstart = 1705752000;
+    var quizstart= 1737730800;
     var isQuizStart = false;
     var isTimeOver = false;
     
@@ -266,7 +251,7 @@
     function showWaitForNextQuestion(){
         questionAnswers.innerHTML = '';
         questionTitle.innerHTML = 'Waiting for the next question';
-        questionText.innerHTML = 'The next question will be loaded automatically.<br><strong>Do not reload the page!</strong>';
+        questionText.innerHTML = 'The next question will be loaded automatically.<br><strong>You do not need to reload the page!</strong>';
     }
 
     function openRegistration(){
@@ -380,7 +365,6 @@
         if(text == "error"){
             loader.style.display = "none";
             loginBody.style.display = "block";
-            infoBody.style.display = "none";
             document.getElementById("error-login").innerHTML = "Invalid";
         }else{
             loader.style.display = "none";
@@ -509,7 +493,7 @@
         
         <div class="row justify-content-md-center">
         <div class="col-md-auto text-muted">
-            <a>Created by Yannik Ottens · © 2023</a>
+            <a>Created by Yannik Ottens · © 2025</a>
           </div>
         </div>
         </div>

@@ -5,8 +5,6 @@ require('2/init.php');
 //document
 //document/1
 
-
-
 switch ($addition) {
     case 'list':
         $quary = new DocumentHandle($pdo);

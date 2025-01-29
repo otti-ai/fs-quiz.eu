@@ -11,7 +11,7 @@ if(true){//($now > $endTime){
     $time = 0;
     $correctScore = 0;
 
-    $sql = "SELECT `result`, `question_id`, `correct`, `time` FROM `fs-testquiz-result` WHERE `user_id` = ? ORDER BY `fs-testquiz-result`.`question_id` ASC;";
+    $sql = "SELECT COALESCE(ftr.`result`, '-') AS `result`, qid.`question_id`, COALESCE(ftr.`correct`, 0) AS `correct`, COALESCE(ftr.`time`, 0) AS `time` FROM (SELECT 1 AS `question_id` UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10) AS qid LEFT JOIN `fs-testquiz-result` AS ftr ON ftr.`question_id` = qid.`question_id` AND ftr.`user_id` = ? ORDER BY qid.`question_id` ASC;";
     $statement = $pdo->prepare($sql);
     $statement->execute(array($_GET["token"]));
 ?>

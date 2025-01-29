@@ -1,5 +1,5 @@
 <?php
-	require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
+	require($_SERVER['DOCUMENT_ROOT']. '/api/2/orginal_db.php');
 	require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 ?>
 <!doctype html>

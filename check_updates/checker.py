@@ -9,8 +9,8 @@ URLS = [
         "selector": "h5#demo"
     },
     {
-        "url": "https://fs-alpeadria.com/",
-        "selector": "div.et_pb_css_mix_blend_mode_passthrough"
+        "url": "https://fs-alpeadria.com/fs-alpe-adria-2025/",
+        "selector": "div.et_pb_text_inner"
     },
     {
         "url": "https://fsaustria.at/fsa-2025/rules-2/",

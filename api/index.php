@@ -31,9 +31,9 @@ Route::pathNotFound(function($path) {
 });
 
 //status no apikey needed
-Route::add('/1/systemStatus', function() {
+Route::add('/2/systemStatus', function() {
     $addition = 'all';
-    require('1/status/get.php');
+    require('2/status/get.php');
 }, 'get');
 
 //quizzes

@@ -1,5 +1,5 @@
 <?php
-	require($_SERVER['DOCUMENT_ROOT']. '/api/1/orginal_db.php');
+	require($_SERVER['DOCUMENT_ROOT']. '/api/2/orginal_db.php');
 	require($_SERVER['DOCUMENT_ROOT']. '/statistic.php');
 ?>
 <!doctype html>
@@ -44,8 +44,10 @@
   </head>
   <body class="d-flex flex-column min-vh-100"> 
 
-  <!--<div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">
-  	<strong>Maintenance on 30 December!</strong> Due to the change of my hosting provider and a major update (yes, it's about the API) this site will be down for several hours.
+	<!-- <div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">
+		 <div class="col-lg-8 mx-auto">
+  			<strong>Maintenance work today from 10 pm (CET)!</strong> Due to work on the server, this page will be unavailable for a few hours. After that all 2024 quizzes will be available.
+		 </div>
   	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>-->
 
