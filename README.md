@@ -1,6 +1,9 @@
-<div style="display:flex;" align="center">
-  <img alt="FS-Quiz logo" src="img/icons/favicon/logo-text.png" width="400px" />
-</div>
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: light)" srcset="img/icons/favicon/logo-text-light.png" />
+        <img alt="FS-Quiz logo" src="img/icons/favicon/logo-text.png" width="400px" />
+    </picture>
+</p>
 
 <p align="center">
     <a href="https://fs-quiz.eu/" alt="Website">
@@ -42,7 +45,7 @@ Tables are also saved as an image to prevent incompatibilities with the public A
 ## API
 This project provides not only the website but also an API for the data in the database. This API is openly accessible and completely free, but requires an API key. More information about this in the API documentation under [Getting Started](https://api.fs-quiz.eu/#Getting).
 
-The source code for the API can be found at [/api/1](/api/2). The 2 here stands for version 2. All changes within a version should be backward compatible. If this cannot be guaranteed a new version will be created.
+The source code for the API can be found at [/api/2](/api/2). The 2 here stands for version 2. All changes within a version should be backward compatible. If this cannot be guaranteed a new version will be created.
 
 The API documentation can be found under [api.fs-quiz.eu](https://api.fs-quiz.eu).
 
