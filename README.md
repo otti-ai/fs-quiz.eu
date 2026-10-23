@@ -1,7 +1,7 @@
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: light)" srcset="img/icons/favicon/logo-text-light.png" />
-        <img alt="FS-Quiz logo" src="img/icons/favicon/logo-text.png" width="400px" />
+        <source media="(prefers-color-scheme: dark)" srcset="img/icons/favicon/logo-text.png" />
+        <img alt="FS-Quiz logo" src="img/icons/favicon/logo-text-light.png" width="400px" />
     </picture>
 </p>
 
