@@ -16,9 +16,10 @@ require("2/class/quiz.php");
 require("2/class/solution.php");
 require("2/class/status.php");
 require("2/class/statistic.php");
+require("2/class/systemStatus.php");
 
  //Statistic
  $sqlStatistic = "INSERT INTO `fs-statistic-api` (`request`) VALUES (?)";
- $statementStatistic = $pdoStatistic->prepare($sqlStatistic);
+ $statementStatistic = $pdo->prepare($sqlStatistic);
  $statementStatistic->execute(array($_SERVER['REQUEST_URI']));
 ?>
