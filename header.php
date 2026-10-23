@@ -43,14 +43,6 @@
     <title><?php echo $titel ?></title>
   </head>
   <body class="d-flex flex-column min-vh-100"> 
-
-	<!-- <div class="alert alert-warning alert-dismissible fade show mb-0" role="alert">
-		 <div class="col-lg-8 mx-auto">
-  			<strong>Maintenance work today from 10 pm (CET)!</strong> Due to work on the server, this page will be unavailable for a few hours. After that all 2024 quizzes will be available.
-		 </div>
-  	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>-->
-
   <!-- Navigation -->
 	<header class="p-3 bg-dark text-white">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
