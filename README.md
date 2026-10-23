@@ -7,14 +7,14 @@
         <img alt="Uptime Robot status" src="https://img.shields.io/uptimerobot/status/m795514430-858284ba79462111b7be85f4?label=website" /></a>
     <a href="https://fs-quiz.eu/" alt="Website">
         <img alt="Uptime Robot ratio (30 days)" src="https://img.shields.io/uptimerobot/ratio/m795514430-858284ba79462111b7be85f4?link=https%3A%2F%2Ffs-quiz.eu%2F" /></a>
-    <a href="https://fs-quiz.eu/quizzes" alt="Old Quizzes">
-        <img alt="available quizzes" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=quizzes&label=quizzes"/></a>
+    <a href="https://fs-quiz.eu/quizzes" alt="All quizzes">
+        <img alt="available quizzes" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F2%2FsystemStatus&query=quizzes&label=quizzes"/></a>
     <a href="https://fs-quiz.eu/search/questions" alt="All questions">
-        <img alt="available questions" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=questions&label=questions"/></a>
-    <a href="https://fs-quiz.eu/quizzes" alt="All questions">
-        <img alt="last update" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=last_change&label=last%20update"/></a>
+        <img alt="available questions" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F2%2FsystemStatus&query=questions&label=questions"/></a>
+    <a href="https://fs-quiz.eu/changelog" alt="Changelog">
+        <img alt="last update" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F2%2FsystemStatus&query=last_change&label=last%20update"/></a>
     <!--<a href="https://fs-quiz.eu/" alt="Website">
-        <img alt="avg daily views" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F1%2FsystemStatus&query=avg_daily_views&label=avg%20daily%20views"/></a>-->
+        <img alt="avg daily views" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.fs-quiz.eu%2F2%2FsystemStatus&query=avg_daily_views&label=avg%20daily%20views"/></a>-->
 </p>
 
 # General
